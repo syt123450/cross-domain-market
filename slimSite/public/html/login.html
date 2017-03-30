@@ -26,7 +26,16 @@
 <nav>
     <ul class="container">
         <li><a href="../index.html">Home</a></li>
-        <li><a href="../index.html#store">Store</a></li>
+        <li>
+            <a href="../index.html#store">Store</a>
+            <ul>
+                <li><a href="store.html">SHOP LI-NING</a></li>
+                <li><a href="store.html">SHOP NIKE</a></li>
+                <li><a href="store.html">SHOP PUMA</a></li>
+                <li><a href="store.html">SHOP ADIDAS</a></li>
+                <li><a href="store.html">SHOP 361</a></li>
+            </ul>
+        </li>
         <li><a href="#contact">Contact</a></li>
         <li class="nowPage"><a>Log In</a></li>
         <li><a><img id="shoppingCart" src="../img/common/pageIcon/shopping_cart.png"></a></li>
@@ -87,6 +96,8 @@
             $("#signInContent").hide();
             $("#registerContent").show();
         });
+
+        bindNav();
     });
 </script>
 

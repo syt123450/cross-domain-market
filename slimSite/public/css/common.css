@@ -69,7 +69,7 @@ nav > ul > li > ul {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    margin-top: -3px;
+    margin-top: -1px;
     z-index: 2;
     list-style: none;
     display: none;
@@ -79,6 +79,24 @@ nav > ul > li > ul {
 nav > ul > li > ul > li {
     width: 100%;
     text-align: center;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    color: #2fa599;
+}
+
+nav > ul > li > ul > li > a {
+    width: 100%;
+    height: 100%;
+    float: left;
+    color: #2fa599;
+    background-color: #fff;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+}
+
+nav > ul > li > ul > li > a:hover {
+    color: #fff;
+    background-color: #2fa599;
 }
 
 nav > ul > li > a {
@@ -96,6 +114,8 @@ nav > ul > li > a:hover {
 
 nav > ul > li.nowPage {
     background-color: #2fa599;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
 }
 
 nav > ul > li:hover {
@@ -104,15 +124,15 @@ nav > ul > li:hover {
     box-sizing: border-box;
 }
 
-nav > ul > li:hover a {
+nav > ul > li:hover > a {
     color: white;
 }
 
-nav > ul > li.nowPage a {
+nav > ul > li.nowPage > a {
     color: white;
 }
 
-nav > ul > li.nowPage a:hover {
+nav > ul > li.nowPage > a:hover {
     color: white;
 }
 

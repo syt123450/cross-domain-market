@@ -28,7 +28,16 @@
 <nav>
     <ul class="container">
         <li class="nowPage"><a>Home</a></li>
-        <li><a href="#store">Store</a></li>
+        <li>
+            <a href="#store">Store</a>
+            <ul>
+                <li><a href="html/store.html">SHOP LI-NING</a></li>
+                <li><a href="html/store.html">SHOP NIKE</a></li>
+                <li><a href="html/store.html">SHOP PUMA</a></li>
+                <li><a href="html/store.html">SHOP ADIDAS</a></li>
+                <li><a href="html/store.html">SHOP 361</a></li>
+            </ul>
+        </li>
         <li><a href="#contact">Contact</a></li>
         <li>
             <a href="html/login.html">Log In</a>
@@ -238,10 +247,10 @@
     $(function () {
         $(".itemBar>section>div").hover(
             function () {
-                $(this).children("div").children("img").attr("src", "img/common/icon/add_to_cart2.png");
+                $(this).children("div").children("img").attr("src", "img/common/pageIcon/add_to_cart2.png");
             },
             function () {
-                $(this).children("div").children("img").attr("src", "img/common/icon/add_to_cart1.png");
+                $(this).children("div").children("img").attr("src", "img/common/pageIcon/add_to_cart1.png");
             }
         );
 
@@ -272,7 +281,7 @@
         );
 
         $("#top5>header>div>p").click(function () {
-            $("#top5>header>div>ul").show();
+            $("#top5>header>div>ul").slideDown();
         });
 
         $("#top5>header>div>ul>li").click(function () {
@@ -280,14 +289,14 @@
             $("#top5>header>div>ul").hide();
         });
 
-        $("nav>ul>li:eq(3)").hover(
+        $("main>#top5>header>div").hover(
+            function () {},
             function () {
-                $("nav>ul>li>ul").show();
-            },
-            function () {
-                $("nav>ul>li>ul").hide();
+                $("main>#top5>header>div>ul").hide();
             }
         );
+
+        bindNav();
     });
 
 </script>

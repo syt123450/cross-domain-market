@@ -26,7 +26,16 @@
 <nav>
     <ul class="container">
         <li><a href="../index.html">Home</a></li>
-        <li class="nowPage"><a>Store</a></li>
+        <li class="nowPage">
+            <a>Store</a>
+            <ul>
+                <li><a href="store.html">SHOP LI-NING</a></li>
+                <li><a href="store.html">SHOP NIKE</a></li>
+                <li><a href="store.html">SHOP PUMA</a></li>
+                <li><a href="store.html">SHOP ADIDAS</a></li>
+                <li><a href="store.html">SHOP 361</a></li>
+            </ul>
+        </li>
         <li><a href="#contact">Contact</a></li>
         <li>
             <a href="login.html">Log In</a>
@@ -228,14 +237,7 @@
             $("body").css("overflow", "scroll");
         });
 
-        $("nav>ul>li:eq(3)").hover(
-            function () {
-                $("nav>ul>li>ul").show();
-            },
-            function () {
-                $("nav>ul>li>ul").hide();
-            }
-        );
+        bindNav();
     });
 
     function setaAllTitleInactive() {
