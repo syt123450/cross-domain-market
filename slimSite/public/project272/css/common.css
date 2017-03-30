@@ -1,0 +1,173 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+main, section {
+    padding: 0;
+}
+
+p {
+    margin: 0;
+}
+
+body > header {
+    height: 80px;
+    width: 100%;
+}
+
+body > header div {
+    height: 100%;
+}
+
+body > header img {
+    height: 100%;
+}
+
+nav {
+    height: 40px;
+    width: 100%;
+    background-color: #e6e6e6;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 40px;
+    text-align: center;
+}
+
+nav div {
+    height: 100%;
+}
+
+nav > ul {
+    height: 100%;
+    width: 100%;
+    display: block;
+    list-style: none;
+}
+
+nav > ul > li {
+    height: 100%;
+    width: 20%;
+    float: left;
+    border-color: white;
+    position: relative;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+}
+
+nav > ul > li > ul {
+    position: absolute;
+    top: 40px;
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #000;
+    border-top: 0;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    margin-top: -3px;
+    z-index: 2;
+    list-style: none;
+    display: none;
+    cursor: pointer;
+}
+
+nav > ul > li > ul > li {
+    width: 100%;
+    text-align: center;
+}
+
+nav > ul > li > a {
+    float: left;
+    height: 100%;
+    width: 100%;
+    color: #000000;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+}
+
+nav > ul > li > a:hover {
+    color: #000000;
+}
+
+nav > ul > li.nowPage {
+    background-color: #2fa599;
+}
+
+nav > ul > li:hover {
+    background-color: #2fa599;
+    border: 1px solid #fff;
+    box-sizing: border-box;
+}
+
+nav > ul > li:hover a {
+    color: white;
+}
+
+nav > ul > li.nowPage a {
+    color: white;
+}
+
+nav > ul > li.nowPage a:hover {
+    color: white;
+}
+
+nav > ul > li.nowPage:hover {
+    border: 0;
+}
+
+nav > ul > li:last-child:hover {
+    border: 0;
+    background-color: #e6e6e6;
+}
+
+#shoppingCart {
+    margin-top: 2%;
+    height: 80%;
+    float: right;
+}
+
+body > footer {
+    width: 100%;
+    color: white;
+    background-color: #2fa599;
+    clear: both;
+}
+
+#contact {
+    padding-top: 20px;
+}
+
+#contact header {
+    height: 40px;
+    font-size: 18px;
+    line-height: 40px;
+    padding-left: 10px;
+    box-sizing: border-box;
+}
+
+#contact section {
+    width: 100%;
+    display: block;
+}
+
+#contact section div {
+    height: 40px;
+    width: 20%;
+    line-height: 40px;
+    float: left;
+    padding-left: 10px;
+    box-sizing: border-box;
+}
+
+#copyright {
+    height: 50px;
+    width: 100%;
+    text-align: center;
+    line-height: 50px;
+    font-size: 11px;
+}
