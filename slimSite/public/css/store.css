@@ -163,7 +163,7 @@ aside > header > div > p {
     padding-left: 20px;
     box-sizing: border-box;
     z-index: 2;
-    background: url(../img/common/icon/pullDown.png) no-repeat 140px;
+    background: url(../img/common/pageIcon/pullDown.png) no-repeat 140px;
     background-size: 25px 25px;
     cursor: pointer;
 }

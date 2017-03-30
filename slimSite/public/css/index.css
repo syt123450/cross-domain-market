@@ -162,7 +162,7 @@ main > section > section > div:hover {
     padding-left: 30px;
     box-sizing: border-box;
     z-index: 2;
-    background: url(../img/common/icon/pullDown.png) no-repeat 160px;
+    background: url(../img/common/pageIcon/pullDown.png) no-repeat 160px;
     background-size: 25px 25px;
     cursor: pointer;
 }
