@@ -14,13 +14,12 @@ $app->get('/[{name}]', function ($request, $response, $args) {
 });
 
 require_once('controllers/restController.php');
+require_once('controllers/pageLoadController.php');
 
 // To determine if to use mock
-if($app->getContainer()['mock']){
+if ($app->getContainer()['mock']) {
     require_once('mock/mongoConn_mock.php');
+    require_once('mock/getPageLoadData_mock.php');
+} else {
+    require_once('db/mongoConn.php');
 }
-else {
-    require_once ('db/mongoConn.php');
-}
-
-
