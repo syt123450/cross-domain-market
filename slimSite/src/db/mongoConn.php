@@ -41,7 +41,7 @@ function getTestResult(){
     ];
     $query = new MongoDB\Driver\Query($filter, $options);
 //    $rows = $GLOBALS['manager']->executeQuery('mydb.myCol', $query)->toArray();
-    $rows = $manager->executeQuery('mydb.myCol', $query)->toArray();
+    $rows = $manager->executeQuery('db272.myCol', $query)->toArray();
 
     return $rows;
 
@@ -64,7 +64,7 @@ function getINumGreater($i_num){
 
     $query = new MongoDB\Driver\Query($filter, $options);
 //    $rows = $GLOBALS['manager']->executeQuery('mydb.myCol', $query)->toArray();
-    $rows = $manager->executeQuery('mydb.myCol', $query)->toArray();
+    $rows = $manager->executeQuery('db272.myCol', $query)->toArray();
 
     return $rows;
 }
