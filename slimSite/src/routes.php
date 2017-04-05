@@ -22,4 +22,5 @@ if ($app->getContainer()['mock']) {
     require_once('mock/getPageLoadData_mock.php');
 } else {
     require_once('db/mongoConn.php');
+    require_once('db/getPageLoadData.php');
 }

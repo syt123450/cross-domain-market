@@ -68,3 +68,21 @@ function getINumGreater($i_num){
 
     return $rows;
 }
+
+function getAllStoreData(){
+    $manager = new MongoDB\Driver\Manager("mongodb://localhost:27017");
+
+    $query = new MongoDB\Driver\Query([]);
+    $rows = $manager->executeQuery('db272.Store', $query)->toArray();
+
+    return $rows;
+}
+
+
+$results = getAllStoreData();
+var_dump($results);
+//echo "</br></br>";
+//foreach ($results as $row){
+//    var_dump($row);
+//    echo "</br></br>";
+//}
