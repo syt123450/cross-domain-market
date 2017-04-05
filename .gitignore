@@ -1,2 +1,5 @@
+/logs/*
+!/logs/README.md
 .idea
 .idea/*
+
