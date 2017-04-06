@@ -15,11 +15,19 @@ $app->get('/[{name}]', function ($request, $response, $args) {
 
 require_once('controllers/restController.php');
 require_once('controllers/pageLoadController.php');
+require_once('controllers/top5Controller.php');
+require_once('controllers/commodityController.php');
+require_once ('controllers/loginController.php');
+require_once ('controllers/storeController.php');
 
 // To determine if to use mock
 if ($app->getContainer()['mock']) {
     require_once('mock/mongoConn_mock.php');
     require_once('mock/getPageLoadData_mock.php');
+    require_once('mock/getTop5Data_mock.php');
+    require_once('mock/getStoreProduct_mock.php');
+    require_once('mock/loginHandler_mock.php');
+    require_once ('mock/commodity_mock.php');
 } else {
     require_once('db/mongoConn.php');
     require_once('db/getPageLoadData.php');

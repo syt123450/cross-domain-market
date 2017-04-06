@@ -35,6 +35,8 @@ function renderComment(commentData) {
 }
 
 function renderCommodityInfo(basicCommodityInfo) {
+    var commodityPic = $("main>div:eq(0)>img");
+    $(commodityPic).attr("src", basicCommodityInfo.commodityPic);
     var productName = document.createElement("p");
     $(productName).text(basicCommodityInfo.commodityName);
     var productPriceArea = document.createElement("div");

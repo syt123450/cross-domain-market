@@ -367,6 +367,7 @@ function getCommodityPageLoadData($commodityID)
         "commodityID" => "ID1",
         "commodityName" => "John Deere Men's Waxed Cotton Camo Mesh",
         "commodityPrice" => "$ 18.28",
+        "commodityPic" => "../img/products/1.jpg",
         "stock" => "5",
         "commentNumber" => "100", //total number of the product
         "averageRate" => "4.3"

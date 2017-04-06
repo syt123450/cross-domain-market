@@ -1,0 +1,43 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: ss
+ * Date: 2017/4/6
+ * Time: 下午2:20
+ */
+
+function checkUsr($usrName, $usrPassword) {
+
+    //use the usrName, usrPassword to validate
+
+    $checkResult = array(
+        "checkResult" => true,
+        "checkMessage" => ""
+    );
+
+    return $checkResult;
+}
+
+function checkNewUsrName($usrName) {
+
+    //use the usrName to check whether this name has been registered.
+
+    $checkResult = array(
+        "checkResult" => true,
+        "checkMessage" => ""
+    );
+
+    return $checkResult;
+}
+
+function createUsr($usrName, $usrPassword, $usrEmail) {
+
+    //use the usrName, usrPassword, usrEmail to create new usr
+
+    $createResult = array(
+        "createResult" => true,
+        "createMessage" => ""
+    );
+
+    return $createResult;
+}
