@@ -27,13 +27,9 @@
     <ul class="container">
         <li><a href="../index.html">Home</a></li>
         <li>
-            <a href="../index.html#store">Store</a>
+            <a>Store</a>
             <ul>
-                <li><a href="store.html">SHOP LI-NING</a></li>
-                <li><a href="store.html">SHOP NIKE</a></li>
-                <li><a href="store.html">SHOP PUMA</a></li>
-                <li><a href="store.html">SHOP ADIDAS</a></li>
-                <li><a href="store.html">SHOP 361</a></li>
+                <!--<li><a href="store.html">SHOP LI-NING</a></li>-->
             </ul>
         </li>
         <li><a href="#contact">Contact</a></li>
@@ -80,25 +76,22 @@
 </body>
 
 <script>
+
     $(function () {
-        $("#signIn").click(function () {
-            $("main").attr("class", "signIn");
-            $("#signIn").attr("class", "activeTitle");
-            $("#register").attr("class", "inactiveTitle");
-            $("#signInContent").show();
-            $("#registerContent").hide();
-        });
 
-        $("#register").click(function () {
-            $("main").attr("class", "register");
-            $("#signIn").attr("class", "inactiveTitle");
-            $("#register").attr("class", "activeTitle");
-            $("#signInContent").hide();
-            $("#registerContent").show();
+        $.ajax({
+            url: '../initialize/login',
+            type: 'GET',
+            async: true,
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                renderNavStoreList(data.storeNameList);
+                bindEvent();
+            }
         });
-
-        bindNav();
     });
+
 </script>
 
 </html>

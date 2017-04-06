@@ -70,24 +70,15 @@ function bindLink() {
 function bindClickButton() {
     $(".itemBar>section>div").hover(
         function () {
+            console.log(222);
             $(this).children("div").children("img").attr("src", "img/common/pageIcon/add_to_cart2.png");
+            console.log("4444");
         },
         function () {
+            console.log("kkkk");
             $(this).children("div").children("img").attr("src", "img/common/pageIcon/add_to_cart1.png");
         }
     );
-}
-
-function renderNavStoreList(storeNameList) {
-    var storeListArea = $("nav>ul>li>ul:eq(0)");
-    for(var i = 0; i < storeNameList.length; i++) {
-        var nameLi = document.createElement("li");
-        $(nameLi).attr("data-storeID", storeNameList[i].storeID);
-        var nameA = document.createElement("a");
-        $(nameA).attr("href", "html/store.html").text(storeNameList[i].storeName);
-        $(nameLi).append(nameA);
-        $(storeListArea).append(nameLi);
-    }
 }
 
 function renderTop5(top5Data) {
@@ -162,5 +153,17 @@ function renderRecentView(recentViewData) {
         $(commodityObject).append(commodityStore);
 
         $(storeArea).append(commodityObject);
+    }
+}
+
+function renderNavStoreList(storeNameList) {
+    var storeListArea = $("nav>ul>li>ul:eq(0)");
+    for(var i = 0; i < storeNameList.length; i++) {
+        var nameLi = document.createElement("li");
+        $(nameLi).attr("data-storeID", storeNameList[i].storeID);
+        var nameA = document.createElement("a");
+        $(nameA).attr("href", "html/store.html").text(storeNameList[i].storeName);
+        $(nameLi).append(nameA);
+        $(storeListArea).append(nameLi);
     }
 }

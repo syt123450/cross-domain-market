@@ -22,3 +22,15 @@ function bindNav() {
         }
     );
 }
+
+function renderNavStoreList(storeNameList) {
+    var storeListArea = $("nav>ul>li>ul:eq(0)");
+    for(var i = 0; i < storeNameList.length; i++) {
+        var nameLi = document.createElement("li");
+        $(nameLi).attr("data-storeID", storeNameList[i].storeID);
+        var nameA = document.createElement("a");
+        $(nameA).attr("href", "store.html").text(storeNameList[i].storeName);
+        $(nameLi).append(nameA);
+        $(storeListArea).append(nameLi);
+    }
+}

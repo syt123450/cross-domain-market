@@ -11,6 +11,7 @@ use \Psr\Http\Message\ResponseInterface as Response;
 
 $app->GET('/initialize/index', function (Request $request, Response $response) {
 
+    $this->logger->info('GET indexPage information.');
     $usrName = $request->getCookieParams()["name"];
 
     $indexData = getIndexPageLoadData($usrName);
@@ -21,10 +22,46 @@ $app->GET('/initialize/index', function (Request $request, Response $response) {
     return $response;
 });
 
-$app->GET('/initialize/store', function (Request $request, Response $response) {
+$app->POST('/initialize/store', function (Request $request, Response $response) {
+
+    $this->logger->info('GET storePage information.');
+    $storeID = ($request->getParsedBody())["storeID"];
+    $this->logger->info($storeID);
+    $storeData = getStorePageLoadData($storeID);
+    $responseJson = json_encode($storeData);
+    $response->getBody()->write($responseJson);
+
+    return $response;
+});
+
+$app->POST('/initialize/commodity', function (Request $request, Response $response) {
+
+    $this->logger->info('GET commodityPage information.');
+    $commodityID = ($request->getParsedBody())["commodityID"];
+    $this->logger->info($commodityID);
+    $commodityData = getCommodityPageLoadData($commodityID);
+    $responseJson = json_encode($commodityData);
+    $response->getBody()->write($responseJson);
+
+    return $response;
 
 });
 
-$app->GET('/initialize/commodity', function (Request $request, Response $response) {
+$app->GET('/initialize/login', function (Request $request, Response $response) {
+    $this->logger->info("Get loginPage data");
+    $loginData = getLoginPageLoadData();
+    $responseJson = json_encode($loginData);
+    $response->getBody()->write($responseJson);
 
+    return $response;
+});
+
+$app->GET('/initialize/contact', function (Request $request, Response $response) {
+
+    $this->logger->info("Get contactPage data");
+    $contactData = getContactPageLoadData();
+    $responseJson = json_encode($contactData);
+    $response->getBody()->write($responseJson);
+
+    return $response;
 });
