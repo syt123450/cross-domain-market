@@ -7,7 +7,69 @@
 // MongoDB manager used to connect to database
 //$manager = new MongoDB\Driver\Manager("mongodb://localhost:27017");
 
-/*
+
+$ary = getData("db272.TopProduct", ['storeID' => 1, 'productID' => 1], ['projection' => ['comment' => 1, '_id' => 0]]);
+var_dump($ary);
+
+
+/**
+ * To catch all data from specified collections
+ * @return array
+ */
+function getAllData($collectionName){
+    $manager = new MongoDB\Driver\Manager("mongodb://localhost:27017");
+
+    $query = new MongoDB\Driver\Query([]);
+    $rows = $manager->executeQuery($collectionName, $query)->toArray();
+
+    return $rows;
+}
+
+/**
+ * To catch data by collection namespace, filter and option
+ * @param $collectionName
+ * @param $filter
+ * @param $option
+ * @return array
+ */
+function getData($collectionName, $filter, $option){
+    $manager = new MongoDB\Driver\Manager("mongodb://localhost:27017");
+
+    $query = new MongoDB\Driver\Query($filter, $option);
+    $readPreference = new MongoDB\Driver\ReadPreference(MongoDB\Driver\ReadPreference::RP_PRIMARY);
+    $rows = $manager->executeQuery($collectionName, $query, $readPreference)->toArray();
+
+    return $rows;
+}
+
+/**
+ * Upsert (update if existed, insert otherwise) items to target collections
+ * @param $collectionName   e.g. "db272.TopProduct"
+ * @param $filter           e.g. ['x' => 2]
+ * @param $sets             e.g. ['y' => 3]
+ */
+function upsertData($collectionName, $filter, $sets){
+    $bulk = new MongoDB\Driver\BulkWrite;
+    $bulk->update(
+        $filter,
+        ['$set' => $sets],
+        ['multi' => false, 'upsert' => true]
+    );
+
+    $manager = new MongoDB\Driver\Manager('mongodb://localhost:27017');
+    $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+    $result = $manager->executeBulkWrite($collectionName, $bulk, $writeConcern);
+}
+
+
+
+
+
+/* ************************** ************************** ************************** ************************** */
+/* **************************       Example and Test function start below           ************************** */
+/* ************************** ************************** ************************** ************************** */
+
+/**
  * Connectivity test.
  */
 function pingServer(){
@@ -28,9 +90,9 @@ function pingServer(){
     $response = $cursor->toArray()[0];
 }
 
-/*
- * Query use example
- * return as an array
+/**
+ * Query example
+ * @return array
  */
 function getTestResult(){
     $manager = new MongoDB\Driver\Manager("mongodb://localhost:27017");
@@ -50,9 +112,10 @@ function getTestResult(){
 //    }
 }
 
-/*
+/**
  * Query use example to find i_num greater than the $i_num
- * return as an array
+ * @param $i_num
+ * @return array
  */
 function getINumGreater($i_num){
     $manager = new MongoDB\Driver\Manager("mongodb://localhost:27017");
@@ -69,20 +132,4 @@ function getINumGreater($i_num){
     return $rows;
 }
 
-function getAllStoreData(){
-    $manager = new MongoDB\Driver\Manager("mongodb://localhost:27017");
 
-    $query = new MongoDB\Driver\Query([]);
-    $rows = $manager->executeQuery('db272.Store', $query)->toArray();
-
-    return $rows;
-}
-
-
-$results = getAllStoreData();
-var_dump($results);
-//echo "</br></br>";
-//foreach ($results as $row){
-//    var_dump($row);
-//    echo "</br></br>";
-//}

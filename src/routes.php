@@ -30,5 +30,7 @@ if ($app->getContainer()['mock']) {
     require_once ('mock/commodity_mock.php');
 } else {
     require_once('db/mongoConn.php');
+    require_once('db/curlConn.php');
+    require_once('db/dataUtility.php');
     require_once('db/getPageLoadData.php');
 }
