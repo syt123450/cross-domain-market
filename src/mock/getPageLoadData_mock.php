@@ -36,6 +36,7 @@ function getIndexPageLoadData($usrName)
 
     $top5Data = array(
         array(
+            "storeID" => "storeID1",
             "commodityID" => "ID1",
             "commodityPicUrl" => "img/home/top5/1.jpg",
             "commodityPrice" => "$12.33",
@@ -43,6 +44,7 @@ function getIndexPageLoadData($usrName)
             "commodityStore" => "By SHOP PUMA"
         ),
         array(
+            "storeID" => "storeID1",
             "commodityID" => "ID2",
             "commodityPicUrl" => "img/home/top5/2.jpg",
             "commodityPrice" => "$25.69",
@@ -50,6 +52,7 @@ function getIndexPageLoadData($usrName)
             "commodityStore" => "By SHOP 361"
         ),
         array(
+            "storeID" => "storeID1",
             "commodityID" => "ID3",
             "commodityPicUrl" => "img/home/top5/3.jpg",
             "commodityPrice" => "$18.35",
@@ -57,6 +60,7 @@ function getIndexPageLoadData($usrName)
             "commodityStore" => "By SHOP LI-NING"
         ),
         array(
+            "storeID" => "storeID1",
             "commodityID" => "ID4",
             "commodityPicUrl" => "img/home/top5/4.jpg",
             "commodityPrice" => "$22.46",
@@ -64,6 +68,7 @@ function getIndexPageLoadData($usrName)
             "commodityStore" => "By SHOP NIKE"
         ),
         array(
+            "storeID" => "storeID1",
             "commodityID" => "ID5",
             "commodityPicUrl" => "img/home/top5/5.jpg",
             "commodityPrice" => "$24.95",
@@ -74,6 +79,7 @@ function getIndexPageLoadData($usrName)
 
     $recentViewData = array(
         array(
+            "storeID" => "storeID1",
             "commodityID" => "ID1",
             "commodityPicUrl" => "img/home/top5/1.jpg",
             "commodityPrice" => "$12.33",
@@ -81,6 +87,7 @@ function getIndexPageLoadData($usrName)
             "commodityStore" => "By SHOP PUMA"
         ),
         array(
+            "storeID" => "storeID1",
             "commodityID" => "ID2",
             "commodityPicUrl" => "img/home/top5/2.jpg",
             "commodityPrice" => "$25.69",
@@ -88,6 +95,7 @@ function getIndexPageLoadData($usrName)
             "commodityStore" => "By SHOP 361"
         ),
         array(
+            "storeID" => "storeID1",
             "commodityID" => "ID3",
             "commodityPicUrl" => "img/home/top5/3.jpg",
             "commodityPrice" => "$18.35",
@@ -95,6 +103,7 @@ function getIndexPageLoadData($usrName)
             "commodityStore" => "By SHOP LI-NING"
         ),
         array(
+            "storeID" => "storeID1",
             "commodityID" => "ID4",
             "commodityPicUrl" => "img/home/top5/4.jpg",
             "commodityPrice" => "$22.46",
@@ -102,6 +111,7 @@ function getIndexPageLoadData($usrName)
             "commodityStore" => "By SHOP NIKE"
         ),
         array(
+            "storeID" => "storeID1",
             "commodityID" => "ID5",
             "commodityPicUrl" => "img/home/top5/5.jpg",
             "commodityPrice" => "$24.95",
@@ -155,7 +165,7 @@ function getStorePageLoadData($storeID)
     //use the storeID to get data
 
     //total number of the product
-    $storeProductNumber = "100";
+    $storeProductNumber = 100;
 
     $storeNameList = array(
         array(
@@ -336,9 +346,9 @@ function getContactPageLoadData()
     return $contactLoadData;
 }
 
-function getCommodityPageLoadData($commodityID)
+function getCommodityPageLoadData($storeID, $commodityID)
 {
-    //use $commodityID to get data
+    //use $storeID and $commodityID to get data
 
     $storeNameList = array(
         array(

@@ -59,23 +59,24 @@ function bindTop5Selector() {
 function bindLink() {
 
     $("#store>section>div").click(function () {
-        location.href = "html/store.html";
+
+        location.href = "html/store.html?storeID=" + $(this).attr("data-storeID");
     });
 
     $("#top5>section>div, #recentView>section>div").click(function () {
-        location.href = "html/commodity.html";
+        var storeID = $(this).attr("data-storeID");
+        var commodityID = $(this).attr("data-commodityID");
+        var commodityUrl = "html/commodity.html?" + "storeID=" + storeID + "&" + "commodityID=" + commodityID;
+        location.href = commodityUrl;
     });
 }
 
 function bindClickButton() {
     $(".itemBar>section>div").hover(
         function () {
-            console.log(222);
             $(this).children("div").children("img").attr("src", "img/common/pageIcon/add_to_cart2.png");
-            console.log("4444");
         },
         function () {
-            console.log("kkkk");
             $(this).children("div").children("img").attr("src", "img/common/pageIcon/add_to_cart1.png");
         }
     );
@@ -83,9 +84,11 @@ function bindClickButton() {
 
 function renderTop5(top5Data) {
     var top5Area = $("#top5>section");
+    $(top5Area).empty();
     for (var i = 0; i < top5Data.length; i++) {
 //            console.log(top5Data[i]);
         var commodityObject = document.createElement("div");
+        $(commodityObject).attr("data-storeID", top5Data[i].storeID);
         $(commodityObject).attr("data-commodityID", top5Data[i].commodityID);
         var commodityPic = document.createElement("img");
         $(commodityPic).attr("src", top5Data[i].commodityPicUrl);
@@ -131,6 +134,7 @@ function renderRecentView(recentViewData) {
     for (var i = 0; i < recentViewData.length; i++) {
 //            console.log(recentViewData[i]);
         var commodityObject = document.createElement("div");
+        $(commodityObject).attr("data-storeID", recentViewData[i].storeID);
         $(commodityObject).attr("data-commodityID", recentViewData[i].commodityID);
         var commodityPic = document.createElement("img");
         $(commodityPic).attr("src", recentViewData[i].commodityPicUrl);
@@ -160,10 +164,28 @@ function renderNavStoreList(storeNameList) {
     var storeListArea = $("nav>ul>li>ul:eq(0)");
     for(var i = 0; i < storeNameList.length; i++) {
         var nameLi = document.createElement("li");
-        $(nameLi).attr("data-storeID", storeNameList[i].storeID);
         var nameA = document.createElement("a");
-        $(nameA).attr("href", "html/store.html").text(storeNameList[i].storeName);
+        $(nameA).attr("href", "html/store.html?storeID=" + storeNameList[i].storeID).text(storeNameList[i].storeName);
         $(nameLi).append(nameA);
         $(storeListArea).append(nameLi);
     }
+}
+
+function renderInitiatedEvent() {
+    $("#top5 ul li").click(function () {
+        var keyWord = $(this).attr("data-top5KeyWord");
+        console.log(keyWord);
+        $.ajax({
+            url: 'top5/home',
+            type: 'POST',
+            contentType: "application/json; charset=utf-8",
+            async: true,
+            data: JSON.stringify({"keyWord": keyWord}),
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                renderTop5(data);
+            }
+        });
+    });
 }

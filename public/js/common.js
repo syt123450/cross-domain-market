@@ -27,10 +27,21 @@ function renderNavStoreList(storeNameList) {
     var storeListArea = $("nav>ul>li>ul:eq(0)");
     for(var i = 0; i < storeNameList.length; i++) {
         var nameLi = document.createElement("li");
-        $(nameLi).attr("data-storeID", storeNameList[i].storeID);
+        // $(nameLi).attr("data-storeID", storeNameList[i].storeID);
         var nameA = document.createElement("a");
-        $(nameA).attr("href", "store.html").text(storeNameList[i].storeName);
+        $(nameA).attr("href", "store.html?storeID=" + storeNameList[i].storeID).text(storeNameList[i].storeName);
         $(nameLi).append(nameA);
         $(storeListArea).append(nameLi);
     }
+}
+
+function getUrlParameter(key) {
+
+    var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
+    var result = window.location.search.substr(1).match(reg);
+
+    if (result != null) {
+        return unescape(result[2]);
+    }
+    return null;
 }

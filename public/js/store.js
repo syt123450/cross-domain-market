@@ -101,6 +101,9 @@ function bindAd() {
 
 function bindLink() {
     $(".container>section>div>div, .container>aside>div>div").click(function () {
-        location.href = "commodity.html";
+        var storeID = getUrlParameter("storeID");
+        var commodityID = $(this).attr("data-commodityID");
+        var commodityUrl = "commodity.html?" + "storeID=" + storeID + "&" + "commodityID=" + commodityID;
+        location.href = commodityUrl;
     });
 }

@@ -37,9 +37,11 @@ $app->POST('/initialize/store', function (Request $request, Response $response) 
 $app->POST('/initialize/commodity', function (Request $request, Response $response) {
 
     $this->logger->info('GET commodityPage information.');
+    $storeID = ($request->getParsedBody())["storeID"];
     $commodityID = ($request->getParsedBody())["commodityID"];
     $this->logger->info($commodityID);
-    $commodityData = getCommodityPageLoadData($commodityID);
+    $this->logger->info($storeID);
+    $commodityData = getCommodityPageLoadData($storeID, $commodityID);
     $responseJson = json_encode($commodityData);
     $response->getBody()->write($responseJson);
 

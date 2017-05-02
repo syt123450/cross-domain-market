@@ -135,12 +135,14 @@
 
     $(function () {
 
+        console.log(getUrlParameter("storeID"));
+
         $.ajax({
             url: '../initialize/store',
             type: 'POST',
             contentType: "application/json; charset=utf-8",
             async: true,
-            data: JSON.stringify({"storeID": "storeIDXXX"}),
+            data: JSON.stringify({"storeID": getUrlParameter("storeID")}),
             dataType: 'json',
             success: function (data) {
                 console.log(data);
