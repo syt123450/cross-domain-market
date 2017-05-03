@@ -49,10 +49,16 @@
         <img src="">
         <div>
             <!--<p>John Deere Men's Waxed Cotton Camo Mesh</p>-->
-            <img id="commodityAverageRate" src="../img/products/star_5.png">
+            <div id="commodityAverageRate">
+                <img src="../img/products/star_1.png">
+                <img src="../img/products/star_1.png">
+                <img src="../img/products/star_1.png">
+                <img src="../img/products/star_1.png">
+                <img src="../img/products/star_1.png">
+            </div>
             <!--<div>-->
-                <!--<p>$ 18.28</p>-->
-                <!--<p>Only 5 left in stock</p>-->
+            <!--<p>$ 18.28</p>-->
+            <!--<p>Only 5 left in stock</p>-->
             <!--</div>-->
             <img src="../img/common/pageIcon/add_to_cart1.png">
         </div>
@@ -71,15 +77,15 @@
         </section>
         <section id="commentContent">
             <!--<div class="commentItem">-->
-                <!--<p>By Matt on July 3, 2015</p>-->
-                <!--<p>-->
-                    <!--I try to write a lot of reviews but I don't know if I've ever written one about a hat. Well, this-->
-                    <!--hat is awesome. A great subdued style and well constructed. It seems like ball caps are either tall,-->
-                    <!--ugly trucker hats best suited for old men and hipsters, or they are unstructured dishrags that look-->
-                    <!--sloppy.In my opinion this hat is the perfect in-between: structured to look sharp but not tall like-->
-                    <!--a trucker hat. I was so happy with it I bought a second to keep on hand when/if I wear this one out.-->
-                    <!--No joke.-->
-                <!--</p>-->
+            <!--<p>By Matt on July 3, 2015</p>-->
+            <!--<p>-->
+            <!--I try to write a lot of reviews but I don't know if I've ever written one about a hat. Well, this-->
+            <!--hat is awesome. A great subdued style and well constructed. It seems like ball caps are either tall,-->
+            <!--ugly trucker hats best suited for old men and hipsters, or they are unstructured dishrags that look-->
+            <!--sloppy.In my opinion this hat is the perfect in-between: structured to look sharp but not tall like-->
+            <!--a trucker hat. I was so happy with it I bought a second to keep on hand when/if I wear this one out.-->
+            <!--No joke.-->
+            <!--</p>-->
             <!--</div>-->
             <div id="paginationArea">
                 <ul id="pagination" class="pagination">
@@ -95,12 +101,26 @@
                 <textarea placeholder="Add your precious comment here"></textarea>
             </div>
             <div id="commentButton" class="submitButton">Add Comment</div>
+            <div id="operationArea">
+                <div id="submitComment">Submit</div>
+                <div id="cancelComment">Cancel</div>
+            </div>
         </section>
         <section id="rateContent" class="submitButton">
             <p>Average rate:</p>
-            <img src="../img/products/star_5.png">
+            <img src="../img/products/star_1.png">
+            <img src="../img/products/star_1.png">
+            <img src="../img/products/star_1.png">
+            <img src="../img/products/star_1.png">
+            <img src="../img/products/star_1.png">
             <p>Add rate:</p>
-            <img src="../img/products/star_5.png">
+            <div>
+                <img class="rateStar" src="../img/products/star_empty.png">
+                <img class="rateStar" src="../img/products/star_empty.png">
+                <img class="rateStar" src="../img/products/star_empty.png">
+                <img class="rateStar" src="../img/products/star_empty.png">
+                <img class="rateStar" src="../img/products/star_empty.png">
+            </div>
             <div id="rateButton" class="submitButton">Submit</div>
         </section>
     </div>
@@ -144,13 +164,39 @@
             type: 'POST',
             contentType: "application/json; charset=utf-8",
             async: true,
-            data: JSON.stringify({"storeID": getUrlParameter("storeID"),"commodityID": getUrlParameter("commodityID")}),
+            data: JSON.stringify({
+                "storeID": getUrlParameter("storeID"),
+                "commodityID": getUrlParameter("commodityID")
+            }),
             dataType: 'json',
             success: function (data) {
                 console.log(data);
                 renderLoadPage(data);
                 bindEvent();
             }
+        });
+
+        $(".rateStar").hover(
+            function () {
+                if ($(this).parent().attr("data-rate") == null) {
+                    var starNumber = $("#rateContent .rateStar").index(this);
+                    for (var i = 0; i <= starNumber; i++) {
+                        $($("#rateContent .rateStar")[i]).attr("src", "../img/products/star_1.png");
+                    }
+                }
+            },
+            function () {
+                if ($(this).parent().attr("data-rate") == null) {
+                    for (var i = 0; i < 5; i++) {
+                        $($("#rateContent .rateStar")[i]).attr("src", "../img/products/star_empty.png");
+                    }
+                }
+            }
+        );
+
+        $(".rateStar").click(function() {
+            var starNumber = $("#rateContent .rateStar").index(this);
+            $(this).parent().attr("data-rate", starNumber);
         });
     });
 
@@ -165,19 +211,22 @@
     function bindCommentArea() {
         $("#commentButton").click(function () {
 
-            var commentArea = $("#textarea");
+            showAddItem();
 
-            if (commentArea.css("display") == "none") {
-                commentArea.show();
-            }
-            else {
-                commentArea.hide();
-            }
 
 //            $("#curtain").fadeIn(300);
 //            $("#oops").fadeIn(300);
 //            $("body").css("overflow", "hidden");
         });
+
+        $("#submitComment").click(function () {
+            submitComment();
+        });
+
+        $("#cancelComment").click(function () {
+            hideAddItem();
+        });
+
     }
 
     function bindRateArea() {
@@ -231,11 +280,51 @@
 
     function submitComment() {
 
+        var userID = getCookieValue("userID");
+        var storeID = getUrlParameter("storeID");
+        var commodityID = getUrlParameter("commodityID");
+        var comment = $("textarea").val();
+
+        var postBody = {
+            "userID": userID,
+            "storeID": storeID,
+            "commodityID": commodityID,
+            "commentContent": comment
+        };
+
+        $.ajax({
+            url: '../commodity/addComment',
+            type: 'POST',
+            contentType: "application/json; charset=utf-8",
+            async: true,
+            data: JSON.stringify(postBody),
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                hideAddItem();
+                renderComment(data.commentData);
+                renderPagination(data.commentNumber, 1);
+            }
+        });
     }
 
     function submitRate() {
 
     }
+
+    function hideAddItem() {
+        $("textarea").val("");
+        $("#textarea").hide();
+        $("#operationArea").hide();
+        $("#commentButton").show();
+    }
+
+    function showAddItem() {
+        $("#textarea").show();
+        $("#operationArea").show();
+        $("#commentButton").hide();
+    }
+
 
 </script>
 

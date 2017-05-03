@@ -351,6 +351,7 @@ function getCommodityPageLoadData($storeID, $commodityID)
     //use $storeID and $commodityID to get data
 
     $totalCommentNumber = 100;
+    $averageRate = 4;
 
     $storeNameList = array(
         array(
@@ -427,7 +428,8 @@ function getCommodityPageLoadData($storeID, $commodityID)
         "basicCommodityInfo" => $basicCommodityInfo,
         "descriptionData" => $descriptionData,
         "commentNumber" => $totalCommentNumber,
-        "commentData" => $commentData
+        "commentData" => $commentData,
+        "averageRate" => $averageRate
     );
 
     return $commodityLoadData;

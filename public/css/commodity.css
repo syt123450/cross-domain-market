@@ -19,8 +19,16 @@ main > div:first-child > div {
     box-sizing: border-box;
 }
 
-main > div:first-child > div > img {
+#commodityAverageRate {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    padding: 0;
     height: 25px;
+}
+
+main > div:first-child > div > div > img {
+    height: 100%;
 }
 
 main > div:first-child > div > p {
@@ -224,6 +232,36 @@ main > div:last-child > header li {
     cursor: pointer;
 }
 
+#commentContent #operationArea {
+    padding: 0;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    font-weight: bold;
+    box-sizing: border-box;
+    margin-top: 20px;
+    background-color: #fff;
+    text-align: center;
+    color: #fff;
+    display: none;
+}
+
+#commentContent #operationArea div {
+    width: 20%;
+    height: 100%;
+    background-color: #2fa599;
+    float: left;
+    cursor: pointer;
+}
+
+#commentContent #operationArea div:nth-child(odd) {
+    margin-left: 20%;
+}
+
+#commentContent #operationArea div:nth-child(even) {
+    margin-left: 20%;
+}
+
 main div section {
 
 }
@@ -290,6 +328,7 @@ main div section {
     font-size: 18px;
     box-sizing: border-box;
     display: block;
+    cursor: pointer;
 }
 
 #oops section > div > div {
@@ -321,4 +360,10 @@ main div section {
     background-color: #FFF;
     color: #AAA;
     cursor: auto;
+}
+
+.rateStar {
+    cursor: pointer;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
 }

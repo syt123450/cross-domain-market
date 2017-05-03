@@ -44,9 +44,30 @@ function addComment($userID, $storeID, $commodityID, $commentContent) {
 
     //use the commodityID, userID, commentContent to add comment
 
+    $commentData = array(
+        array (
+            "commentInfo" => "By Norman on April 16, 2015",
+            "commentContent" =>  $commentContent
+        ),
+        array(
+            "commentInfo" => "By F. M. Green on May 23, 2016",
+            "commentContent" => "love the ball cap. Thre orange goes with the Home Depot apron. I just toss the cap in the washer on cold worth like colors and in the dryer, it can out fine, no shrinkage at all.The visited hellos keep the sun of my face, but I still use sunglasses and sunscreen. I also purchased the navy ball cap to look cool with my jersey baseball shirt which had navy sleeves."
+        ),
+        array(
+            "commentInfo" => "By JAGF on March 13, 2016",
+            "commentContent" => "I love, love, LOVE this cap! I wear a ll of the time whenever I feel like my hairs gross or isn't cooperating with me. It's so simple yet cute! I was actually planning to iron on a patch on the front of it, but I love it so much just plain that I might have to order another black cap so I can iron on my patch onto that one!"
+        ),
+        array(
+            "commentInfo" => "By Matt on July 3, 2015",
+            "commentContent" => "I try to write a lot of reviews but I don't know if I've ever written one about a hat. Well, this hat is awesome. A great subdued style and well constructed. It seems like ball caps are either tall, ugly trucker hats best suited for old men and hipsters, or they are unstructured dishrags that look sloppy.In my opinion this hat is the perfect in-between: structured to look sharp but not tall like a trucker hat. I was so happy with it I bought a second to keep on hand when/if I wear this one out. No joke."
+        )
+    );
+
     $addResult = array(
         "addResult" => true,
-        "addMessage" => ""
+        "addMessage" => "",
+        "commentNumber" => 101,
+        "commentData" => $commentData
     );
 
     return $addResult;
@@ -56,9 +77,12 @@ function addRate($userID, $storeID, $commodityID, $rate) {
 
     //use the commodityID, userID, rate to add rate
 
+    $averageRate = 4;
+
     $addResult = array(
         "addResult" => true,
-        "addMessage" => ""
+        "addMessage" => "",
+        "averageRate" => $averageRate
     );
 
     return $addResult;

@@ -12,9 +12,9 @@ use \Psr\Http\Message\ResponseInterface as Response;
 $app->GET('/initialize/index', function (Request $request, Response $response) {
 
     $this->logger->info('GET indexPage information.');
-    $usrName = $request->getCookieParams()["name"];
+    $userID = $request->getCookieParams()["userID"];
 
-    $indexData = getIndexPageLoadData($usrName);
+    $indexData = getIndexPageLoadData($userID);
     $responseJson = json_encode($indexData);
 
     $response->getBody()->write($responseJson);

@@ -9,8 +9,22 @@ function renderLoadPage(data) {
     renderDescription(data.descriptionData);
     renderComment(data.commentData);
     renderPagination(data.commentNumber, 1);
+    renderRate(data.averageRate);
 }
 
+
+function renderRate(averageRate) {
+    var starNumber = Math.round(averageRate);
+    console.log(starNumber);
+    var infoStars = $("#commodityAverageRate img");
+    var addStars = $("#rateContent>img");
+    for (var i = 4; i >= starNumber; i--) {
+
+        console.log(addStars);
+        $(infoStars[i]).attr("src", "../img/products/star_empty.png");
+        $(addStars[i]).attr("src", "../img/products/star_empty.png");
+    }
+}
 
 function renderDescription(descriptionData) {
     var descriptionArea = $("#descriptionContent");
@@ -28,16 +42,22 @@ function renderComment(commentData) {
 
     for (var i = 0; i < commentData.length; i++) {
         var oneCommentData = commentData[i];
-        var commentItem = document.createElement("div");
-        $(commentItem).attr("class", "commentItem");
-        var commentInfo = document.createElement("p");
-        $(commentInfo).text(oneCommentData.commentInfo);
-        var commentParagraph = document.createElement("p");
-        $(commentParagraph).text(oneCommentData.commentContent);
-        $(commentItem).append(commentInfo);
-        $(commentItem).append(commentParagraph);
+        var commentItem = createOneCommentItem(oneCommentData);
         $(commentItem).insertBefore("#paginationArea");
     }
+}
+
+function createOneCommentItem(oneCommentData) {
+    var commentItem = document.createElement("div");
+    $(commentItem).attr("class", "commentItem");
+    var commentInfo = document.createElement("p");
+    $(commentInfo).text(oneCommentData.commentInfo);
+    var commentParagraph = document.createElement("p");
+    $(commentParagraph).text(oneCommentData.commentContent);
+    $(commentItem).append(commentInfo);
+    $(commentItem).append(commentParagraph);
+
+    return commentItem;
 }
 
 function renderCommodityInfo(basicCommodityInfo) {
