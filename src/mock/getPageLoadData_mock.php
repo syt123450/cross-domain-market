@@ -350,6 +350,8 @@ function getCommodityPageLoadData($storeID, $commodityID)
 {
     //use $storeID and $commodityID to get data
 
+    $totalCommentNumber = 100;
+
     $storeNameList = array(
         array(
             "storeID" => "ID1",
@@ -424,6 +426,7 @@ function getCommodityPageLoadData($storeID, $commodityID)
         "storeNameList" => $storeNameList,
         "basicCommodityInfo" => $basicCommodityInfo,
         "descriptionData" => $descriptionData,
+        "commentNumber" => $totalCommentNumber,
         "commentData" => $commentData
     );
 

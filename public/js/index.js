@@ -185,6 +185,8 @@ function renderInitiatedEvent() {
             success: function (data) {
                 console.log(data);
                 renderTop5(data);
+                bindLink();
+                bindClickButton();
             }
         });
     });

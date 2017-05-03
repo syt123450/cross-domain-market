@@ -9,18 +9,20 @@
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
+//userID 其实是后端从cookie中取出来的
+
 $app->POST('/commodity/addComment', function (Request $request, Response $response) {
 
     $this->logger->info('Add comment for commodity.');
-    $usrName = ($request->getCookieParams())["name"];
+    $userID = ($request->getCookieParams())["userID"];
     $storeID = ($request->getParsedBody())["storeID"];
     $commodityID = ($request->getParsedBody())["commodityID"];
     $commentContent = ($request->getParsedBody())["commentContent"];
-    $this->logger->info("The usr name is: " . $usrName);
+    $this->logger->info("The userID is: " . $userID);
     $this->logger->info("The storeID is: " . $storeID);
     $this->logger->info("The commodity ID is: " .  $commodityID);
     $this->logger->info("The commentContent is: " . $commentContent);
-    $addResult = addComment($commodityID, $usrName, $commentContent);
+    $addResult = addComment($userID, $storeID, $commodityID, $commentContent);
     $responseJson = json_encode($addResult);
     $response->getBody()->write($responseJson);
 
@@ -30,13 +32,13 @@ $app->POST('/commodity/addComment', function (Request $request, Response $respon
 $app->POST('/commodity/addToCart', function (Request $request, Response $response) {
 
     $this->logger->info('Add commodity to shopping cart.');
-    $usrName = ($request->getCookieParams())["name"];
+    $userID = ($request->getCookieParams())["userID"];
     $storeID = ($request->getParsedBody())["storeID"];
     $commodityID = ($request->getParsedBody())["commodityID"];
-    $this->logger->info("The usr name is: " . $usrName);
+    $this->logger->info("The usr name is: " . $userID);
     $this->logger->info("The storeID is: " . $storeID);
     $this->logger->info("The commodityID is: " . $commodityID);
-    $addResult = addToCart($usrName, $commodityID);
+    $addResult = addToCart($userID, $storeID, $commodityID);
     $responseJson = json_encode($addResult);
     $response->getBody()->write($responseJson);
 
@@ -46,15 +48,15 @@ $app->POST('/commodity/addToCart', function (Request $request, Response $respons
 $app->POST('/commodity/addRate', function (Request $request, Response $response) {
 
     $this->logger->info('Add rate for commodity.');
-    $usrName = ($request->getCookieParams())["name"];
+    $userID = ($request->getCookieParams())["userID"];
     $storeID = ($request->getParsedBody())["storeID"];
     $commodityID = ($request->getParsedBody())["commodityID"];
     $rate = ($request->getParsedBody())["rate"];
-    $this->logger->info("The usr name is: " . $usrName);
+    $this->logger->info("The usr name is: " . $userID);
     $this->logger->info("The storeID is: " . $storeID);
     $this->logger->info("The commodityID is: " . $commodityID);
     $this->logger->info("The rate is: " . $rate);
-    $addResult = addRate($commodityID, $usrName, $rate);
+    $addResult = addRate($userID, $storeID, $commodityID, $rate);
     $responseJson = json_encode($addResult);
     $response->getBody()->write($responseJson);
 
@@ -70,7 +72,7 @@ $app->POST('/commodity/getComment', function (Request $request, Response $respon
     $this->logger->info("The storeID is: " . $storeID);
     $this->logger->info("The commodityID is: " . $commodityID);
     $this->logger->info("The pageID is: " . $pageID);
-    $commentData = getComment($commodityID, $pageID);
+    $commentData = getComment($storeID, $commodityID, $pageID);
     $responseJson = json_encode($commentData);
     $response->getBody()->write($responseJson);
 

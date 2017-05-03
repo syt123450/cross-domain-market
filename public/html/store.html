@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="../css/store.css">
     <script src="../js/common.js"></script>
     <script src="../js/store.js"></script>
+    <script src="../js/pagination.js"></script>
 </head>
 <body>
 
@@ -77,13 +78,7 @@
 
         </div>
         <footer>
-            <ul class="pagination">
-                <li><a>&laquo;</a></li>
-                <li class="active"><a>1</a></li>
-                <li><a>2</a></li>
-                <li><a>...</a></li>
-                <li><a>&raquo;</a></li>
-            </ul>
+            <ul id="pagination" class="pagination"></ul>
         </footer>
     </section>
     <aside>
@@ -135,7 +130,7 @@
 
     $(function () {
 
-        console.log(getUrlParameter("storeID"));
+        bindStaticEvent();
 
         $.ajax({
             url: '../initialize/store',
@@ -147,7 +142,7 @@
             success: function (data) {
                 console.log(data);
                 renderLoadPage(data);
-                bindEvent();
+                bindLoadEvent();
             }
         });
     });

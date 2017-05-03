@@ -139,7 +139,7 @@ main > div:last-child > header li {
     background-color: #e0f2f0;
 }
 
-#commentContent > #pagination {
+#commentContent > #paginationArea {
     padding: 0;
     margin: 0;
     text-align: center;
@@ -305,4 +305,20 @@ main div section {
 #oops section > div > div:last-child {
     width: 30%;
     float: right;
+}
+
+#pagination li a {
+    cursor: pointer;
+}
+
+#pagination li a.now-button {
+    background-color: #2fa599;
+    color: #FFF;
+    cursor: auto;
+}
+
+#pagination li a.unactive-button {
+    background-color: #FFF;
+    color: #AAA;
+    cursor: auto;
 }

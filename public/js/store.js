@@ -1,12 +1,17 @@
 /**
  * Created by ss on 2017/2/7.
  */
-function bindEvent() {
+
+function bindStaticEvent() {
+
+    bindTop5Selector();
+}
+
+function bindLoadEvent() {
     bindNav();
     bindAd();
     bindClickButton();
     bindLink();
-    bindTop5Selector();
 }
 
 function renderLoadPage(data) {
@@ -14,6 +19,7 @@ function renderLoadPage(data) {
     renderAD(data.storeADList);
     renderProductList(data.productList);
     renderTop5(data.top5Data);
+    renderPagination(data.productNumber, 1);
 }
 
 function renderAD(storeADList) {
@@ -24,6 +30,7 @@ function renderAD(storeADList) {
 
 function renderTop5(top5Data) {
     var top5Area = $("main>aside>div");
+    $(top5Area).empty();
     for (var i = 0; i < top5Data.length; i++) {
         renderProductItem(top5Area, top5Data[i]);
     }
@@ -31,6 +38,7 @@ function renderTop5(top5Data) {
 
 function renderProductList(productList) {
     var productArea = $("main>section>div");
+    $(productArea).empty();
     for (var i = 0; i < productList.length; i++) {
         renderProductItem(productArea, productList[i]);
     }
@@ -65,6 +73,24 @@ function bindTop5Selector() {
     $("aside>header>div>ul>li").click(function () {
         $("aside>header>div>p").text($(this).text());
         $("aside>header>div>ul").hide();
+
+        var keyWord = $(this).attr("data-top5KeyWord");
+        var storeID = getUrlParameter("storeID");
+        console.log(keyWord);
+        $.ajax({
+            url: '../top5/store',
+            type: 'POST',
+            contentType: "application/json; charset=utf-8",
+            async: true,
+            data: JSON.stringify({"keyWord": keyWord, "storeID": storeID}),
+            dataType: 'json',
+            success: function (top5Data) {
+                console.log(top5Data);
+                renderTop5(top5Data);
+                bindClickButton();
+                bindLink();
+            }
+        });
     });
 }
 
@@ -105,5 +131,24 @@ function bindLink() {
         var commodityID = $(this).attr("data-commodityID");
         var commodityUrl = "commodity.html?" + "storeID=" + storeID + "&" + "commodityID=" + commodityID;
         location.href = commodityUrl;
+    });
+}
+
+//use for pagination click event
+function renderPage(pageNumber) {
+    $.ajax({
+        url: '../store/product',
+        type: 'POST',
+        contentType: "application/json; charset=utf-8",
+        async: true,
+        data: JSON.stringify({"storeID": getUrlParameter("storeID"), "pageID": pageNumber}),
+        dataType: 'json',
+        success: function (productListData) {
+            console.log(productListData);
+            renderProductList(productListData.productList);
+            renderPagination(productListData.productNumber, productListData.pageID);
+            bindClickButton();
+            bindLink();
+        }
     });
 }

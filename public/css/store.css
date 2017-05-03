@@ -194,3 +194,19 @@ aside > header > div > ul > li:hover {
     background-color: #2fa599;
     color: #fff;
 }
+
+#pagination li a {
+    cursor: pointer;
+}
+
+#pagination li a.now-button {
+    background-color: #2fa599;
+    color: #FFF;
+    cursor: auto;
+}
+
+#pagination li a.unactive-button {
+    background-color: #FFF;
+    color: #AAA;
+    cursor: auto;
+}

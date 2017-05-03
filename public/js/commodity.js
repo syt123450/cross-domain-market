@@ -8,6 +8,7 @@ function renderLoadPage(data) {
     renderCommodityInfo(data.basicCommodityInfo);
     renderDescription(data.descriptionData);
     renderComment(data.commentData);
+    renderPagination(data.commentNumber, 1);
 }
 
 
@@ -21,16 +22,21 @@ function renderDescription(descriptionData) {
 }
 
 function renderComment(commentData) {
+
+    var commentContent = $(".commentItem");
+    $(commentContent).remove();
+
     for (var i = 0; i < commentData.length; i++) {
         var oneCommentData = commentData[i];
         var commentItem = document.createElement("div");
+        $(commentItem).attr("class", "commentItem");
         var commentInfo = document.createElement("p");
         $(commentInfo).text(oneCommentData.commentInfo);
-        var commentContent = document.createElement("p");
-        $(commentContent).text(oneCommentData.commentContent);
+        var commentParagraph = document.createElement("p");
+        $(commentParagraph).text(oneCommentData.commentContent);
         $(commentItem).append(commentInfo);
-        $(commentItem).append(commentContent);
-        $(commentItem).insertBefore("#pagination");
+        $(commentItem).append(commentParagraph);
+        $(commentItem).insertBefore("#paginationArea");
     }
 }
 
@@ -61,4 +67,31 @@ function hideAllContent() {
     $("#descriptionContent").hide();
     $("#commentContent").hide();
     $("#rateContent").hide();
+}
+
+function renderPage(pageNumber) {
+    console.log(pageNumber);
+
+    var storeID = getUrlParameter("storeID");
+    var commodityID = getUrlParameter("commodityID");
+
+    var postBody = {
+        "storeID": storeID,
+        "commodityID": commodityID,
+        "pageID": pageNumber
+    };
+
+    $.ajax({
+        url: '../commodity/getComment',
+        type: 'POST',
+        contentType: "application/json; charset=utf-8",
+        async: true,
+        data: JSON.stringify(postBody),
+        dataType: 'json',
+        success: function (data) {
+            console.log(data);
+            renderComment(data.commentData);
+            renderPagination(data.commentNumber, data.pageID);
+        }
+    });
 }
