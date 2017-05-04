@@ -8,6 +8,8 @@
 
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
+use Dflydev\FigCookies\SetCookie;
+use Dflydev\FigCookies\FigResponseCookies;
 
 $app->POST('/login/checkName', function (Request $request, Response $response) {
 
@@ -29,6 +31,18 @@ $app->POST('/login/checkLogin', function (Request $request, Response $response) 
     $this->logger->info("The userInfo is: " . $userInfo);
     $this->logger->info("The userPassword is: " . $userPassword);
     $storeData = checkUsr($userInfo, $userPassword);
+    if ($storeData['checkResult'] ==true){
+        $userAry = $storeData['checkMessage'];
+
+        $response = FigResponseCookies::set($response, SetCookie::create('userID')
+            ->withValue($userAry['userID'])
+            ->withPath('/')
+        );
+        $response = FigResponseCookies::set($response, SetCookie::create('userName')
+            ->withValue($userAry['userName'])
+            ->withPath('/')
+        );
+    }
     $responseJson = json_encode($storeData);
     $response->getBody()->write($responseJson);
 

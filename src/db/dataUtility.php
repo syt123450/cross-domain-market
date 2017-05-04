@@ -333,39 +333,86 @@
         return $ret;
     }
 
+/**
+ * Validate username/email and password for a user
+ * @param $userinfo
+ * @param $password
+ * @return array
+ *  [
+ *      "checkResult" : <boolean value of the result>,
+ *      "checkMessage" : <Message related to the validation>,
+ *  ]
+ */
     function validateUser($userinfo, $password){
         $ret = array();
 
-        $resultByNameAry = getData("db272.User", ['userName' => $userinfo, 'password' => $password], []);
-        $resultByEmailAry = getData("db272.User", ['email' => $userinfo, 'password' => $password], []);
+        $resultByNameAry = getData("db272.User",
+            ['userName' => $userinfo, 'password' => $password],
+            ['projection' => ['userName' => 1, 'userID' => 1, 'email' => 1, '_id' => 0]]);
+        $resultByEmailAry = getData("db272.User",
+            ['email' => $userinfo, 'password' => $password],
+            ['projection' => ['userName' => 1, 'userID' => 1, 'email' => 1, '_id' => 0]]);
 
         if (count($resultByNameAry) ==1) {
+            $tempUser = $resultByNameAry[0];
+            $tempUser = json_decode(json_encode($tempUser));
+
             if (count($resultByEmailAry) ==0){
                 $ret["checkResult"] = true;
-                $ret["checkMessage"] = "Validated by userName";
+                $ret["checkMessage"] = $tempUser;
+            }
+            else {
+                $ret["checkResult"] = true;
+                $ret["checkMessage"] = $tempUser;
             }
         }
-
-        if (count($resultByNameAry) >1){
-            $ret["checkResult"] = true;
-            $ret["checkMessage"] = "Validated by userName";
+        else if (count($resultByEmailAry) ==1){
+            $tempUser = $resultByNameAry[0];
+            $tempUser = json_decode(json_encode($tempUser));
+            if (count($resultByNameAry) ==0){
+                $ret["checkResult"] = true;
+                $ret["checkMessage"] = $tempUser;
+            }
+            else {
+                $ret["checkResult"] = true;
+                $ret["checkMessage"] = $tempUser;
+            }
         }
-        else if (count($resultByNameAry) >1){
-           $ret["checkResult"] = false;
-           $ret["checkMessage"] = "Too many user results...";
+        else if (count($resultByNameAry) ==0 && count($resultByEmailAry) ==0){
+            $ret["checkResult"] = false;
+            $ret["checkMessage"] = "No user found by: " . $userinfo;
         }
         else {
             $ret["checkResult"] = false;
-            $ret["checkMessage"] = "Can't find the user: " . $userName;
+            $ret["checkMessage"] = "Too many results with: " . $userinfo;
         }
 
         return $ret;
     }
 
-    function validateUserByUserEmail($email, $password){
+/**
+ * Validate if the new user name is available for
+ * @param $userName
+ * @return array
+ *  [
+ *      "checkResult" : <boolean value of the result>,
+ *      "checkMessage" : <Message related to the validation>,
+ *  ]
+ */
+    function validateNewUser($userName){
+        $ret = array();
+        $resultByNameAry = getData("db272.User", ['userName' => $userName], []);
+        if (count($resultByNameAry) ==0){
+            $ret["checkResult"] = true;
+            $ret["checkMessage"] = "Valid UserName.";
+        }
+        else {
+            $ret["checkResult"] = false;
+            $ret["checkMessage"] = "UserName Existed: " . $userName;
+        }
 
+        return $ret;
     }
-
 
 
 
