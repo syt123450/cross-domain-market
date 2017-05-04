@@ -23,21 +23,14 @@ $app->GET('/initialize/index', function (Request $request, Response $response) {
     $response->getBody()->write($responseJson);
 
     try {
-        $this->logger->info(">>> 0 <<<");
-
         $response = FigResponseCookies::set($response, SetCookie::create('testCookie')
             ->withValue('12341234')
+            ->withPath('/')
         );
 //        $response = FigResponseCookies::expire($response, 'session_cookie');
 
         $setCookie = FigResponseCookies::get($response, 'testCookie');
-        $this->logger->info("testCookie before response: " . $setCookie->getValue());
-
-        $this->logger->info(">>> 1 <<<");
-
-        $this->logger->info(">>> 2 <<<");
     } catch(Exception $what) {
-        $this->logger->info(">>> 3 <<<");
         $this->logger->info($what->getMessage());
     }
 

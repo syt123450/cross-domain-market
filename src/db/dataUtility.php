@@ -333,7 +333,38 @@
         return $ret;
     }
 
+    function validateUser($userinfo, $password){
+        $ret = array();
 
+        $resultByNameAry = getData("db272.User", ['userName' => $userinfo, 'password' => $password], []);
+        $resultByEmailAry = getData("db272.User", ['email' => $userinfo, 'password' => $password], []);
+
+        if (count($resultByNameAry) ==1) {
+            if (count($resultByEmailAry) ==0){
+                $ret["checkResult"] = true;
+                $ret["checkMessage"] = "Validated by userName";
+            }
+        }
+
+        if (count($resultByNameAry) >1){
+            $ret["checkResult"] = true;
+            $ret["checkMessage"] = "Validated by userName";
+        }
+        else if (count($resultByNameAry) >1){
+           $ret["checkResult"] = false;
+           $ret["checkMessage"] = "Too many user results...";
+        }
+        else {
+            $ret["checkResult"] = false;
+            $ret["checkMessage"] = "Can't find the user: " . $userName;
+        }
+
+        return $ret;
+    }
+
+    function validateUserByUserEmail($email, $password){
+
+    }
 
 
 

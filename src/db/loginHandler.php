@@ -8,6 +8,7 @@
 function checkUsr($usrInfo, $usrPassword) {
 
     //use the usrName/usrEmail, usrPassword to validate
+    $checkResult = validateUserByUserName($usrInfo, $usrPassword);
 
     $checkResult = array(
         "checkResult" => true,

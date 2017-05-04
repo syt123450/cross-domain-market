@@ -61,10 +61,6 @@ function upsertData($collectionName, $filter, $sets){
     $result = $manager->executeBulkWrite($collectionName, $bulk, $writeConcern);
 }
 
-function validateData(){
-
-}
-
 
 
 
