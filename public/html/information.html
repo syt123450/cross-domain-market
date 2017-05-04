@@ -1,41 +1,179 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width = device-width, initial-scale =1.0, maximum-scale = 1.0, user-scalable = no">
     <title>Information</title>
-</head>
-<body>
 
-</body>
+    <link rel='icon' href='../img/common/browserLogo.ico' type=‘image/x-ico’>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/information.css">
+    <script src="../js/common.js"></script>
+    <script src="../js/information.js"></script>
+
+</head>
+<body data-spy="scroll" data-target="#myScrollspy" data-offset="20">
+
+<header>
+    <div class="container">
+        <img src="../img/common/top_banner.png" alt="webLogo">
+    </div>
+</header>
+
+<nav>
+    <ul class="container">
+        <li><a href="../index.html">Home</a></li>
+        <li>
+            <a>Store</a>
+            <ul>
+                <!--<li><a href="store.html">SHOP LI-NING</a></li>-->
+            </ul>
+        </li>
+        <li class="nowPage"><a>Contact</a></li>
+        <li>
+            <a href="login.html">Log In</a>
+            <ul>
+                <li>Log Out</li>
+            </ul>
+        </li>
+        <li><a><img id="shoppingCart" src="../img/common/pageIcon/shopping_cart.png"></a></li>
+    </ul>
+</nav>
+
+<div class="container">
+    <div class="row">
+        <nav class="col-sm-3" id="myScrollspy">
+            <div class="container-fluid">
+                <div class="container-fluid">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li class="active"><a href="#contactInfo">Contact us</a></li>
+                        <li><a href="#policy">Terms & Policy</a></li>
+                        <li><a href="#partner">Partner</a></li>
+                        <li><a href="#FAQ">FAQ</a></li>
+                        <li><a href="#story">Our story</a></li>
+                        <li class="dropdown"></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div id="infoContentArea" class="col-sm-9">
+            <div id="contactInfo">
+                <h2>Contact us</h2>
+                <p><span class="glyphicon glyphicon-home"></span> Icon brands, inc, 1 Washington Sq, San Jose, CA 95193
+                </p>
+                <p><span class="glyphicon glyphicon-envelope"></span> Tel: +1 123-456-7890</p>
+                <p><span class="glyphicon glyphicon-earphone"></span> Email: contact@icon.com</p>
+            </div>
+            <div id="policy">
+                <h2>Terms & Policy</h2>
+                <h3>Privacy Policy</h3>
+                <p>iconinc.com is owned and operated by ICON Inc. This privacy policy describes how we handle your
+                    personal information. By using iconinc.com (the "Site") you consent to the storage, processing,
+                    transfer and disclosure of your personal information as described in this privacy policy. This
+                    policy is effective as of November 16, 2015.</p>
+                <h3>Collection</h3>
+                <p>You may browse this Site without providing any personal information about yourself. However, to
+                    receive notifications, updates or request additional information about ICON Inc. or this Site, we
+                    may collect the following information: name, contact information, email address, company and user
+                    ID; correspondence sent to or from us; any additional information you choose to provide; and other
+                    information from your interaction with our Site, services, content and advertising, including
+                    computer and connection information, statistics on page views, traffic to and from the Site, ad
+                    data, IP address and standard web log information. If you choose to provide us with personal
+                    information, you consent to the transfer and storage of that information on our servers located in
+                    the United States.</p>
+                <h3>Cookies and Other Tracking Technologies</h3>
+                <p>We use cookies, web beacons, unique identifiers, and similar technologies to collect information
+                    about the pages you view, the links you click, and other actions you take on our Site. For more
+                    information about our use of these technologies and how to control them, see our notice on Cookies,
+                    Web Beacons and Similar Technologies.</p>
+                <h3>Use</h3>
+                <p>We use your personal information to provide you with the services you request, communicate with you,
+                    troubleshoot problems, customize your experience, inform you about our services and Site updates and
+                    measure interest in our sites and services.</p>
+                <h3>Disclosure</h3>
+                <p>We don't sell or rent your personal information to third parties for their marketing purposes without
+                    your explicit consent. We may disclose personal information to respond to legal requirements,
+                    enforce our policies, respond to claims that a posting or other content violates other's rights, or
+                    protect anyone's rights, property, or safety. Such information will be disclosed in accordance with
+                    applicable laws and regulations. We may also share personal information with service providers who
+                    help with our business operations, and with members of our corporate family, who may provide joint
+                    content and services and help detect and prevent potentially illegal acts. Should we plan to merge
+                    or be acquired by another business entity, we may share personal information with the other company
+                    and will require that the new combined entity follow this privacy policy with respect to your
+                    personal information.</p>
+                <h3>Access</h3>
+                <p>You may access or update the personal information you provided to us at any time by contacting us at
+                    ebayinc@ebay.com.</p>
+                <h3>Security</h3>
+                <p>We treat information as an asset that must be protected and use lots of tools to protect your
+                    personal information against unauthorized access and disclosure. However, as you probably know,
+                    third parties may unlawfully intercept or access transmissions or private communications. Therefore,
+                    although we work very hard to protect your privacy, we do not promise, and you should not expect
+                    that your personal information or private communications will always remain private.</p>
+                <h3>General</h3>
+                <p>We may update this policy at any time by posting amended terms on this site. All amended terms
+                    automatically take effect 30 days after they are initially posted on the site. For questions about
+                    this policy, email us at ebayinc@ebay.com or write to us at eBay Inc. Attn: Legal - Global Privacy
+                    Practices, 2145 Hamilton Avenue, San Jose, California 95125.</p>
+            </div>
+            <div id="partner">
+                <h1>Partner</h1>
+                <p>There is some description. There is some description. There is some description.</p>
+            </div>
+            <div id="FAQ">
+                <h1>FAQ</h1>
+                <p>There is some description. There is some description. There is some description.</p>
+            </div>
+            <div id="story">
+                <h1>Our story</h1>
+                <p>ICON is a global creative commerce platform. We build markets, services and economic opportunity for
+                    creative entrepreneurs.</p><br>
+                <p>Our service allows users to buy just about anything in a variety of pricing formats and locations.
+                    The actual contract for sale is directly between the seller and buyer. eBay is not a traditional
+                    auctioneer. </p><br>
+                <p>While we may provide pricing, shipping, listing, and other guidance in our Services, such guidance is
+                    solely informational and you may decide to follow it or not. Also, while we may help facilitate the
+                    resolution of disputes through various programs, eBay has no control over and does not guarantee the
+                    existence, quality, safety or legality of items advertised; the truth or accuracy of users' content
+                    or listings; the ability of sellers to sell items; the ability of buyers to pay for items; or that a
+                    buyer or seller will actually complete a transaction or return an item.</p><br>
+                <p>Within our markets, millions of people around the world connect, both online and offline, to make,
+                    sell and buy unique goods. We also offer a wide range of Seller Services and tools that help
+                    creative entrepreneurs start, manage and scale their businesses. Our mission is to reimagine
+                    commerce in ways that build a more fulfilling and lasting world, and we're committed to using the
+                    power of business to strengthen communities and empower people.</p>
+            </div>
+            <div></div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div id="copyright">copyright © 2017 Icon brands, inc. All rights reserved</div>
+</footer>
+
 
 <script>
-    var storeNameList = [];
 
-    storeNameList[0] = {
-        "storeID": "ID1",
-        "storeName": "SHOP PUMA"
-    };
-
-    storeNameList[1] = {
-        "storeID": "ID2",
-        "storeName": "SHOP 361"
-    };
-
-    storeNameList[2] = {
-        "storeID": "ID3",
-        "storeName": "SHOP LI-NING"
-    };
-
-    storeNameList[3] = {
-        "storeID": "ID4",
-        "storeName": "SHOP NIKE"
-    };
-
-    storeNameList[4] = {
-        "storeID": "ID5",
-        "storeName": "SHOP ADIDAS"
-    };
+    $(function() {
+        $.ajax({
+            url: '../initialize/contact',
+            type: 'GET',
+            async: true,
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                renderNavStoreList(data.storeNameList);
+                bindNav();
+            }
+        });
+    });
 
 </script>
 
+</body>
 </html>
