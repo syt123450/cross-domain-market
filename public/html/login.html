@@ -97,11 +97,9 @@
             var userPassword = $("#signInContent input:eq(1)").val();
 
             var postBody = {
-                "usrInfo": userInfo,
-                "usrPassword": userPassword
+                "userInfo": userInfo,
+                "userPassword": userPassword
             };
-
-            console.log(postBody);
 
             $.ajax({
                 url: '../login/checkLogin',
