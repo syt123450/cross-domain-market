@@ -23,12 +23,12 @@ $app->POST('/login/checkName', function (Request $request, Response $response) {
 
 $app->POST('/login/checkLogin', function (Request $request, Response $response) {
 
-    $this->logger->info('Check the usrName and usrPassword.');
-    $usrName = ($request->getParsedBody())["usrName"];
+    $this->logger->info('Check the usrInfo and usrPassword.');
+    $usrInfo = ($request->getParsedBody())["usrInfo"];
     $usrPassword = ($request->getParsedBody())["usrPassword"];
-    $this->logger->info("The usrName is: " . $usrName);
+    $this->logger->info("The usrInfo is: " . $usrInfo);
     $this->logger->info("The usrPassword is: " . $usrPassword);
-    $storeData = checkUsr($usrName, $usrPassword);
+    $storeData = checkUsr($usrInfo, $usrPassword);
     $responseJson = json_encode($storeData);
     $response->getBody()->write($responseJson);
 

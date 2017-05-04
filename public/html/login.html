@@ -46,14 +46,14 @@
     <section id="signInContent">
         <input type="text" placeholder="User name/Email">
         <input type="text" placeholder="Password">
-        <div>Sign In</div>
+        <div id="signInButton">Sign In</div>
     </section>
     <section id="registerContent">
         <input type="text" placeholder="User Name">
         <input type="text" placeholder="Email">
         <input type="text" placeholder="Password">
         <input type="text" placeholder="Re-enter password">
-        <div>Register</div>
+        <div id="registerButton">Register</div>
     </section>
 </main>
 
@@ -89,6 +89,31 @@
                 renderNavStoreList(data.storeNameList);
                 bindEvent();
             }
+        });
+
+        $("#signInButton").click(function() {
+
+            var userInfo = $("#signInContent input:eq(0)").val();
+            var userPassword = $("#signInContent input:eq(1)").val();
+
+            var postBody = {
+                "usrInfo": userInfo,
+                "usrPassword": userPassword
+            };
+
+            console.log(postBody);
+
+            $.ajax({
+                url: '../login/checkLogin',
+                type: 'POST',
+                contentType: "application/json; charset=utf-8",
+                async: true,
+                data: JSON.stringify(postBody),
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                }
+            });
         });
     });
 
