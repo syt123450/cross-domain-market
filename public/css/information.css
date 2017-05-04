@@ -1,0 +1,36 @@
+div.container-fluid .nav {
+    width: 15%;
+    text-align: center;
+    background-color: #e0f2f0;
+    padding: 30px 10px;
+    box-sizing: border-box;
+}
+
+div.container-fluid .nav li.active a {
+    background-color: #2fa599;
+}
+
+body {
+    position: relative;
+}
+
+ul.nav-pills {
+    top: 200px;
+    position: fixed;
+}
+
+div.col-sm-9 div {
+    height: 250px;
+    font-size: 28px;
+}
+
+#contactInfo, #policy, #partner, #story, #FAQ {
+    background-color: #e0f2f0;
+    height: auto;
+    min-height: 400px;
+    padding: 20px 40px 40px 40px;
+    box-sizing: border-box;
+    margin-bottom: 40px;
+    margin-top: 20px;
+    font-size: 15px;
+}
