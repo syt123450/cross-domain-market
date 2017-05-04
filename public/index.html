@@ -156,6 +156,7 @@
             success: function (data) {
                 console.log(data);
                 console.log(getCookieValue('testCookie'));
+                console.log(getCookieValue('userID'));
                 renderPage(data);
                 bindEvent();
             }

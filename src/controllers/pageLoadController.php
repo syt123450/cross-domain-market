@@ -5,10 +5,12 @@
  * Date: 2017/3/31
  * Time: 下午4:52
  */
-
+ini_set('display_errors', 1);
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 use Dflydev\FigCookies\SetCookie;
+use Dflydev\FigCookies\SetCookies;
+use Dflydev\FigCookies\FigResponseCookies;
 
 $app->GET('/initialize/index', function (Request $request, Response $response) {
 
@@ -23,21 +25,15 @@ $app->GET('/initialize/index', function (Request $request, Response $response) {
     try {
         $this->logger->info(">>> 0 <<<");
 
+        $response = FigResponseCookies::set($response, SetCookie::create('testCookie')
+            ->withValue('12341234')
+        );
+//        $response = FigResponseCookies::expire($response, 'session_cookie');
 
-        $setCookie = SetCookie::create('lu')
-            ->withValue('Rg3vHJZnehYLjVg7qi3bZjzg')
-            ->withExpires('Tue, 15-Jan-2013 21:47:38 GMT')
-            ->withMaxAge(500)
-            ->rememberForever()
-            ->withPath('/')
-            ->withDomain('.example.com')
-            ->withSecure(true)
-            ->withHttpOnly(true)
-        ;
+        $setCookie = FigResponseCookies::get($response, 'testCookie');
+        $this->logger->info("testCookie before response: " . $setCookie->getValue());
 
         $this->logger->info(">>> 1 <<<");
-
-//        $setCookies = Dflydev\FigCookies\SetCookies::fromResponse($response);
 
         $this->logger->info(">>> 2 <<<");
     } catch(Exception $what) {

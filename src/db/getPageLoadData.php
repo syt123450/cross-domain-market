@@ -63,14 +63,14 @@ function getStorePageLoadData($storeID) {
     $storeProductNumber = count($productData);
 
     $top5Products = getData("db272.TopProduct", ['storeID' => $storeID], ['sort' => ['viewed' => -1], 'limit' => 3]);
-    $top5DataNoStoreName = getTop5DataNoStoreName($top5Products);
+    $top5DataNoStore = getTop5DataNoStore($top5Products);
 
     $storeLoadData = array(
         "productNumber" => $storeProductNumber,
         "storeNameList" => $storeNameList,
         "storeADList" => $storeADList,
         "productList" => $productList,
-        "top5Data" => $top5DataNoStoreName
+        "top5Data" => $top5DataNoStore
     );
 
     return $storeLoadData;
@@ -99,7 +99,7 @@ function getContactPageLoadData() {
     return $contactLoadData;
 }
 
-function getCommodityPageLoadData($commodityID, $storeID) {
+function getCommodityPageLoadData($storeID, $commodityID) {
     //use $commodityID to get data
 
     $stores = getAllData("db272.Store");

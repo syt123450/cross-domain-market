@@ -13,6 +13,15 @@ $app->get('/[{name}]', function ($request, $response, $args) {
 
 });
 
+// Require Dflydev/Fig-Cookies Library for cookie handling
+require_once('../vendor/dflydev/fig-cookies/src/Dflydev/FigCookies/Cookie.php');
+require_once('../vendor/dflydev/fig-cookies/src/Dflydev/FigCookies/Cookies.php');
+require_once('../vendor/dflydev/fig-cookies/src/Dflydev/FigCookies/FigRequestCookies.php');
+require_once('../vendor/dflydev/fig-cookies/src/Dflydev/FigCookies/FigResponseCookies.php');
+require_once('../vendor/dflydev/fig-cookies/src/Dflydev/FigCookies/SetCookie.php');
+require_once('../vendor/dflydev/fig-cookies/src/Dflydev/FigCookies/SetCookies.php');
+require_once('../vendor/dflydev/fig-cookies/src/Dflydev/FigCookies/StringUtil.php');
+
 require_once('controllers/restController.php');
 require_once('controllers/pageLoadController.php');
 require_once('controllers/top5Controller.php');
