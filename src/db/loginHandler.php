@@ -1,14 +1,13 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: ss
- * Date: 2017/4/6
- * Time: 下午2:20
+ * User: Chenhua Zhu
+ * Date: 2017/5/3 17:29
  */
 
 function checkUsr($usrInfo, $usrPassword) {
 
-    //use the usrName, usrPassword to validate
+    //use the usrName/usrEmail, usrPassword to validate
 
     $checkResult = array(
         "checkResult" => true,

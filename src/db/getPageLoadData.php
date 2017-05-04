@@ -16,7 +16,7 @@ require_once('dataUtility.php');
  * @param $usrName
  * @return array
  */
-function getIndexPageLoadData($usrName) {
+function getIndexPageLoadData($userID) {
     // Get all store related data
     $stores = getAllData("db272.Store");
     $storeNameList = getStoreNameList($stores);
@@ -27,7 +27,7 @@ function getIndexPageLoadData($usrName) {
     $top5Data = getTop5Data($top5Products);
 
     // Get all recent view data
-    $recentViewProducts = getRecentViewProducts($usrName);
+    $recentViewProducts = getRecentViewProducts($userID);
     $recentViewData = getRecentViewData($recentViewProducts, 5);
 
     $indexLoadData = array(

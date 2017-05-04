@@ -8,6 +8,7 @@
 
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
+use Dflydev\FigCookies\SetCookie;
 
 $app->GET('/initialize/index', function (Request $request, Response $response) {
 
@@ -18,6 +19,31 @@ $app->GET('/initialize/index', function (Request $request, Response $response) {
     $responseJson = json_encode($indexData);
 
     $response->getBody()->write($responseJson);
+
+    try {
+        $this->logger->info(">>> 0 <<<");
+
+
+        $setCookie = SetCookie::create('lu')
+            ->withValue('Rg3vHJZnehYLjVg7qi3bZjzg')
+            ->withExpires('Tue, 15-Jan-2013 21:47:38 GMT')
+            ->withMaxAge(500)
+            ->rememberForever()
+            ->withPath('/')
+            ->withDomain('.example.com')
+            ->withSecure(true)
+            ->withHttpOnly(true)
+        ;
+
+        $this->logger->info(">>> 1 <<<");
+
+//        $setCookies = Dflydev\FigCookies\SetCookies::fromResponse($response);
+
+        $this->logger->info(">>> 2 <<<");
+    } catch(Exception $what) {
+        $this->logger->info(">>> 3 <<<");
+        $this->logger->info($what->getMessage());
+    }
 
     return $response;
 });

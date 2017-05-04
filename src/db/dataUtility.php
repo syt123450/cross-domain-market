@@ -98,7 +98,7 @@
     function getRecentViewProducts($user){
         require_once ('mongoConn.php');
         // Catch general data first
-        $recentViewedProducts = getData("db272.User", ['userName' => $user], ['projection' => ['recentViewed' => 1, '_id' => 0]]);
+        $recentViewedProducts = getData("db272.User", ['userID' => $user], ['projection' => ['recentViewed' => 1, '_id' => 0]]);
 
         // Catch the 1st object from array
         $recentViewedProducts = $recentViewedProducts[0];
