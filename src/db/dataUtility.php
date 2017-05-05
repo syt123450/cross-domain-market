@@ -334,6 +334,136 @@
     }
 
 /**
+ * Find comments based on the requirements of front-end
+ * @param $storeID
+ * @param $commodityID
+ * @param $pageID
+ */
+    function getComments($storeID, $commodityID, $pageID, $numPerPage){
+        $ret = array();
+
+        $comments = getData("db272.TopProduct", ['storeID' => $storeID, 'productID' => $commodityID], ['projection' => ['comment' => 1, '_id' => 0]]);
+        $comments = json_decode(json_encode($comments[0]), true);
+        $comments = $comments["comment"];
+
+        $numOfComments = count($comments);
+        $commentData = array();
+
+        if ($numOfComments <=0){
+            $commentData = array();
+        }
+        else {
+            /* Decide if the last page */
+            $lastID = $numPerPage * $pageID;
+            // Out of range
+            if ($lastID - $numOfComments >=$numPerPage){
+                $commentData = array();
+            }
+            else {
+                $startIdx = $lastID -$numPerPage;
+
+                if ($lastID - $numOfComments >0){
+                    $endIdx = $numOfComments -1;
+                }
+                else {
+                    $endIdx = $lastID -1;
+                }
+
+                for ($i =$startIdx; $i <$endIdx; $i++){
+                    $comment = json_decode(json_encode($comments[$i]), true);
+                    $temp = array();
+                    $temp["commentInfo"] = "By " . $comment["userName"] . " on " . $comment["timeStamp"];
+                    $temp["commentContent"] = $comment["description"];
+                    $commentData[] = $temp;
+                }
+            }
+
+            $ret["commentNumber"] = $numOfComments;
+            $ret["commentData"] = $commentData;
+            $ret["pageID"] = $pageID;
+
+
+        }
+
+        return ret;
+    }
+
+/**
+ * Add new comment for a product
+ * Update comment information and return new comments set
+ * @param $userID
+ * @param $storeID
+ * @param $commodityID
+ * @param $commentContent
+ * @param $numPerPage
+ * @return array
+ */
+    function addNewComment($userID, $storeID, $commodityID, $commentContent, $numPerPage){
+        // Find user by userID
+        $userData = getData("db272.User", ['userID' => $userID], []);
+        $userData = json_decode(json_encode($userData[0]), true);
+        $userName = $userData["userName"];
+
+        // Find comments
+        $comments = getData("db272.TopProduct", ['storeID' => $storeID, 'productID' => $commodityID], ['projection' => ['comment' => 1, '_id' => 0]]);
+        $comments = json_decode(json_encode($comments[0]), true);
+        $comments = $comments["comment"];
+
+        // Update comments
+        $newComment = array(
+            "userID" => $userID,
+			"userName" => $userData["userName"],
+			"timeStamp" => date("m/d/Y h:i:sa"),
+			"description" => $commentContent
+        );
+        $comments[] = $newComment;
+
+        $sets = [
+            "comment" => $comments
+        ];
+
+        $filter = [ 'storeID' => $storeID, 'productID' => $commodityID ];
+
+        upsertData('db272.TopProduct' , $sets, $filter);
+
+        return $addResult = array(
+            "addResult" => true,
+            "addMessage" => "",
+            "commentNumber" => count($comments),
+            "commentData" => $comments
+        );
+    }
+
+    function addNewRate($userID, $storeID, $commodityID, $rate){
+        // Find rate and rated
+        $rates = getData("db272.TopProduct", ['storeID' => $storeID, 'productID' => $commodityID], ['projection' => ['rate' => 1, 'rated' => 1, '_id' => 0]]);
+        $rates = json_decode(json_encode($rates[0]), true);
+        $curRate = $rates["rate"];
+        $curRated = $rates["rated"];
+
+        // Calculate new rate and rated
+        $newRated = $curRated +1;
+        $newRate = ($curRate * $curRated + $rate) / $newRated;
+
+        // Update database
+        $sets = [
+            "rate" => $newRate,
+            "rated" => $newRated
+        ];
+
+        $filter = [ 'storeID' => $storeID, 'productID' => $commodityID ];
+
+        upsertData('db272.TopProduct' , $sets, $filter);
+
+        return array(
+            "addResult" => true,
+            "addMessage" => "",
+            "averageRate" => $newRate
+        );
+    }
+
+
+/**
  * Validate username/email and password for a user
  * @param $userinfo
  * @param $password
@@ -355,7 +485,7 @@
 
         if (count($resultByNameAry) ==1) {
             $tempUser = $resultByNameAry[0];
-            $tempUser = json_decode(json_encode($tempUser));
+            $tempUser = json_decode(json_encode($tempUser), true);
 
             if (count($resultByEmailAry) ==0){
                 $ret["checkResult"] = true;
@@ -368,7 +498,7 @@
         }
         else if (count($resultByEmailAry) ==1){
             $tempUser = $resultByNameAry[0];
-            $tempUser = json_decode(json_encode($tempUser));
+            $tempUser = json_decode(json_encode($tempUser), true);
             if (count($resultByNameAry) ==0){
                 $ret["checkResult"] = true;
                 $ret["checkMessage"] = $tempUser;
@@ -414,7 +544,38 @@
         return $ret;
     }
 
+/**
+ * Create new user
+ * @param $userName
+ * @param $password
+ * @param $email
+ */
+    function createNewUser($userName, $password, $email){
+        $ret = array();
 
+        // Decide the new userID
+        $idAry = getData("db272.User", [], ['sort' => ['userID' => -1], 'limit' => 1, 'projection' => ['userID' => 1, '_id' => 0]]);
+        $newUserID = json_decode(json_encode($idAry[0]), true);
+        $newUserID = $newUserID['userID'] +1;
 
+        // New user
+        $sets = [
+            "userID" => $newUserID,
+	        "userName" => $userName,
+	        "password" => $password,
+	        "email" => $email,
+	        "ifOwner" => 0,
+            "recentViewed" => array()
+        ];
 
+        $filter = [ 'userID' => $newUserID];
 
+        upsertData('db272.User' , $sets, $filter);
+
+        $ret = array(
+            "createResult" => true,
+            "createMessage" => ""
+        );
+
+        return $ret;
+    }

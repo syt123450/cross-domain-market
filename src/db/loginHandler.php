@@ -22,14 +22,11 @@ function checkNewUsrName($usrName) {
     return $checkResult;
 }
 
-function createUsr($usrName, $usrPassword, $usrEmail) {
+function createUsr($userName, $password, $email) {
 
     //use the usrName, usrPassword, usrEmail to create new usr
 
-    $createResult = array(
-        "createResult" => true,
-        "createMessage" => ""
-    );
+    $createResult = createNewUser($userName, $password, $email);
 
     return $createResult;
 }

@@ -46,7 +46,7 @@ function getData($collectionName, $filter, $option){
  * Upsert (update if existed, insert otherwise) items to target collections
  * @param $collectionName   e.g. "db272.TopProduct"
  * @param $filter           e.g. ['x' => 2]
- * @param $sets             e.g. ['y' => 3]
+ * @param $sets             e.g. ['y' => 3]     items to be updated
  */
 function upsertData($collectionName, $filter, $sets){
     $bulk = new MongoDB\Driver\BulkWrite;

@@ -95,7 +95,31 @@ db.TopProduct.insertMany(
                     "userName": "cmpe272",
                     "timeStamp": "04/26/2017 08:00:03",
                     "description": "lol"
-                }
+                },
+                {
+                    "userID": 1,
+                    "userName": "cmpe272",
+                    "timeStamp": "04/26/2017 08:01:03",
+                    "description": "asdf"
+                },
+                {
+                    "userID": 1,
+                    "userName": "cmpe272",
+                    "timeStamp": "04/26/2017 08:02:03",
+                    "description": "hello"
+                },
+                {
+                    "userID": 1,
+                    "userName": "cmpe272",
+                    "timeStamp": "04/26/2017 08:03:03",
+                    "description": "hola"
+                },
+                {
+                    "userID": 1,
+                    "userName": "cmpe272",
+                    "timeStamp": "04/26/2017 08:04:03",
+                    "description": "hiya"
+                },
             ]
         },
         {
