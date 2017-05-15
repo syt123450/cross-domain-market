@@ -19,75 +19,60 @@
 
 function getTop5Data($top5KeyWord) {
 
-    //use the top5KeyWord to get top5 data
+    // Based on keyword to search for proper result
+    if ($top5KeyWord == "highest_rated"){
+        // Rated times from high to low
+        $top5Products = getData("db272.TopProduct", [], ['sort' => ['rated' => -1], 'limit' => 5]);
+    }
+    else if ($top5KeyWord == "most_recommend"){
+        // Rates value from high to low
+        $top5Products = getData("db272.TopProduct", [], ['sort' => ['rate' => -1], 'limit' => 5]);
+    }
+    else if ($top5KeyWord == "highest_price"){
+        // Price from high to low
+        $top5Products = getData("db272.TopProduct", [], ['sort' => ['priceNew' => -1], 'limit' => 5]);
+    }
+    else if ($top5KeyWord == "lowest_price"){
+        // Price from low to high
+        $top5Products = getData("db272.TopProduct", [], ['sort' => ['priceNew' => 1], 'limit' => 5]);
+    }
+    else {
+        // Default to return most viewed product
+        $top5Products = getData("db272.TopProduct", [], ['sort' => ['viewed' => -1], 'limit' => 5]);
+    }
 
-    $top5Data = array(
-        array(
-            "commodityID" => "ID5",
-            "commodityPicUrl" => "img/home/top5/5.jpg",
-            "commodityPrice" => "$24.95",
-            "commodityName" => "Barmah Leather Hat",
-            "commodityStore" => "By SHOP ADIDAS"
-
-        ),
-        array(
-            "commodityID" => "ID4",
-            "commodityPicUrl" => "img/home/top5/4.jpg",
-            "commodityPrice" => "$22.46",
-            "commodityName" => "John Waxed Mesh",
-            "commodityStore" => "By SHOP NIKE"
-
-        ),
-        array(
-            "commodityID" => "ID3",
-            "commodityPicUrl" => "img/home/top5/3.jpg",
-            "commodityPrice" => "$18.35",
-            "commodityName" => "Corpsman Hat US Navy",
-            "commodityStore" => "By SHOP LI-NING"
-        ),
-        array(
-            "commodityID" => "ID2",
-            "commodityPicUrl" => "img/home/top5/2.jpg",
-            "commodityPrice" => "$25.69",
-            "commodityName" => "Winter Beanie Knit",
-            "commodityStore" => "By SHOP 361"
-        ),
-        array(
-            "commodityID" => "ID1",
-            "commodityPicUrl" => "img/home/top5/1.jpg",
-            "commodityPrice" => "$12.33",
-            "commodityName" => "Tilley LTM3 Airflo Hat",
-            "commodityStore" => "By SHOP PUMA"
-        ),
-    );
+    // Reformat the output
+    $top5Data = getTop5Data($top5Products);
 
     return $top5Data;
 }
 
 function getTop5DataOfStore($top5KeyWord, $storeID) {
 
-    //use the top5KeyWord and storeID to get data
+    // Based on keyword to search for proper result
+    if ($top5KeyWord == "highest_rated"){
+        // Rated times from high to low
+        $top5Products = getData("db272.TopProduct", ['storeID' => $storeID], ['sort' => ['rated' => -1], 'limit' => 3]);
+    }
+    else if ($top5KeyWord == "most_recommend"){
+        // Rates value from high to low
+        $top5Products = getData("db272.TopProduct", ['storeID' => $storeID], ['sort' => ['rate' => -1], 'limit' => 3]);
+    }
+    else if ($top5KeyWord == "highest_price"){
+        // Price from high to low
+        $top5Products = getData("db272.TopProduct", ['storeID' => $storeID], ['sort' => ['priceNew' => -1], 'limit' => 3]);
+    }
+    else if ($top5KeyWord == "lowest_price"){
+        // Price from low to high
+        $top5Products = getData("db272.TopProduct", ['storeID' => $storeID], ['sort' => ['priceNew' => 1], 'limit' => 3]);
+    }
+    else {
+        // Default to return most viewed product
+        $top5Products = getData("db272.TopProduct", ['storeID' => $storeID], ['sort' => ['viewed' => -1], 'limit' => 3]);
+    }
 
-    $top5Data = array(
-        array(
-            "commodityID" => "ID3",
-            "commodityPicUrl" => "../img/store/products/3.jpg",
-            "commodityPrice" => "$18.35",
-            "commodityName" => "Corpsman Hat US Navy"
-        ),
-        array(
-            "commodityID" => "ID2",
-            "commodityPicUrl" => "../img/store/products/2.jpg",
-            "commodityPrice" => "$25.69",
-            "commodityName" => "Winter Beanie Knit"
-        ),
-        array(
-            "commodityID" => "ID1",
-            "commodityPicUrl" => "../img/store/products/1.jpg",
-            "commodityPrice" => "$12.33",
-            "commodityName" => "tilley LTM3 Airflo Hat"
-        )
-    );
+    // Reformat the output
+    $top5Data = getTop5DataNoStore($top5Products);
 
     return $top5Data;
 }

@@ -45,4 +45,6 @@ if ($app->getContainer()['mock']) {
     require_once('db/getPageLoadData.php');
     require_once('db/loginHandler.php');
     require_once('db/commodity.php');
+    require_once('db/getStoreProduct.php');
+    require_once('db/getTop5Data.php');
 }

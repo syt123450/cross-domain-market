@@ -4,56 +4,55 @@
  * User: Chenhua Zhu
  * Date: 2017/5/5 13:00
  */
+
+/* In case we don't have all requirements */
+require_once('mongoConn.php');
+require_once('curlConn.php');
+require_once('dataUtility.php');
+
+/**
+ * Find proper product information to feedback front-end
+ * @param $storeID
+ * @param $pageID
+ * @return array
+ */
 function getProductData($storeID, $pageID) {
 
     //use the storeID and pageID to get productList and total product data
 
-    $storeProductNumber = 100;
+    // Get all store data
+    $stores = getAllData("db272.Store");
+    $storeNameList = getStoreNameList($stores);
 
-    $productList = array(
-        array(
-            "commodityID" => "ID7",
-            "commodityPicUrl" => "../img/store/products/7.jpg",
-            "commodityPrice" => "$22.46",
-            "commodityName" => "John Waxed Mesh"
-        ),
-        array(
-            "commodityID" => "ID6",
-            "commodityPicUrl" => "../img/store/products/6.jpg",
-            "commodityPrice" => "$18.35",
-            "commodityName" => "Corpsman Hat US Navy"
-        ),
-        array(
-            "commodityID" => "ID5",
-            "commodityPicUrl" => "../img/store/products/5.jpg",
-            "commodityPrice" => "$9.69",
-            "commodityName" => "Winter Beanie Knit"
-        ),
-        array(
-            "commodityID" => "ID4",
-            "commodityPicUrl" => "../img/store/products/4.jpg",
-            "commodityPrice" => "$12.33",
-            "commodityName" => "Tilley LTM3 Airflo Hat"
-        ),
-        array(
-            "commodityID" => "ID3",
-            "commodityPicUrl" => "../img/store/products/3.jpg",
-            "commodityPrice" => "$18.35",
-            "commodityName" => "Corpsman Hat US Navy"
-        ),
-        array(
-            "commodityID" => "ID2",
-            "commodityPicUrl" => "../img/store/products/2.jpg",
-            "commodityPrice" => "$25.69",
-            "commodityName" => "Winter Beanie Knit"
-        ),
-        array(
-            "commodityID" => "ID1",
-            "commodityPicUrl" => "../img/store/products/1.jpg",
-            "commodityPrice" => "$12.33",
-            "commodityName" => "tilley LTM3 Airflo Hat"
-        )
-    );
+    // Find the target store data by ID
+    $targetStore =  findTargetStore($stores, $storeID);
+
+    // Find product information
+    $productData = curlData($targetStore["ProductList"]);
+    $productList = getProductList($productData);
+
+    //total number of the product
+    $storeProductNumber = count($productData);
+
+    //based on number of product per page and pageID to decide returns
+    $numPerPage = 10;
+
+    /* Decide if the last page */
+    $lastID = $numPerPage * $pageID;
+    // Out of range
+    if ($lastID - $storeProductNumber >=$numPerPage){
+        $productList = array();
+    }
+    else {
+        $startIdx = $lastID -$numPerPage;
+        if ($lastID - $storeProductNumber >0){
+            $productList = array_slice($productList, $startIdx);
+        }
+        else {
+            $productList = array_slice($productList, $startIdx, $numPerPage);
+        }
+
+    }
 
     $productListData = array (
         "productNumber" => $storeProductNumber,

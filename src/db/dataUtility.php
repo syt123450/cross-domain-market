@@ -249,6 +249,38 @@
     }
 
 /**
+ * Based on page number to return proper product list data
+ * @param $productData
+ * @param $pageID
+ * @param $totalNumber
+ * @return array
+ */
+    function getProductListByPage($productData, $pageID, $numberPerPage){
+        $ret = array();
+
+        $totalProductNumber = count($productData);
+        $productData = array();
+
+        $pList = json_decode($productData);
+
+        foreach ($pList as $product){
+            $product = json_decode(json_encode($product), true);
+            $temp = array();
+            $temp["commodityID"] = $product["productID"];
+            $temp["commodityPicUrl"] = $product["smallPicUrl"];
+            $temp["commodityPrice"] = $product["priceNew"];
+            $temp["commodityName"] = $product["productName"];
+            $ret[] = $temp;
+        }
+
+        $ret["productNumber"]=$totalProductNumber;
+        $ret["pageID"]=$pageID;
+        $ret["productList"]=$productData;
+
+        return $ret;
+    }
+
+/**
  * @param $productData
  * @return array
  */
@@ -385,7 +417,7 @@
 
         }
 
-        return ret;
+        return $ret;
     }
 
 /**

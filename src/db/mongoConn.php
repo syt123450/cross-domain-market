@@ -11,7 +11,6 @@
 $ary = getData("db272.TopProduct", ['storeID' => 1, 'productID' => 1], ['projection' => ['comment' => 1, '_id' => 0]]);
 var_dump($ary);
 
-
 /**
  * To catch all data from specified collections
  * @return array
