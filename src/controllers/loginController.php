@@ -8,7 +8,9 @@
 
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
+use Dflydev\FigCookies\Cookie;
 use Dflydev\FigCookies\SetCookie;
+use Dflydev\FigCookies\FigRequestCookies;
 use Dflydev\FigCookies\FigResponseCookies;
 
 $app->POST('/login/checkName', function (Request $request, Response $response) {
@@ -81,11 +83,19 @@ $app->GET('/login/logout', function(Request $request, Response $response) {
 
     $this->logger->info("Deleting the cookie of user...");
 
-    FigResponseCookies::remove($response, 'userID');
-    FigResponseCookies::remove($response, 'userName');
+    $response = FigResponseCookies::set($response, SetCookie::create('userID')
+        ->withValue(-1)
+        ->withExpires('Tue, 15-Jan-2013 21:47:38 GMT')
+        ->withPath('/')
+    );
+    $response = FigResponseCookies::set($response, SetCookie::create('userName')
+        ->withValue("")
+        ->withExpires('Tue, 15-Jan-2013 21:47:38 GMT')
+        ->withPath('/')
+    );
 
     $this->logger->info("Deletion Complete.");
 
     //do some to response to delet the cookie
-
+    return $response;
 });
