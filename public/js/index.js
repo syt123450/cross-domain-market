@@ -137,32 +137,37 @@ function renderStore(storeData) {
 
 function renderRecentView(recentViewData) {
     var storeArea = $("#recentView>section");
-    for (var i = 0; i < recentViewData.length; i++) {
+
+    if (recentViewData.length == 0) {
+        $("#recentView").hide();
+    } else {
+        for (var i = 0; i < recentViewData.length; i++) {
 //            console.log(recentViewData[i]);
-        var commodityObject = document.createElement("div");
-        $(commodityObject).attr("data-storeID", recentViewData[i].storeID);
-        $(commodityObject).attr("data-commodityID", recentViewData[i].commodityID);
-        var commodityPic = document.createElement("img");
-        $(commodityPic).attr("src", recentViewData[i].commodityPicUrl);
-        var commodityPricePlace = document.createElement("div");
-        var commodityPrice = document.createElement("p");
-        $(commodityPrice).text(recentViewData[i].commodityPrice);
-        var addButton = document.createElement("img");
-        $(addButton).attr("src", "img/common/pageIcon/add_to_cart1.png");
-        var commodityName = document.createElement("p");
-        $(commodityName).text(recentViewData[i].commodityName);
-        var commodityStore = document.createElement("p");
-        $(commodityStore).text(recentViewData[i].commodityStore);
+            var commodityObject = document.createElement("div");
+            $(commodityObject).attr("data-storeID", recentViewData[i].storeID);
+            $(commodityObject).attr("data-commodityID", recentViewData[i].commodityID);
+            var commodityPic = document.createElement("img");
+            $(commodityPic).attr("src", recentViewData[i].commodityPicUrl);
+            var commodityPricePlace = document.createElement("div");
+            var commodityPrice = document.createElement("p");
+            $(commodityPrice).text(recentViewData[i].commodityPrice);
+            var addButton = document.createElement("img");
+            $(addButton).attr("src", "img/common/pageIcon/add_to_cart1.png");
+            var commodityName = document.createElement("p");
+            $(commodityName).text(recentViewData[i].commodityName);
+            var commodityStore = document.createElement("p");
+            $(commodityStore).text(recentViewData[i].commodityStore);
 
-        $(commodityPricePlace).append(commodityPrice);
-        $(commodityPricePlace).append(addButton);
+            $(commodityPricePlace).append(commodityPrice);
+            $(commodityPricePlace).append(addButton);
 
-        $(commodityObject).append(commodityPic);
-        $(commodityObject).append(commodityPricePlace);
-        $(commodityObject).append(commodityName);
-        $(commodityObject).append(commodityStore);
+            $(commodityObject).append(commodityPic);
+            $(commodityObject).append(commodityPricePlace);
+            $(commodityObject).append(commodityName);
+            $(commodityObject).append(commodityStore);
 
-        $(storeArea).append(commodityObject);
+            $(storeArea).append(commodityObject);
+        }
     }
 }
 
