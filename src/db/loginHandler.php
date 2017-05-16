@@ -35,3 +35,17 @@ function createUsr($userName, $password, $email) {
 
     return $createResult;
 }
+
+function handleThirdPartyLogin($uniqueID){
+
+    if (isUserExisted($uniqueID)){
+        // Existed, then login
+        $checkResult = validateUser($uniqueID, $uniqueID);
+        return $checkResult;
+    }
+    else {
+        // Not existed, create as new user
+        $createResult = createUsr($uniqueID, $uniqueID, $uniqueID);
+        return $createResult;
+    }
+}

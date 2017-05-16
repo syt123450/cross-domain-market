@@ -450,7 +450,7 @@ require_once('curlConn.php');
         // Reverse comments to be update (so we have data stored with TIME order ASC)
         $comments = array_reverse($comments);
 
-        $filter = [ 'storeID' => $storeID, 'productID' => $commodityID ];
+        $filter = [ 'storeID' => (int)$storeID, 'productID' => (int)$commodityID ];
         $sets = [
             "comment" => $comments
         ];
@@ -561,7 +561,7 @@ require_once('curlConn.php');
     }
 
 /**
- * Validate if the new user name is available for
+ * Validate if the new user name is available for front end
  * @param $userName
  * @return array
  *  [
@@ -608,15 +608,29 @@ require_once('curlConn.php');
             "recentViewed" => array()
         ];
 
-        $filter = [ 'userID' => $newUserID];
+        $filter = [ 'userID' => (int)$newUserID];
 
-        upsertData('db272.User' , $sets, $filter);
+        upsertData('db272.User' , $filter, $sets);
 
         $ret = array(
             "createResult" => true,
             "createMessage" => $filter
         );
 
+        return $ret;
+    }
+
+/**
+ * Check by userName if a user existed
+ * @param $userName
+ * @return bool     true if user existed; false otherwise
+ */
+    function isUserExisted($userName){
+        $ret = false;
+        $resultByNameAry = getData("db272.User", ['userName' => $userName], []);
+        if (count($resultByNameAry) !=0){
+            $ret = true;
+        }
         return $ret;
     }
 

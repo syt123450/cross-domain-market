@@ -32,9 +32,9 @@ $app->POST('/login/checkLogin', function (Request $request, Response $response) 
     $userPassword = ($request->getParsedBody())["userPassword"];
     $this->logger->info("The userInfo is: " . $userInfo);
     $this->logger->info("The userPassword is: " . $userPassword);
-    $storeData = checkUsr($userInfo, $userPassword);
-    if ($storeData['checkResult'] ==true){
-        $userAry = $storeData['checkMessage'];
+    $userData = checkUsr($userInfo, $userPassword);
+    if ($userData['checkResult'] ==true){
+        $userAry = $userData['checkMessage'];
 
         $response = FigResponseCookies::set($response, SetCookie::create('userID')
             ->withValue($userAry['userID'])
@@ -45,7 +45,37 @@ $app->POST('/login/checkLogin', function (Request $request, Response $response) 
             ->withPath('/')
         );
     }
-    $responseJson = json_encode($storeData);
+    $responseJson = json_encode($userData);
+    $response->getBody()->write($responseJson);
+
+    return $response;
+});
+
+$app->POST('/login/checkThirdParty', function (Request $request, Response $response) {
+
+    $this->logger->info('User Third Party Login.');
+    $uniqueID = ($request->getParsedBody())["uniqueID"];
+
+    $this->logger->info("The uniqueID is: " . $uniqueID);
+
+    $userData = handleThirdPartyLogin($uniqueID);
+
+    try {
+        $userAry = $userData['checkMessage'];
+    } catch (Exception $what){
+        $userAry = $userData['createMessage'];
+    }
+
+    $response = FigResponseCookies::set($response, SetCookie::create('userID')
+        ->withValue($userAry['userID'])
+        ->withPath('/')
+    );
+    $response = FigResponseCookies::set($response, SetCookie::create('userName')
+        ->withValue($uniqueID)
+        ->withPath('/')
+    );
+
+    $responseJson = json_encode($userData);
     $response->getBody()->write($responseJson);
 
     return $response;

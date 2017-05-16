@@ -157,7 +157,7 @@ function getCommodityPageLoadData($storeID, $commodityID) {
 
     // Update viewed history on TopProduct
     $collectionName = "db272.TopProduct";
-    $filter = [ 'storeID' => $storeID, 'productID' => $commodityID ];
+    $filter = [ 'storeID' => (int)$storeID, 'productID' => (int)$commodityID ];
     $sets = [
         "storeID" => (int)$targetStore["StoreID"],
         "storeName" => $targetStore["StoreName"],

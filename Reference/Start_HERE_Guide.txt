@@ -1,0 +1,85 @@
+
+Note:
+* Run commands AFTER ">>>>>", i.e. DO NOT INCLUDE ">>>>>"
+** I can't help if you forget your root password of your mysql ;)
+*** For other questions, you may or may not contact me for more details.
+**** Well, I prefer you can follow the simple guide without any problem~
+***** ~Have a nice day~
+
+
+STEP 0. Login your server MySQL as "root" user （你忘了root密码别来问我）
+>>>>>mysql -u root -p
+
+STEP 1. Create new MySQL database "nebula" on your AWS server
+>>>>>CREATE DATABASE nebula;
+
+STEP 2. Create new user "nebula"
+>>>>>CREATE USER 'nebula'@'localhost' IDENTIFIED BY 'nebulapw';
+
+STEP 3. Set proper Authentication for "nebula"
+>>>>>GRANT ALL ON nebula.* TO 'nebula'@'localhost';
+
+STEP 4. Exit your current MySQL session
+>>>>>exit
+
+STEP 4. Login your MySQL as "nebula" by using password "nebulapw"
+>>>>>mysql -u nebula -p nebula
+
+
+STEP 5. Create Table "Product"
+Please run the commands in the following Block
+##### Block Start #####
+DROP TABLE IF EXISTS `Product`;
+CREATE TABLE `Product` (
+  `productID` int(11) NOT NULL AUTO_INCREMENT,
+  `productName` varchar(100) DEFAULT NULL,
+  `description` varchar(400) DEFAULT NULL,
+  `priceOrig` float DEFAULT NULL,
+  `priceNew` float DEFAULT NULL,
+  `quantity` int(11) DEFAULT NULL,
+  `smallPicUrl` varchar(100) DEFAULT NULL,
+  `largePicUrl` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`productID`)
+);
+##### Block End #####
+
+STEP 6. Insert all your data to your new database
+Use the following command as an example, but please use your own data:
+##### Example Start #####
+INSERT INTO `Product` (productName, description, priceOrig, priceNew, quantity, smallPicUrl, largePicUrl) VALUES
+('C/C++ 101','&*&Quick C/C++ introduction from zero C/C++ knowledge base',29.99,19.99,999,'/Pic/small/cpp.png','/Pic/large/cpp.png'),
+('Java 101','&*&Quick Java introduction from zero Java knowledge base',29.99,19.99,999,'/Pic/small/java.png','/Pic/large/java.png'),
+('Python 101','&*&Quick Python introduction from zero Python knowledge base',29.99,19.99,999,'/Pic/small/python.png','/Pic/large/python.png'),
+('PHP 101','&*&Quick PHP introduction from zero PHP knowledge base',29.99,19.99,999,'/Pic/small/php.png','/Pic/large/php.png'),
+('MySQL 101','&*&Quick MySQL introduction from zero MySQL knowledge base',49.99,29.99,999,'/Pic/small/mysql.png','/Pic/large/mysql.png'),
+('MongoDB 101','&*&Quick MongoDB introduction from zero MongoDB knowledge base',49.99,29.99,999,'/Pic/small/mongodb.png','/Pic/large/mongodb.png'),
+('Redis 101','&*&Quick Redis introduction from zero Redis knowledge base',49.99,29.99,999,'/Pic/small/redis.png','/Pic/large/redis.png'),
+('Oracle Database 101','&*&Quick Oracle Database introduction from zero Oracle Database knowledge base',49.99,29.99,999,'/Pic/small/oracle.jpg','/Pic/large/oracle.jpg'),
+('SQL Server 101','&*&Quick SQL Server introduction from zero SQL Server knowledge base',49.99,29.99,999,'/Pic/small/sqlserver.png','/Pic/large/sqlserver.png'),
+('PHP+MySQL','&*&Combination PHP and MySQL professional Course. &*&Include how to use each techniques, how to apply proper PHP together with MySQL and the advatages of the combination',49.99,29.99,999,'/Pic/small/php_mysql.png','/Pic/large/php_mysql.png');
+##### Example End #####
+
+    STEP 6 Notes:
+        - You can set "priceOrig" and "priceNew" the same as they don't have any effect for the current site.
+        - Please note in the "description", you have to put a delimeter "&*&" when you try to make a new line for your description.
+            Otherwise, all your description will be considered as a whole paragraph in one line.
+        - "smallPicUrl" is for small pictures used in store page
+        - "largePicUrl" is for large pictures used in product detailed page
+        - Please note the picture url should start with a slash (/), e.g. "/Pic/small/redis.png".
+        - Please note the picture url should be reachable from your site when combined with your domain.
+            e.g.    My domain is: http://cmpe272.zchholmes.cc
+                    My picture url is: /Pic/small/redis.png
+                    Then combination of the above: http://cmpe272.zchholmes.cc/Pic/small/redis.png
+                    should be reachable and valid.
+
+STEP 7. Copy the "allProduct.php" file into your AWS project directory
+    - For example, under your project folder, create a directory named as "api", hence you have the structur /Your_project_folder/api
+    - Then put the "allProduct.php" into the "api" folder to satisfy /Your_project_folder/api/allProduct.php
+    - Now, you should be able to get all your product information by accessing the "allProduct.php" by "http://Your_Domain/api/allProduct.php"
+
+    STEP 7 Note:
+        - You may put "allProduct.php" into any folder in your web site folder wherer you can reach it by "http://Your_Domain/Some_Path/allProduct.php"
+        - You should see the data you just created in STEP 6.
+
+STEP 8. Fill in the "Information for each site" in the Google Drive
+
