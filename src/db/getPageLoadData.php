@@ -24,7 +24,7 @@ function getIndexPageLoadData($userID) {
 
     // Get all Top 5 data
     $top5Products = getData("db272.TopProduct", [], ['sort' => ['viewed' => -1], 'limit' => 5]);
-    $top5Data = getTop5Data($top5Products);
+    $top5Data = getTopData($top5Products);
 
     // Get all recent view data
     $recentViewProducts = getRecentViewProducts($userID);
@@ -63,7 +63,7 @@ function getStorePageLoadData($storeID) {
     $storeProductNumber = count($productData);
 
     $top5Products = getData("db272.TopProduct", ['storeID' => $storeID], ['sort' => ['viewed' => -1], 'limit' => 3]);
-    $top5DataNoStore = getTop5DataNoStore($top5Products);
+    $top5DataNoStore = getTopDataNoStore($top5Products);
 
     $storeLoadData = array(
         "productNumber" => $storeProductNumber,
@@ -100,8 +100,8 @@ function getContactPageLoadData() {
 }
 
 function getCommodityPageLoadData($storeID, $commodityID) {
-    //use $commodityID to get data
 
+    // Get Store data
     $stores = getAllData("db272.Store");
     $storeNameList = getStoreNameList($stores);
 
@@ -111,24 +111,65 @@ function getCommodityPageLoadData($storeID, $commodityID) {
     // Collection product information from both sub-site and main database
     // Curl sub-site for detailed information
     $productData = curlData($targetStore["ProductList"] . "?productID=" . $commodityID);
-    // Search database for rating and comments
-    $ratingData = getData("db272.TopProduct", ['storeID' => 1, 'productID' => 1], ['projection' => ['rate' => 1, '_id' => 0]]);
-    $comments = getData("db272.TopProduct", ['storeID' => 1, 'productID' => 1], ['projection' => ['comment' => 1, '_id' => 0]]);
-    $comments = json_decode(json_encode($comments[0]), true);
-    $comments = $comments["comment"];
 
-    $basicCommodityInfo = getBasicProductData($productData, $targetStore["Domain"], $ratingData["rate"], count($comments));
+    /* Try to catch product data from DB */
+    $product_db = getData("db272.TopProduct", ['storeID' => $storeID, 'productID' => $commodityID], ['projection' => ['_id' => 0]]);
+    if (empty($product_db)){
+        // Empty, then init
+        $viewed = 0;
+        $rated = 0;
+        $rate =0;
+        $comments = array();
+    }
+    else {
+        // Existed, catch from existed
+        $product_db = json_decode(json_encode($product_db[0]), true);
+        $viewed = $product_db["viewed"];
+        $rated = $product_db["rated"];
+        $rate = $product_db["rate"];
+        $comments = $product_db["comment"];
+    }
+
+    /* Update product viewed history in DB */
+    $pList = json_decode($productData);
+    $product = json_decode(json_encode($pList[0]), true);
+
+    // Update viewed history on TopProduct
+    $collectionName = "db272.TopProduct";
+    $filter = [ 'storeID' => $storeID, 'productID' => $commodityID ];
+    $sets = [
+        "storeID" => (int)$targetStore["StoreID"],
+        "storeName" => $targetStore["StoreName"],
+        "productID" => (int)$product["productID"],
+        "productName" => $product["productName"],
+        "priceNew" => (float)$product["priceNew"],
+        "largePicUrl" => $targetStore["Domain"] . $product["largePicUrl"],
+        "smallPicUrl" => $targetStore["Domain"] . $product["smallPicUrl"],
+        "viewed" => (int)($viewed +1),
+        "rated" => (int)$rated,
+        "rate" => (float)$rate,
+        "comment" => $comments
+    ];
+    upsertData($collectionName, $filter, $sets);
 
 
+    /* Prepare Data for return  */
+    // Generate basic commodity information
+    $basicCommodityInfo = getBasicProductData($productData, $targetStore["Domain"], $rate, count($comments));
+
+    // Generate description data
     $descriptionData = getDescriptionData($productData);
 
     $commentData = getCommentData($comments);
+
 
     $commodityLoadData = array(
         "storeNameList" => $storeNameList,
         "basicCommodityInfo" => $basicCommodityInfo,
         "descriptionData" => $descriptionData,
-        "commentData" => $commentData
+        "commentNumber" => count($commentData),
+        "commentData" => $commentData,
+        "averageRate" => $rate
     );
 
     return $commodityLoadData;

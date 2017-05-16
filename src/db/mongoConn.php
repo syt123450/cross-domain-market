@@ -7,10 +7,6 @@
 // MongoDB manager used to connect to database
 //$manager = new MongoDB\Driver\Manager("mongodb://localhost:27017");
 
-
-$ary = getData("db272.TopProduct", ['storeID' => 1, 'productID' => 1], ['projection' => ['comment' => 1, '_id' => 0]]);
-var_dump($ary);
-
 /**
  * To catch all data from specified collections
  * @return array
@@ -131,3 +127,6 @@ function getINumGreater($i_num){
 }
 
 
+
+//$ary = getData("db272.TopProduct", ['storeID' => 1, 'productID' => 11], ['projection' => ['_id' => 0]]);
+//var_dump($ary);

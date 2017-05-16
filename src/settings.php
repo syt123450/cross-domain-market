@@ -27,5 +27,11 @@ return [
             'port' => '27017',
             'db' => 'db272',
         ],
+
+        // Constant settings
+        'pagination' => [
+            'commentPerPage' => 5,
+            'productPerPage' => 10
+        ],
     ],
 ];

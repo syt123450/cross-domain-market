@@ -5,9 +5,6 @@
  * Date: 2017/4/25 16:56
  */
 
-$ary = curlData("http://cmpe272.zchholmes.cc/Template/allProduct.php" . "?productID=" . 1);
-var_dump($ary);
-
     function curlData($url){
         // create curl resource
         $ch = curl_init();
@@ -26,3 +23,6 @@ var_dump($ary);
 
         return $output;
     }
+
+//$ary = curlData("http://cmpe272.zchholmes.cc/Template/allProduct.php" . "?productID=" . 1);
+//var_dump($ary);

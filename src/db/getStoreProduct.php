@@ -32,7 +32,7 @@ function getProductData($storeID, $pageID) {
     $productList = getProductList($productData);
 
     //total number of the product
-    $storeProductNumber = count($productData);
+    $storeProductNumber = count($productList);
 
     //based on number of product per page and pageID to decide returns
     $numPerPage = 10;

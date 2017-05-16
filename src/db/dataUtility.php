@@ -1,11 +1,6 @@
 <?php
-
-
-
-
-//$ary = getData("db272.TopProduct", ['storeID' => 1, 'productID' => 1], ['projection' => ['rate' => 1, '_id' => 0]]);
-//var_dump($ary);
-
+require_once('mongoConn.php');
+require_once('curlConn.php');
 
 /**
  * Function used to get all storeID with the storeName
@@ -106,7 +101,7 @@
  *      ]
  *  ]
  */
-    function getTop5Data($top5Products){
+    function getTopData($top5Products){
         $ret = array();
         if ($top5Products !== null){
             foreach ($top5Products as $product){
@@ -138,7 +133,7 @@
  *      ]
  *  ]
  */
-    function getTop5DataNoStore($top5Products){
+    function getTopDataNoStore($top5Products){
         $ret = array();
         if ($top5Products !== null){
             foreach ($top5Products as $product){
@@ -304,7 +299,7 @@
     function getBasicProductData($productData, $storeUrl, $rate, $commentNum){
         $ret = array();
         $pList = json_decode($productData);
-        $product = $pList[0];
+        $product = json_decode(json_encode($pList[0]), true);
 
         $ret["commodityID"] = $product["productID"];
         $ret["commodityName"] = $product["productName"];
@@ -313,16 +308,6 @@
         $ret["stock"] = $product["quantity"];
         $ret["commentNumber"] = $commentNum;
         $ret["averageRate"] = $rate;
-
-        foreach ($pList as $product){
-            $product = json_decode(json_encode($product), true);
-            $temp = array();
-            $temp["commodityID"] = $product["productID"];
-            $temp["commodityPicUrl"] = $product["smallPicUrl"];
-            $temp["commodityPrice"] = $product["priceNew"];
-            $temp["commodityName"] = $product["productName"];
-            $ret[] = $temp;
-        }
 
         return $ret;
     }
@@ -335,7 +320,7 @@
  */
     function getDescriptionData($productData){
         $pList = json_decode($productData);
-        $product = $pList[0];
+        $product = json_decode(json_encode($pList[0]), true);
 
         return (explode("&*&", $product["description"]));
     }
@@ -414,7 +399,6 @@
             $ret["commentData"] = $commentData;
             $ret["pageID"] = $pageID;
 
-
         }
 
         return $ret;
@@ -431,38 +415,61 @@
  * @return array
  */
     function addNewComment($userID, $storeID, $commodityID, $commentContent, $numPerPage){
+        $collectionName = "db272.TopProduct";
+
         // Find user by userID
         $userData = getData("db272.User", ['userID' => $userID], []);
         $userData = json_decode(json_encode($userData[0]), true);
-        $userName = $userData["userName"];
 
         // Find comments
         $comments = getData("db272.TopProduct", ['storeID' => $storeID, 'productID' => $commodityID], ['projection' => ['comment' => 1, '_id' => 0]]);
         $comments = json_decode(json_encode($comments[0]), true);
         $comments = $comments["comment"];
 
+
         // Update comments
         $newComment = array(
             "userID" => $userID,
-			"userName" => $userData["userName"],
-			"timeStamp" => date("m/d/Y h:i:sa"),
-			"description" => $commentContent
+            "userName" => $userData["userName"],
+            "timeStamp" => date("m/d/Y h:i:sa"),
+            "description" => $commentContent
         );
         $comments[] = $newComment;
 
+        // Reverse comments array (so we have TIME order DESC)
+        $comments = array_reverse($comments);
+
+        if (count($comments) >$numPerPage){
+            $limitComments = array_slice($comments, 0, $numPerPage);
+        }
+        else {
+            $limitComments = $comments;
+        }
+
+        // Reverse comments to be update (so we have data stored with TIME order ASC)
+        $comments = array_reverse($comments);
+
+        $filter = [ 'storeID' => $storeID, 'productID' => $commodityID ];
         $sets = [
             "comment" => $comments
         ];
+        upsertData($collectionName, $filter, $sets);
 
-        $filter = [ 'storeID' => $storeID, 'productID' => $commodityID ];
+        $commentData = array();
 
-        upsertData('db272.TopProduct' , $sets, $filter);
+        foreach ($limitComments as $comment){
+            $comment = json_decode(json_encode($comment), true);
+            $temp = array();
+            $temp["commentInfo"] = "By " . $comment["userName"] . " on " . $comment["timeStamp"];
+            $temp["commentContent"] = $comment["description"];
+            $commentData[] = $temp;
+        }
 
         return $addResult = array(
             "addResult" => true,
             "addMessage" => "",
             "commentNumber" => count($comments),
-            "commentData" => $comments
+            "commentData" => $commentData
         );
     }
 
@@ -485,7 +492,7 @@
 
         $filter = [ 'storeID' => $storeID, 'productID' => $commodityID ];
 
-        upsertData('db272.TopProduct' , $sets, $filter);
+        upsertData('db272.TopProduct' , $filter, $sets);
 
         return array(
             "addResult" => true,
@@ -542,7 +549,7 @@
         }
         else if (count($resultByNameAry) ==0 && count($resultByEmailAry) ==0){
             $ret["checkResult"] = false;
-            $ret["checkMessage"] = "No user found by: " . $userinfo;
+            $ret["checkMessage"] = "Invalid Username or Password: " . $userinfo;
         }
         else {
             $ret["checkResult"] = false;
@@ -611,3 +618,7 @@
 
         return $ret;
     }
+
+
+//$ary = addNewComment(1, 1, 6, "7New Comment",5);
+//var_dump($ary);

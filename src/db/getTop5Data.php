@@ -42,7 +42,7 @@ function getTop5Data($top5KeyWord) {
     }
 
     // Reformat the output
-    $top5Data = getTop5Data($top5Products);
+    $top5Data = getTopData($top5Products);
 
     return $top5Data;
 }
@@ -72,7 +72,7 @@ function getTop5DataOfStore($top5KeyWord, $storeID) {
     }
 
     // Reformat the output
-    $top5Data = getTop5DataNoStore($top5Products);
+    $top5Data = getTopDataNoStore($top5Products);
 
     return $top5Data;
 }

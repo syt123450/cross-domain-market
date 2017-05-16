@@ -12,6 +12,7 @@
  * @param $pageID
  * @return array
  */
+
 function getComment($storeID, $commodityID, $pageID) {
 
     //use the storeID commodityID and pageID to get commentData

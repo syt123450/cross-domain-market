@@ -5,10 +5,15 @@
  * Date: 2017/5/3 17:29
  */
 
+/* In case we don't have all requirements */
+require_once('mongoConn.php');
+require_once('curlConn.php');
+require_once('dataUtility.php');
+
 function checkUsr($usrInfo, $usrPassword) {
 
     //use the usrName/usrEmail, usrPassword to validate
-    $checkResult = validateUserByUserName($usrInfo, $usrPassword);
+    $checkResult = validateUser($usrInfo, $usrPassword);
 
     return $checkResult;
 }

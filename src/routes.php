@@ -36,7 +36,6 @@ if ($app->getContainer()['mock']) {
     require_once('mock/getTop5Data_mock.php');
     require_once('mock/getStoreProduct_mock.php');
     require_once('mock/loginHandler_mock.php');
-//    require_once('db/loginHandler.php');
     require_once ('mock/commodity_mock.php');
 } else {
     require_once('db/mongoConn.php');
