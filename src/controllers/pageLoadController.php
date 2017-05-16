@@ -30,18 +30,6 @@ $app->GET('/initialize/index', function (Request $request, Response $response) {
 
     $response->getBody()->write($responseJson);
 
-    try {
-        $response = FigResponseCookies::set($response, SetCookie::create('testCookie')
-            ->withValue('12341234')
-            ->withPath('/')
-        );
-//        $response = FigResponseCookies::expire($response, 'session_cookie');
-
-        $setCookie = FigResponseCookies::get($response, 'testCookie');
-    } catch(Exception $what) {
-        $this->logger->info($what->getMessage());
-    }
-
     return $response;
 });
 
