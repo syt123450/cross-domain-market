@@ -10,10 +10,16 @@ function bindEvent() {
     bindClickButton();
 }
 
-function renderPage(data) {
+function renderUserPage(data) {
     renderNavStoreList(data.storeNameList);
     renderTop5(data.top5Data);
     renderRecentView(data.recentViewData);
+    renderStore(data.storeData);
+}
+
+function renderPage(data) {
+    renderNavStoreList(data.storeNameList);
+    renderTop5(data.top5Data);
     renderStore(data.storeData);
 }
 

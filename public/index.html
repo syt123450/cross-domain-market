@@ -143,8 +143,8 @@
 
     $(function () {
 
-        setCookie("userID", "syt");
-        setCookie("userName", "ss");
+//        setCookie("userID", "syt");
+//        setCookie("userName", "ss");
         renderIndexUser();
 
         renderInitiatedEvent();
@@ -157,6 +157,13 @@
             success: function (data) {
 
                 console.log(data);
+
+                if (getCookieValue("userID") != null) {
+                    renderUserPage(data);
+                } else {
+                    renderPage(data);
+                }
+
                 renderPage(data);
                 bindEvent();
             }
