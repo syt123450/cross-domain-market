@@ -16,6 +16,12 @@
     <script src="../js/commodity.js"></script>
     <script src="../js/pagination.js"></script>
 
+    <style>
+
+
+
+    </style>
+
 </head>
 <body>
 
@@ -128,27 +134,36 @@
             <img src="../img/products/star_1.png">
             <img src="../img/products/star_1.png">
             <img src="../img/products/star_1.png">
-            <p>Add rate:</p>
-            <div id="startArea">
-                <img class="rateStar" src="../img/products/star_empty.png">
-                <img class="rateStar" src="../img/products/star_empty.png">
-                <img class="rateStar" src="../img/products/star_empty.png">
-                <img class="rateStar" src="../img/products/star_empty.png">
-                <img class="rateStar" src="../img/products/star_empty.png">
+            <p>Your rate:</p>
+            <div id="likeArea">
+                <p>Like it?</p>
+                <div>
+                    <img class="rateStar" src="../img/products/star_empty.png">
+                    <img class="rateStar" src="../img/products/star_empty.png">
+                    <img class="rateStar" src="../img/products/star_empty.png">
+                    <img class="rateStar" src="../img/products/star_empty.png">
+                    <img class="rateStar" src="../img/products/star_empty.png">
+                </div>
             </div>
-            <div>
-                <img class="rateStar" src="../img/products/star_empty.png">
-                <img class="rateStar" src="../img/products/star_empty.png">
-                <img class="rateStar" src="../img/products/star_empty.png">
-                <img class="rateStar" src="../img/products/star_empty.png">
-                <img class="rateStar" src="../img/products/star_empty.png">
+            <div id="priceArea">
+                <p>Its price?</p>
+                <div>
+                    <img class="rateStar" src="../img/products/star_empty.png">
+                    <img class="rateStar" src="../img/products/star_empty.png">
+                    <img class="rateStar" src="../img/products/star_empty.png">
+                    <img class="rateStar" src="../img/products/star_empty.png">
+                    <img class="rateStar" src="../img/products/star_empty.png">
+                </div>
             </div>
-            <div>
-                <img class="rateStar" src="../img/products/star_empty.png">
-                <img class="rateStar" src="../img/products/star_empty.png">
-                <img class="rateStar" src="../img/products/star_empty.png">
-                <img class="rateStar" src="../img/products/star_empty.png">
-                <img class="rateStar" src="../img/products/star_empty.png">
+            <div id="qualityArea">
+                <p>Its quality?</p>
+                <div>
+                    <img class="rateStar" src="../img/products/star_empty.png">
+                    <img class="rateStar" src="../img/products/star_empty.png">
+                    <img class="rateStar" src="../img/products/star_empty.png">
+                    <img class="rateStar" src="../img/products/star_empty.png">
+                    <img class="rateStar" src="../img/products/star_empty.png">
+                </div>
             </div>
             <div id="rateButton" class="submitButton">Submit</div>
         </section>
@@ -213,149 +228,46 @@
 
         $(".rateStar").hover(
             function () {
-                $(this).parent().removeAttr("data-rate");
+                var starArea = $(this).parent();
+                $(starArea).removeAttr("data-rate");
                 for (var i = 0; i < 5; i++) {
-                    $($("#rateContent .rateStar")[i]).attr("src", "../img/products/star_empty.png");
+                    $(starArea).find("img").eq(i).attr("src", "../img/products/star_empty.png");
                 }
-                var starNumber = $("#rateContent .rateStar").index(this);
-                for (var i = 0; i <= starNumber; i++) {
-                    $($("#rateContent .rateStar")[i]).attr("src", "../img/products/star_1.png");
+                var starNumber = $(starArea).find("img").index(this);
+                for (var j = 0; j <= starNumber; j++) {
+                    $(starArea).find("img").eq(j).attr("src", "../img/products/star_1.png");
                 }
             },
             function () {
-                if ($(this).parent().attr("data-rate") == null) {
-                    for (var i = 0; i < 5; i++) {
-                        $($("#rateContent .rateStar")[i]).attr("src", "../img/products/star_empty.png");
-                    }
+                var starArea = $(this).parent();
+                if ($(starArea).attr("data-rate") == null) {
+                    $(starArea).find("img").attr("src", "../img/products/star_empty.png");
                 }
             }
-        );
+        ).click(function () {
 
-        $(".rateStar").click(function () {
-            var starNumber = $("#rateContent .rateStar").index(this) + 1;
-            $(this).parent().attr("data-rate", starNumber);
+            var starArea = $(this).parent();
+            var starNumber = $(starArea).find("img").index(this) + 1;
+            $(starArea).attr("data-rate", starNumber);
         });
     });
-
-    function bindEvent() {
-        bindNav();
-        bindInfoHeader();
-        bindCommentArea();
-        bindRateArea();
-        bindAlertArea();
-    }
-
-    function bindCommentArea() {
-        $("#commentButton").click(function () {
-
-            if (getCookieValue("userID") != null) {
-                showAddItem();
-            } else {
-                showOops();
-            }
-        });
-
-        $("#submitComment").click(function () {
-            submitComment();
-        });
-
-        $("#cancelComment").click(function () {
-            hideAddItem();
-        });
-
-    }
-
-    function bindRateArea() {
-        $("#rateButton").click(function () {
-
-            if (getCookieValue("userID") != null) {
-                submitRate();
-            } else {
-                showOops();
-            }
-        });
-    }
-
-    function bindInfoHeader() {
-        $("#description").click(function () {
-            setaAllTitleInactive();
-            hideAllContent();
-            $(this).attr("class", "activeTitle");
-            $("#descriptionContent").show();
-        });
-
-        $("#comment").click(function () {
-
-            setaAllTitleInactive();
-            hideAllContent();
-            $(this).attr("class", "activeTitle");
-            $("#commentContent").show();
-        });
-
-        $("#rate").click(function () {
-            setaAllTitleInactive();
-            hideAllContent();
-            $(this).attr("class", "activeTitle");
-            $("#rateContent").show();
-        });
-    }
-
-    function bindAlertArea() {
-        $("#curtain").click(function () {
-            hideOops();
-        });
-
-        $("#moveToSignIn").click(function () {
-            location.href = "login.html?";
-        });
-
-        $("#cancelOperation").click(function () {
-            hideOops();
-        });
-    }
-
-    function submitComment() {
-
-        var userID = getCookieValue("userID");
-        var storeID = getUrlParameter("storeID");
-        var commodityID = getUrlParameter("commodityID");
-        var comment = $("textarea").val();
-
-        var postBody = {
-            "userID": userID,
-            "storeID": storeID,
-            "commodityID": commodityID,
-            "commentContent": comment
-        };
-
-        $.ajax({
-            url: '../commodity/addComment',
-            type: 'POST',
-            contentType: "application/json; charset=utf-8",
-            async: true,
-            data: JSON.stringify(postBody),
-            dataType: 'json',
-            success: function (data) {
-                console.log(data);
-                hideAddItem();
-                renderComment(data.commentData);
-                renderPagination(data.commentNumber, 1);
-            }
-        });
-    }
 
     function submitRate() {
 
         var userID = getCookieValue("userID");
         var storeID = getUrlParameter("storeID");
         var commodityID = getUrlParameter("commodityID");
-        var rate = $("#startArea").attr("data-rate");
+        var like = $("#likeArea>div").attr("data-rate");
+        var price = $("#priceArea>div").attr("data-rate");
+        var quality = $("#qualityArea>div").attr("data-rate");
 
         var postBody = {
             "userID": userID,
             "storeID": storeID,
             "commodityID": commodityID,
-            "rate": rate
+            "like": like,
+            "price": price,
+            "quality": quality
         };
 
         $.ajax({

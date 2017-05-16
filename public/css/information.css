@@ -19,6 +19,10 @@ ul.nav-pills {
     position: fixed;
 }
 
+ul.nav-pills li a {
+    color: #000;
+}
+
 div.col-sm-9 div {
     height: 250px;
     font-size: 28px;

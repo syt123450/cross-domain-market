@@ -245,7 +245,7 @@ body > footer a {
     color: #000;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 550px) {
     #contact section div {
         width: 50%;
     }

@@ -206,13 +206,32 @@ main > div:last-child > header li {
     box-sizing: border-box;
 }
 
-#rateContent p {
+#rateContent > p {
     height: 50px;
     line-height: 50px;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
 }
 
 #rateContent img {
     height: 40px;
+}
+
+#likeArea, #priceArea, #qualityArea {
+    height: 50px;
+    display: block;
+}
+
+#likeArea > p, #priceArea > p, #qualityArea > p {
+    width: 120px;
+    line-height: 50px;
+    float: left;
+}
+
+#likeArea > div, #priceArea > div, #qualityArea > div {
+    height: 100%;
+    float: left;
 }
 
 #commentContent > #commentButton {

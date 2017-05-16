@@ -49,12 +49,17 @@ $app->POST('/commodity/addRate', function (Request $request, Response $response)
     $userID = ($request->getCookieParams())["userID"];
     $storeID = ($request->getParsedBody())["storeID"];
     $commodityID = ($request->getParsedBody())["commodityID"];
-    $rate = ($request->getParsedBody())["rate"];
+    $like = ($request->getParsedBody())["like"];
+    $price = ($request->getParsedBody())["price"];
+    $quality = ($request->getParsedBody())["quality"];
+
     $this->logger->info("The usr name is: " . $userID);
     $this->logger->info("The storeID is: " . $storeID);
     $this->logger->info("The commodityID is: " . $commodityID);
-    $this->logger->info("The rate is: " . $rate);
-    $addResult = addRate($userID, $storeID, $commodityID, $rate);
+    $this->logger->info("The like rate is: " . $like);
+    $this->logger->info("The like price is: " . $price);
+    $this->logger->info("The like quality is: " . $quality);
+    $addResult = addRate($userID, $storeID, $commodityID, $like, $price, $quality);
     $responseJson = json_encode($addResult);
     $response->getBody()->write($responseJson);
 

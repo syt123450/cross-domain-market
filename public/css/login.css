@@ -75,12 +75,13 @@ main > section > div {
     height: 40px;
     margin-top: 20px;
     margin-left: 30%;
-    background-color: #e6e6e6;
+    background-color: #2fa599;
     line-height: 40px;
     color: white;
     text-align: center;
     font-size: 18px;
     border: 1px solid #2fa599;
+    cursor: pointer;
 }
 
 #registerContent {

@@ -115,6 +115,113 @@ function renderPage(pageNumber) {
     });
 }
 
+function bindEvent() {
+    bindNav();
+    bindInfoHeader();
+    bindCommentArea();
+    bindRateArea();
+    bindAlertArea();
+}
+
+function bindCommentArea() {
+    $("#commentButton").click(function () {
+
+        if (getCookieValue("userID") != null) {
+            showAddItem();
+        } else {
+            showOops();
+        }
+    });
+
+    $("#submitComment").click(function () {
+        submitComment();
+    });
+
+    $("#cancelComment").click(function () {
+        hideAddItem();
+    });
+
+}
+
+function bindRateArea() {
+    $("#rateButton").click(function () {
+
+        if (getCookieValue("userID") != null) {
+            submitRate();
+        } else {
+            showOops();
+        }
+    });
+}
+
+function bindInfoHeader() {
+    $("#description").click(function () {
+        setaAllTitleInactive();
+        hideAllContent();
+        $(this).attr("class", "activeTitle");
+        $("#descriptionContent").show();
+    });
+
+    $("#comment").click(function () {
+
+        setaAllTitleInactive();
+        hideAllContent();
+        $(this).attr("class", "activeTitle");
+        $("#commentContent").show();
+    });
+
+    $("#rate").click(function () {
+        setaAllTitleInactive();
+        hideAllContent();
+        $(this).attr("class", "activeTitle");
+        $("#rateContent").show();
+    });
+}
+
+function bindAlertArea() {
+    $("#curtain").click(function () {
+        hideOops();
+    });
+
+    $("#moveToSignIn").click(function () {
+        location.href = "login.html";
+    });
+
+    $("#cancelOperation").click(function () {
+        hideOops();
+    });
+}
+
+function submitComment() {
+
+    var userID = getCookieValue("userID");
+    var storeID = getUrlParameter("storeID");
+    var commodityID = getUrlParameter("commodityID");
+    var comment = $("textarea").val();
+
+    var postBody = {
+        "userID": userID,
+        "storeID": storeID,
+        "commodityID": commodityID,
+        "commentContent": comment
+    };
+
+    $.ajax({
+        url: '../commodity/addComment',
+        type: 'POST',
+        contentType: "application/json; charset=utf-8",
+        async: true,
+        data: JSON.stringify(postBody),
+        dataType: 'json',
+        success: function (data) {
+            console.log(data);
+            hideAddItem();
+            renderComment(data.commentData);
+            renderPagination(data.commentNumber, 1);
+        }
+    });
+}
+
 function hideAddItem() {
     $("textarea").val("");
     $("#textarea").hide();
