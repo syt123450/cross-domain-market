@@ -4,7 +4,7 @@ main {
     right: 0;
     margin-top: 40px;
     margin-left: auto;
-    margin-right:auto;
+    margin-right: auto;
     border: 1px solid #2fa599;
     box-sizing: border-box;
 }
@@ -19,7 +19,7 @@ main.register {
     margin-bottom: 70px;
 }
 
-main>header {
+main > header {
     height: 45px;
     width: 100%;
     font-size: 18px;
@@ -28,29 +28,29 @@ main>header {
     display: block;
 }
 
-main>header>div {
+main > header > div {
     width: 50%;
     height: 100%;
     float: left;
 }
 
-main>header>div:first-child {
+main > header > div:first-child {
     border-right: 1px solid #2fa599;
     box-sizing: border-box;
 }
 
-main>header>div.activeTitle {
+main > header > div.activeTitle {
     color: #000000;
 }
 
-main>header>div.inactiveTitle:hover {
+main > header > div.inactiveTitle:hover {
     color: #2fa599;
     border-bottom: 1px solid #2fa599;
     box-sizing: border-box;
     background-color: #e6e6e6;
 }
 
-main>header>div.inactiveTitle {
+main > header > div.inactiveTitle {
     color: white;
     background-color: #2fa599;
     -webkit-transition-duration: 0.3s;
@@ -58,7 +58,7 @@ main>header>div.inactiveTitle {
     cursor: pointer;
 }
 
-main>section>input[type="text"] {
+main > section > input[type="text"] {
     border: 1px solid #2fa599;
     margin-top: 20px;
     margin-left: 5%;
@@ -67,10 +67,10 @@ main>section>input[type="text"] {
     padding-left: 30px;
     padding-right: 30px;
     box-sizing: border-box;
-    outline:none;
+    outline: none;
 }
 
-main>section>div {
+main > section > div {
     width: 40%;
     height: 40px;
     margin-top: 20px;
@@ -85,4 +85,10 @@ main>section>div {
 
 #registerContent {
     display: none;
+}
+
+@media (max-width: 400px) {
+    main {
+        width: 350px;
+    }
 }

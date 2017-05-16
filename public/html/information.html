@@ -24,7 +24,7 @@
 </header>
 
 <nav>
-    <ul class="container">
+    <ul class="container hidden-xs">
         <li><a href="../index.html">Home</a></li>
         <li>
             <a>Store</a>
@@ -41,11 +41,25 @@
         </li>
         <li><a><img id="shoppingCart" src="../img/common/pageIcon/shopping_cart.png"></a></li>
     </ul>
+
+    <div class="container">
+        <ul id="shown-smallnav" class="nav nav-tabs visible-xs">
+            <li class="navBarActiveLi"><a>Contact</a></li>
+            <li id="smallsize-morebutton"><a><span
+                    class="glyphicon glyphicon-th-large"></span></a></li>
+        </ul>
+
+        <ul id="navbar-collapse" class="nav navbar-nav">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../index.html#store">Store</a></li>
+            <li><a href="login.html">LogIn</a></li>
+        </ul>
+    </div>
 </nav>
 
 <div class="container">
     <div class="row">
-        <nav class="col-sm-3" id="myScrollspy">
+        <nav class="col-sm-3 hidden-xs" id="myScrollspy">
             <div class="container-fluid">
                 <div class="container-fluid">
                     <ul class="nav nav-pills nav-stacked">
@@ -120,15 +134,15 @@
                     Practices, 2145 Hamilton Avenue, San Jose, California 95125.</p>
             </div>
             <div id="partner">
-                <h1>Partner</h1>
+                <h2>Partner</h2>
                 <p>There is some description. There is some description. There is some description.</p>
             </div>
             <div id="FAQ">
-                <h1>FAQ</h1>
+                <h2>FAQ</h2>
                 <p>There is some description. There is some description. There is some description.</p>
             </div>
             <div id="story">
-                <h1>Our story</h1>
+                <h2>Our story</h2>
                 <p>ICON is a global creative commerce platform. We build markets, services and economic opportunity for
                     creative entrepreneurs.</p><br>
                 <p>Our service allows users to buy just about anything in a variety of pricing formats and locations.
@@ -172,6 +186,10 @@
                 renderNavStoreList(data.storeNameList);
                 bindNav();
             }
+        });
+
+        $("#smallsize-morebutton").click(function () {
+            $("#navbar-collapse").slideToggle();
         });
     });
 

@@ -193,3 +193,55 @@ main > section > section > div:hover {
     background-color: #2fa599;
     color: #fff;
 }
+
+@media (max-width: 990px) {
+    main > section > section > div {
+        width: 25%;
+    }
+
+    #advertisement {
+        height: 300px;
+    }
+
+    #advertisement .carousel-inner .item img {
+        height: 300px;
+    }
+}
+
+@media (max-width: 650px) {
+    main > section > section > div {
+        width: 33%;
+    }
+}
+
+@media (max-width: 501px) {
+    main > section > section > div {
+        width: 50%;
+    }
+}
+
+@media (max-width: 400px) {
+    #advertisement {
+         height: 200px;
+     }
+
+    #advertisement .carousel-inner .item img {
+        height: 200px;
+    }
+
+    #top5 > header > div {
+        width: 150px;
+        font-size: 15px;
+    }
+
+    #top5 > header > div > p {
+        padding-left: 20px;
+        background: url(../img/common/pageIcon/pullDown.png) no-repeat 110px;
+        background-size: 25px 25px;
+    }
+
+    #top5 > header > div > ul > li {
+        padding-left: 10px;
+    }
+}
+

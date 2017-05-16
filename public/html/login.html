@@ -23,7 +23,7 @@
 </header>
 
 <nav>
-    <ul class="container">
+    <ul class="container hidden-xs">
         <li><a href="../index.html">Home</a></li>
         <li>
             <a>Store</a>
@@ -35,6 +35,20 @@
         <li class="nowPage"><a>Log In</a></li>
         <li><a><img id="shoppingCart" src="../img/common/pageIcon/shopping_cart.png"></a></li>
     </ul>
+
+    <div class="container">
+        <ul id="shown-smallnav" class="nav nav-tabs visible-xs">
+            <li class="navBarActiveLi"><a>LogIn</a></li>
+            <li id="smallsize-morebutton"><a><span
+                    class="glyphicon glyphicon-th-large"></span></a></li>
+        </ul>
+
+        <ul id="navbar-collapse" class="nav navbar-nav">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../index.html#store">Store</a></li>
+            <li><a href="information.html">Contact</a></li>
+        </ul>
+    </div>
 </nav>
 
 <main class="signIn">
@@ -98,6 +112,10 @@
 
         $("#registerButton").click(function() {
             createUser();
+        });
+
+        $("#smallsize-morebutton").click(function () {
+            $("#navbar-collapse").slideToggle();
         });
 
     });

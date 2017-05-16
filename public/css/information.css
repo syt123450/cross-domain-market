@@ -34,3 +34,26 @@ div.col-sm-9 div {
     margin-top: 20px;
     font-size: 15px;
 }
+
+@media (max-width: 400px) {
+    #myScrollspy {
+        display: none;
+    }
+
+    #contactInfo, #policy, #partner, #story, #FAQ {
+        padding: 10px;
+        min-height: 0;
+    }
+
+    h2 {
+        font-size: 18px;
+    }
+
+    h3 {
+        font-size: 16px;
+    }
+
+    p {
+        font-size: 15px;
+    }
+}

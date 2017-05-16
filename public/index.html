@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/index.css">
 
-
 </head>
 <body>
 
@@ -25,7 +24,7 @@
 </header>
 
 <nav>
-    <ul class="container">
+    <ul class="container hidden-xs">
         <li class="nowPage"><a>Home</a></li>
         <li>
             <a href="#store">Store</a>
@@ -42,6 +41,21 @@
         </li>
         <li><a><img id="shoppingCart" src="img/common/pageIcon/shopping_cart.png"></a></li>
     </ul>
+
+    <div class="container">
+        <ul id="shown-smallnav" class="nav nav-tabs visible-xs">
+            <li class="navBarActiveLi"><a>Home</a></li>
+            <li id="smallsize-morebutton"><a><span
+                    class="glyphicon glyphicon-th-large"></span></a></li>
+        </ul>
+
+        <ul id="navbar-collapse" class="nav navbar-nav">
+            <li><a href="#store">Store</a></li>
+            <li><a href="html/information.html">Contact</a></li>
+            <li><a href="html/login.html">LogIn</a></li>
+        </ul>
+    </div>
+
 </nav>
 
 <div id="advertisement" class="carousel slide" data-ride="carousel">
@@ -143,6 +157,17 @@
 
     $(function () {
 
+
+        if (document.body.clientWidth < 400) {
+            $("#advertisement img:eq(0)").attr("src", "img/home/mobile/1.jpg");
+            $("#advertisement img:eq(1)").attr("src", "img/home/mobile/1.jpg");
+            $("#advertisement img:eq(2)").attr("src", "img/home/mobile/1.jpg");
+        } else {
+            $("#advertisement img:eq(0)").attr("src", "img/home/banner/banner1.jpg");
+            $("#advertisement img:eq(1)").attr("src", "img/home/banner/banner2.jpg");
+            $("#advertisement img:eq(2)").attr("src", "img/home/banner/banner3.jpg");
+        }
+
 //        setCookie("userID", "syt");
 //        setCookie("userName", "ss");
         renderIndexUser();
@@ -166,6 +191,10 @@
 
                 bindEvent();
             }
+        });
+
+        $("#smallsize-morebutton").click(function () {
+            $("#navbar-collapse").slideToggle();
         });
     });
 
