@@ -10,11 +10,6 @@ function checkUsr($usrInfo, $usrPassword) {
     //use the usrName/usrEmail, usrPassword to validate
     $checkResult = validateUserByUserName($usrInfo, $usrPassword);
 
-    $checkResult = array(
-        "checkResult" => true,
-        "checkMessage" => ""
-    );
-
     return $checkResult;
 }
 
@@ -22,22 +17,16 @@ function checkNewUsrName($usrName) {
 
     //use the usrName to check whether this name has been registered.
 
-    $checkResult = array(
-        "checkResult" => true,
-        "checkMessage" => ""
-    );
+    $checkResult = validateNewUser($usrName);
 
     return $checkResult;
 }
 
-function createUsr($usrName, $usrPassword, $usrEmail) {
+function createUsr($userName, $password, $email) {
 
     //use the usrName, usrPassword, usrEmail to create new usr
 
-    $createResult = array(
-        "createResult" => true,
-        "createMessage" => ""
-    );
+    $createResult = createNewUser($userName, $password, $email);
 
     return $createResult;
 }

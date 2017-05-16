@@ -36,10 +36,15 @@ if ($app->getContainer()['mock']) {
     require_once('mock/getTop5Data_mock.php');
     require_once('mock/getStoreProduct_mock.php');
     require_once('mock/loginHandler_mock.php');
+//    require_once('db/loginHandler.php');
     require_once ('mock/commodity_mock.php');
 } else {
     require_once('db/mongoConn.php');
     require_once('db/curlConn.php');
     require_once('db/dataUtility.php');
     require_once('db/getPageLoadData.php');
+    require_once('db/loginHandler.php');
+    require_once('db/commodity.php');
+    require_once('db/getStoreProduct.php');
+    require_once('db/getTop5Data.php');
 }

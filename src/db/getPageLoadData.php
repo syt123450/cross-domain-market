@@ -114,8 +114,7 @@ function getCommodityPageLoadData($storeID, $commodityID) {
     // Search database for rating and comments
     $ratingData = getData("db272.TopProduct", ['storeID' => 1, 'productID' => 1], ['projection' => ['rate' => 1, '_id' => 0]]);
     $comments = getData("db272.TopProduct", ['storeID' => 1, 'productID' => 1], ['projection' => ['comment' => 1, '_id' => 0]]);
-    $comments = $comments[0];
-    $comments = json_decode(json_encode($comments), true);
+    $comments = json_decode(json_encode($comments[0]), true);
     $comments = $comments["comment"];
 
     $basicCommodityInfo = getBasicProductData($productData, $targetStore["Domain"], $ratingData["rate"], count($comments));

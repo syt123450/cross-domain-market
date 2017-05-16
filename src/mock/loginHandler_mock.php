@@ -12,7 +12,11 @@ function checkUsr($usrInfo, $usrPassword) {
 
     $checkResult = array(
         "checkResult" => true,
-        "checkMessage" => ""
+        "checkMessage" => array(
+            "userID" => 2,
+	        "userName" => "tester",
+	        "email" => "zchholmes@gmail.com"
+            )
     );
 
     return $checkResult;
