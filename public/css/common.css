@@ -35,7 +35,7 @@ body > header #logo {
 }
 
 body > nav {
-    height: 40px;
+    height: auto;
     width: 100%;
     background-color: #e6e6e6;
     font-size: 18px;
@@ -49,10 +49,11 @@ body > nav div {
 }
 
 body > nav > ul {
-    height: 100%;
+    height: 40px;
     width: 100%;
     display: block;
     list-style: none;
+    margin-bottom: 0;
 }
 
 body > nav > ul > li {
@@ -202,4 +203,50 @@ body > footer a {
     text-align: center;
     line-height: 50px;
     font-size: 11px;
+}
+
+.navBarActiveLi {
+    background-color: #2fa599;
+    color: #fff;
+}
+
+.navBarActiveLi a {
+    color: #fff;
+}
+
+#navbar-collapse {
+    display: none;
+    margin: 0 1px;
+}
+
+#navbar-collapse ul {
+    margin: 0;
+}
+
+#navbar-collapse li {
+    border-top: 1px solid #ddd;
+}
+
+#navbar-collapse li a:active {
+    background-color: #2fa599;
+    color: #fff;
+}
+
+#navbar-collapse li a {
+    color: #000;
+}
+
+#smallsize-morebutton {
+    float: right;
+    border-bottom: 0;
+}
+
+#smallsize-morebutton a {
+    color: #000;
+}
+
+@media (max-width: 400px) {
+    #contact section div {
+        width: 50%;
+    }
 }

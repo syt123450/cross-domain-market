@@ -2,4 +2,4 @@
 !/logs/README.md
 .idea
 .idea/*
-/src/settings.php
+src/settings.php

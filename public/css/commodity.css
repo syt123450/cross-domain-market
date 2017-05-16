@@ -38,17 +38,17 @@ main > div:first-child > div > p {
 main > div:first-child > div > div {
     background-color: #e0f2f0;
     width: 100%;
-    margin-top:30px;
+    margin-top: 30px;
     margin-bottom: 30px;
     padding: 20px;
     box-sizing: border-box;
 }
 
-main >div:first-child > div > div > p {
+main > div:first-child > div > div > p {
     font-size: 18px;
 }
 
-main > div:first-child >div:last-child {
+main > div:first-child > div:last-child {
     clear: both;
     height: 20px;
     width: 100%;
@@ -113,7 +113,8 @@ main > div:last-child > header li {
 }
 
 #descriptionContent > p {
-    height: 30px;
+    height: auto;
+    min-height: 30px;
     line-height: 30px;
 }
 
@@ -181,21 +182,21 @@ main > div:last-child > header li {
     font-size: 18px;
     box-sizing: border-box;
     overflow: scroll;
-    outline:none;
-    resize:none;
+    outline: none;
+    resize: none;
 }
 
 /*#commentContent > .submitButton {*/
-    /*background-color: #2fa599;*/
-    /*height: 50px;*/
-    /*margin-bottom: 20px;*/
-    /*line-height: 50px;*/
-    /*width: 30%;*/
-    /*margin-left: 35%;*/
-    /*text-align: center;*/
-    /*font-size: 18px;*/
-    /*font-weight: bold;*/
-    /*color: white;*/
+/*background-color: #2fa599;*/
+/*height: 50px;*/
+/*margin-bottom: 20px;*/
+/*line-height: 50px;*/
+/*width: 30%;*/
+/*margin-left: 35%;*/
+/*text-align: center;*/
+/*font-size: 18px;*/
+/*font-weight: bold;*/
+/*color: white;*/
 /*}*/
 
 #rateContent {
@@ -366,4 +367,83 @@ main div section {
     cursor: pointer;
     -webkit-transition-duration: 0.3s;
     transition-duration: 0.3s;
+}
+
+@media (max-width: 692px) {
+    main > div:first-child > img {
+        width: 100%;
+        padding: 0 10%;
+        box-sizing: border-box;
+    }
+
+    main > div:first-child > div {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    main > div:first-child > div > p {
+        font-size: 18px;
+        text-align: center;
+    }
+
+    main > div:first-child > div > div > img {
+        height: 80%;
+    }
+
+    main > div:first-child > div > div:nth-child(even) {
+        margin-left: 30%;
+    }
+
+    main > div:first-child > div > div > p {
+        font-size: 15px;
+    }
+
+    main > div:first-child > div > img {
+        height: 30px;
+        margin-left: 30%;
+    }
+}
+
+@media (max-width: 400px) {
+    main > div:last-child > header li {
+        font-size: 15px;
+    }
+
+    #descriptionContent {
+        padding: 10px;
+        font-size: 15px;
+    }
+
+    #commentContent > div {
+        padding: 15px 10px;
+    }
+
+    #commentContent > div > p:nth-child(1) {
+        font-size: 16px;
+    }
+
+    #commentContent > div > p:nth-child(2) {
+        font-size: 15px;
+    }
+
+    #oops {
+        width: 300px;
+    }
+
+    #oops header {
+        font-size: 18px;
+    }
+
+    #oops section p {
+        font-size: 15px;
+    }
+
+    #oops section > div {
+        font-size: 15px;
+    }
+
+    #oops section > div > div:first-child, #oops section > div > div:last-child {
+        width: 40%;
+    }
+
 }

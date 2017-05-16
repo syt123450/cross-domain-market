@@ -24,7 +24,7 @@ main {
     margin-bottom: 10px;
 }
 
-main>section {
+main > section {
     width: 75%;
     height: auto;
     padding: 0 24px;
@@ -42,22 +42,22 @@ main header {
     box-sizing: border-box;
 }
 
-main>section>div {
+main > section > div {
     width: 100%;
     display: block;
 }
 
-main>section>div>div {
+main > section > div > div {
     width: 33%;
     border-right: 1px dotted #e6e6e6;
     float: left;
 }
 
-main>section>div>div:nth-child(3n) {
+main > section > div > div:nth-child(3n) {
     border: 0;
 }
 
-main>section>footer {
+main > section > footer {
     clear: both;
     text-align: center;
 }
@@ -91,11 +91,11 @@ main>section>footer {
     color: white;
 }
 
-.product>img {
+.product > img {
     width: 100%;
 }
 
-.product>div {
+.product > div {
     width: 100%;
     height: 25px;
     line-height: 25px;
@@ -103,26 +103,26 @@ main>section>footer {
     display: block;
 }
 
-.product>div>p {
+.product > div > p {
     width: 30%;
     font-size: 15px;
     font-weight: bold;
     float: left;
 }
 
-.product>div>img {
+.product > div > img {
     height: 100%;
     float: right;
 }
 
-.product>p {
+.product > p {
     width: 100%;
     font-size: 11px;
     font-weight: bold;
     clear: both;
 }
 
-main>aside {
+main > aside {
     position: relative;
     width: 25%;
     height: auto;
@@ -133,25 +133,25 @@ main>aside {
     display: block;
 }
 
-main>aside>div {
+main > aside > div {
     width: 100%;
     float: left;
 }
 
 aside > header > div {
-    position: absolute;
-    right: 8px;
-    top: 3px;
-    z-index: 2;
-    width: 180px;
-    height: 30px;
-    line-height: 30px;
-    font-size: 15px;
-    font-weight: normal;
-    color: #2fa599;
-    background-color: #fff;
-    border-radius: 15px;
-}
+     position: absolute;
+     right: 8px;
+     top: 3px;
+     z-index: 2;
+     width: 180px;
+     height: 30px;
+     line-height: 30px;
+     font-size: 15px;
+     font-weight: normal;
+     color: #2fa599;
+     background-color: #fff;
+     border-radius: 15px;
+ }
 
 aside > header > div > p {
     position: absolute;
@@ -184,7 +184,7 @@ aside > header > div > ul {
     display: none;
 }
 
-aside> header > div > ul > li {
+aside > header > div > ul > li {
     padding-left: 30px;
     box-sizing: border-box;
     cursor: pointer;
@@ -209,4 +209,74 @@ aside > header > div > ul > li:hover {
     background-color: #FFF;
     color: #AAA;
     cursor: auto;
+}
+
+@media (max-width: 1200px) {
+    aside > header > div {
+        margin-top: 5px;
+        width: 150px;
+    }
+
+    aside > header > div > p {
+        background: url(../img/common/pageIcon/pullDown.png) no-repeat 115px;
+        background-size: 25px 25px;
+    }
+}
+
+@media (max-width: 992px) {
+    main section {
+        width: 100%;
+        padding: 0;
+    }
+
+    main aside {
+        width: 100%;
+    }
+
+    main > section > div > div {
+        width: 33%;
+        border: 0;
+    }
+
+    main aside > div > div {
+        width: 33%;
+        float: left;
+    }
+
+    #advertisement {
+        height: 300px;
+    }
+
+    #advertisement .carousel-inner .item img {
+        height: 300px;
+    }
+}
+
+@media (max-width: 540px) {
+    #advertisement {
+        height: 200px;
+    }
+
+    #advertisement .carousel-inner .item img {
+        height: 200px;
+    }
+
+    main > section > div > div {
+        width: 50%;
+        border: 0;
+    }
+
+    main aside > div > div {
+        width: 50%;
+        float: left;
+    }
+
+    .product > div > img {
+        height: 80%;
+    }
+
+    aside > header > div {
+        margin-top: 5px;
+        width: 150px;
+    }
 }
