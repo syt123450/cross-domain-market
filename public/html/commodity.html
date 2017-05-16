@@ -179,11 +179,13 @@
 
         $(".rateStar").hover(
             function () {
-                if ($(this).parent().attr("data-rate") == null) {
-                    var starNumber = $("#rateContent .rateStar").index(this);
-                    for (var i = 0; i <= starNumber; i++) {
-                        $($("#rateContent .rateStar")[i]).attr("src", "../img/products/star_1.png");
-                    }
+                $(this).parent().removeAttr("data-rate");
+                for (var i = 0; i < 5; i++) {
+                    $($("#rateContent .rateStar")[i]).attr("src", "../img/products/star_empty.png");
+                }
+                var starNumber = $("#rateContent .rateStar").index(this);
+                for (var i = 0; i <= starNumber; i++) {
+                    $($("#rateContent .rateStar")[i]).attr("src", "../img/products/star_1.png");
                 }
             },
             function () {
@@ -270,7 +272,7 @@
         });
 
         $("#moveToSignIn").click(function () {
-            location.href = "login.html";
+            location.href = "login.html?";
         });
 
         $("#cancelOperation").click(function () {
