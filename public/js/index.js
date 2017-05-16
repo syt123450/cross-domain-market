@@ -232,5 +232,6 @@ function renderIndexUser() {
         $("#loginArea ul").hide();
         $("#loginArea a").text("Log In");
         $("#loginArea a").attr("href", "html/login.html");
+        $("#recentView").hide();
     }
 }
