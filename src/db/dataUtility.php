@@ -226,7 +226,7 @@ require_once('curlConn.php');
  *      ]
  *  ]
  */
-    function getProductList($productData){
+    function getProductList($storeUrl, $productData){
         $ret = array();
         $pList = json_decode($productData);
 
@@ -234,7 +234,7 @@ require_once('curlConn.php');
             $product = json_decode(json_encode($product), true);
             $temp = array();
             $temp["commodityID"] = $product["productID"];
-            $temp["commodityPicUrl"] = $product["smallPicUrl"];
+            $temp["commodityPicUrl"] = $storeUrl . $product["smallPicUrl"];
             $temp["commodityPrice"] = $product["priceNew"];
             $temp["commodityName"] = $product["productName"];
             $ret[] = $temp;

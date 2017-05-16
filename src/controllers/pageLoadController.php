@@ -9,17 +9,20 @@ ini_set('display_errors', 1);
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 use Dflydev\FigCookies\SetCookie;
+use Dflydev\FigCookies\FigRequestCookies;
 use Dflydev\FigCookies\FigResponseCookies;
 
 $app->GET('/initialize/index', function (Request $request, Response $response) {
 
     $this->logger->info('GET indexPage information.');
-    $userID = $request->getCookieParams()["userID"];
 
-    if (isNull($userID)){
+    $userID = FigRequestCookies::get($request, 'userID')->getValue();
+    if (is_null($userID)){
+        $this->logger->info('No UserID');
         $indexData = getIndexPageLoadDataWithoutUserID();
     }
     else {
+        $this->logger->info($userID);
         $indexData = getIndexPageLoadData($userID);
     }
 
