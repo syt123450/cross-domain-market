@@ -450,7 +450,7 @@ require_once('curlConn.php');
         // Reverse comments to be update (so we have data stored with TIME order ASC)
         $comments = array_reverse($comments);
 
-        $filter = [ 'storeID' => $storeID, 'productID' => $commodityID ];
+        $filter = [ 'storeID' => (int)$storeID, 'productID' => (int)$commodityID ];
         $sets = [
             "comment" => $comments
         ];
@@ -608,9 +608,9 @@ require_once('curlConn.php');
             "recentViewed" => array()
         ];
 
-        $filter = [ 'userID' => $newUserID];
+        $filter = [ 'userID' => (int)$newUserID];
 
-        upsertData('db272.User' , $sets, $filter);
+        upsertData('db272.User' , $filter, $sets);
 
         $ret = array(
             "createResult" => true,
