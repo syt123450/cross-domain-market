@@ -157,7 +157,7 @@ require_once('curlConn.php');
     function getRecentViewProducts($user){
         require_once ('mongoConn.php');
         // Catch general data first
-        $recentViewedProducts = getData("db272.User", ['userID' => $user], ['projection' => ['recentViewed' => 1, '_id' => 0]]);
+        $recentViewedProducts = getData("db272.User", ['userID' => (int)$user], ['projection' => ['recentViewed' => 1, '_id' => 0]]);
 
         // Catch the 1st object from returned array, i.e. the only one find from the database by the userID
         $recentViewedProducts = $recentViewedProducts[0];
@@ -359,9 +359,10 @@ require_once('curlConn.php');
     function getComments($storeID, $commodityID, $pageID, $numPerPage){
         $ret = array();
 
-        $comments = getData("db272.TopProduct", ['storeID' => $storeID, 'productID' => $commodityID], ['projection' => ['comment' => 1, '_id' => 0]]);
+        $comments = getData("db272.TopProduct", ['storeID' => (int)$storeID, 'productID' => (int)$commodityID], ['projection' => ['comment' => 1, '_id' => 0]]);
         $comments = json_decode(json_encode($comments[0]), true);
         $comments = $comments["comment"];
+        $comments = array_reverse($comments);
 
         $numOfComments = count($comments);
         $commentData = array();
@@ -422,7 +423,7 @@ require_once('curlConn.php');
         $userData = json_decode(json_encode($userData[0]), true);
 
         // Find comments
-        $comments = getData("db272.TopProduct", ['storeID' => $storeID, 'productID' => $commodityID], ['projection' => ['comment' => 1, '_id' => 0]]);
+        $comments = getData("db272.TopProduct", ['storeID' => (int)$storeID, 'productID' => (int)$commodityID], ['projection' => ['comment' => 1, '_id' => 0]]);
         $comments = json_decode(json_encode($comments[0]), true);
         $comments = $comments["comment"];
 
@@ -475,7 +476,7 @@ require_once('curlConn.php');
 
     function addNewRate($userID, $storeID, $commodityID, $rate){
         // Find rate and rated
-        $rates = getData("db272.TopProduct", ['storeID' => $storeID, 'productID' => $commodityID], ['projection' => ['rate' => 1, 'rated' => 1, '_id' => 0]]);
+        $rates = getData("db272.TopProduct", ['storeID' => (int)$storeID, 'productID' => (int)$commodityID], ['projection' => ['rate' => 1, 'rated' => 1, '_id' => 0]]);
         $rates = json_decode(json_encode($rates[0]), true);
         $curRate = $rates["rate"];
         $curRated = $rates["rated"];
@@ -490,7 +491,7 @@ require_once('curlConn.php');
             "rated" => $newRated
         ];
 
-        $filter = [ 'storeID' => $storeID, 'productID' => $commodityID ];
+        $filter = [ 'storeID' => (int)$storeID, 'productID' => (int)$commodityID ];
 
         upsertData('db272.TopProduct' , $filter, $sets);
 

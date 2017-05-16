@@ -81,7 +81,7 @@ function getStorePageLoadData($storeID) {
     //total number of the product
     $storeProductNumber = count($productData);
 
-    $top5Products = getData("db272.TopProduct", ['storeID' => $storeID], ['sort' => ['viewed' => -1], 'limit' => 3]);
+    $top5Products = getData("db272.TopProduct", ['storeID' => (int)$storeID], ['sort' => ['viewed' => -1], 'limit' => 3]);
     $top5DataNoStore = getTopDataNoStore($top5Products);
 
     $storeLoadData = array(
@@ -132,7 +132,7 @@ function getCommodityPageLoadData($storeID, $commodityID) {
     $productData = curlData($targetStore["ProductList"] . "?productID=" . $commodityID);
 
     /* Try to catch product data from DB */
-    $product_db = getData("db272.TopProduct", ['storeID' => $storeID, 'productID' => $commodityID], ['projection' => ['_id' => 0]]);
+    $product_db = getData("db272.TopProduct", ['storeID' => (int)$storeID, 'productID' => (int)$commodityID], ['projection' => ['_id' => 0]]);
     if (empty($product_db)){
         // Empty, then init
         $viewed = 0;
@@ -148,6 +148,8 @@ function getCommodityPageLoadData($storeID, $commodityID) {
         $rate = $product_db["rate"];
         $comments = $product_db["comment"];
     }
+
+
 
     /* Update product viewed history in DB */
     $pList = json_decode($productData);
@@ -179,6 +181,13 @@ function getCommodityPageLoadData($storeID, $commodityID) {
     // Generate description data
     $descriptionData = getDescriptionData($productData);
 
+    // Fix to 5 comment
+//    $commentData = getComments($storeID, $commodityID, 1, 5);
+    $comments = array_reverse($comments);
+    $commentNum = count($comments);
+    if (count($comments) >5){
+        $comments = array_slice($comments, 0, 5);
+    }
     $commentData = getCommentData($comments);
 
 
@@ -186,7 +195,7 @@ function getCommodityPageLoadData($storeID, $commodityID) {
         "storeNameList" => $storeNameList,
         "basicCommodityInfo" => $basicCommodityInfo,
         "descriptionData" => $descriptionData,
-        "commentNumber" => count($commentData),
+        "commentNumber" => $commentNum,
         "commentData" => $commentData,
         "averageRate" => $rate
     );
