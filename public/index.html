@@ -35,10 +35,10 @@
             </ul>
         </li>
         <li><a href="html/information.html">Contact</a></li>
-        <li>
-            <a href="html/login.html">Log In</a>
+        <li id="loginArea">
+            <a href="html/login.html"></a>
             <ul>
-                <li>Log Out</li>
+                <li id="logOut">Log Out</li>
             </ul>
         </li>
         <li><a><img id="shoppingCart" src="img/common/pageIcon/shopping_cart.png"></a></li>
@@ -144,7 +144,9 @@
 
     $(function () {
 
-        document.cookie = "userID=syt";
+        setCookie("userID", "syt");
+        setCookie("userName", "ss");
+        renderIndexUser();
 
         renderInitiatedEvent();
 
@@ -154,13 +156,13 @@
             async: true,
             dataType: 'json',
             success: function (data) {
+
                 console.log(data);
-                console.log(getCookieValue('testCookie'));
-                console.log(getCookieValue('userID'));
                 renderPage(data);
                 bindEvent();
             }
         });
     });
+
 </script>
 </html>

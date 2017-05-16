@@ -34,10 +34,10 @@
             </ul>
         </li>
         <li><a href="information.html">Contact</a></li>
-        <li>
+        <li id="loginArea">
             <a href="login.html">Log In</a>
             <ul>
-                <li>Log Out</li>
+                <li id="logOut">Log Out</li>
             </ul>
         </li>
         <li><a><img id="shoppingCart" src="../img/common/pageIcon/shopping_cart.png"></a></li>
@@ -67,14 +67,14 @@
     <section>
         <header>PRODUCTS</header>
         <div>
-            <!--<div data-commodityID="ID1" class="product">-->
-                <!--<img src="../img/store/products/1.jpg">-->
-                <!--<div>-->
-                    <!--<p>$12.33</p>-->
-                    <!--<img src="../img/common/pageIcon/add_to_cart1.png">-->
-                <!--</div>-->
-                <!--<P>tilley LTM3 Airflo Hat</P>-->
-            <!--</div>-->
+            <div data-commodityID="ID1" class="product">
+                <img src="../img/store/products/1.jpg">
+                <div>
+                    <p>$12.33</p>
+                    <img src="../img/common/pageIcon/add_to_cart1.png">
+                </div>
+                <P>tilley LTM3 Airflo Hat</P>
+            </div>
 
         </div>
         <footer>
@@ -131,6 +131,7 @@
     $(function () {
 
         bindStaticEvent();
+        renderUser();
 
         $.ajax({
             url: '../initialize/store',
@@ -143,6 +144,12 @@
                 console.log(data);
                 renderLoadPage(data);
                 bindLoadEvent();
+
+                $(".product>div>img").click(function(event) {
+                    var commodityID = $(this).parent().parent().attr("data-commodityID");
+                    console.log(commodityID);
+                    event.stopPropagation();
+                });
             }
         });
     });

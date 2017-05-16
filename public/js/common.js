@@ -12,15 +12,6 @@ function bindNav() {
             $("nav>ul>li>ul:eq(0)").hide();
         }
     );
-
-    $("nav>ul>li:eq(3)").hover(
-        function () {
-            $("nav>ul>li>ul:eq(1)").show();
-        },
-        function () {
-            $("nav>ul>li>ul:eq(1)").hide();
-        }
-    );
 }
 
 function renderNavStoreList(storeNameList) {
@@ -53,6 +44,14 @@ String.prototype.format = function () {
     });
 };
 
+function setCookie(name,value)
+{
+    var Days = 30;
+    var exp = new Date();
+    exp.setTime(exp.getTime() + Days*24*60*60*1000);
+    document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
+}
+
 function getCookieValue(cookieName)
 {
     var cookieValue = document.cookie;
@@ -76,4 +75,50 @@ function getCookieValue(cookieName)
         cookieValue = unescape(cookieValue.substring(cookieStartAt,cookieEndAt));
     }
     return cookieValue;
+}
+
+function renderUser() {
+
+    var userID = getCookieValue("userID");
+
+    if (userID != null) {
+
+        console.log(222);
+
+        var userName = getCookieValue("userName");
+
+        $("#loginArea a").text(userName);
+        $("#loginArea a").removeAttr("href");
+
+        $("#loginArea").hover(
+            function () {
+                $("nav>ul>li>ul:eq(1)").show();
+            },
+            function () {
+                $("nav>ul>li>ul:eq(1)").hide();
+            }
+        );
+
+        $("#logOut").click(function() {
+
+            $.ajax({
+                url: '../login/logout',
+                type: 'GET',
+                contentType: "application/json; charset=utf-8",
+                async: true,
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    renderUser();
+                    $("#loginArea").unbind("mouseenter").unbind("mouseleave");
+                }
+            });
+        });
+
+    } else {
+        console.log("111");
+        $("#loginArea ul").hide();
+        $("#loginArea a").text("Log In");
+        $("#loginArea a").attr("href", "login.html");
+    }
 }

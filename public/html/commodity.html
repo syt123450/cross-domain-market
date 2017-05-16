@@ -34,10 +34,10 @@
             </ul>
         </li>
         <li><a href="information.html">Contact</a></li>
-        <li>
+        <li id="loginArea">
             <a href="login.html">Log In</a>
             <ul>
-                <li>Log Out</li>
+                <li id="logOut">Log Out</li>
             </ul>
         </li>
         <li><a><img id="shoppingCart" src="../img/common/pageIcon/shopping_cart.png"></a></li>
@@ -114,7 +114,7 @@
             <img src="../img/products/star_1.png">
             <img src="../img/products/star_1.png">
             <p>Add rate:</p>
-            <div>
+            <div id="startArea">
                 <img class="rateStar" src="../img/products/star_empty.png">
                 <img class="rateStar" src="../img/products/star_empty.png">
                 <img class="rateStar" src="../img/products/star_empty.png">
@@ -159,6 +159,8 @@
 
     $(function () {
 
+        renderUser();
+
         $.ajax({
             url: '../initialize/commodity',
             type: 'POST',
@@ -194,7 +196,7 @@
             }
         );
 
-        $(".rateStar").click(function() {
+        $(".rateStar").click(function () {
             var starNumber = $("#rateContent .rateStar").index(this);
             $(this).parent().attr("data-rate", starNumber);
         });
@@ -211,12 +213,11 @@
     function bindCommentArea() {
         $("#commentButton").click(function () {
 
-            showAddItem();
-
-
-//            $("#curtain").fadeIn(300);
-//            $("#oops").fadeIn(300);
-//            $("body").css("overflow", "hidden");
+            if (getCookieValue("userID") != null) {
+                showAddItem();
+            } else {
+                showOops();
+            }
         });
 
         $("#submitComment").click(function () {
@@ -231,9 +232,12 @@
 
     function bindRateArea() {
         $("#rateButton").click(function () {
-            $("#curtain").fadeIn(300);
-            $("#oops").fadeIn(300);
-            $("body").css("overflow", "hidden");
+
+            if (getCookieValue("userID") != null) {
+                submitRate();
+            } else {
+                showOops();
+            }
         });
     }
 
@@ -246,6 +250,7 @@
         });
 
         $("#comment").click(function () {
+
             setaAllTitleInactive();
             hideAllContent();
             $(this).attr("class", "activeTitle");
@@ -262,9 +267,7 @@
 
     function bindAlertArea() {
         $("#curtain").click(function () {
-            $("#curtain").hide();
-            $("#oops").hide();
-            $("body").css("overflow", "scroll");
+            hideOops();
         });
 
         $("#moveToSignIn").click(function () {
@@ -272,9 +275,7 @@
         });
 
         $("#cancelOperation").click(function () {
-            $("#curtain").hide();
-            $("#oops").hide();
-            $("body").css("overflow", "scroll");
+            hideOops();
         });
     }
 
@@ -310,19 +311,29 @@
 
     function submitRate() {
 
-    }
+        var userID = getCookieValue("userID");
+        var storeID = getUrlParameter("storeID");
+        var commodityID = getUrlParameter("commodityID");
+        var rate = $("#startArea").attr("data-rate");
 
-    function hideAddItem() {
-        $("textarea").val("");
-        $("#textarea").hide();
-        $("#operationArea").hide();
-        $("#commentButton").show();
-    }
+        var postBody = {
+            "userID": userID,
+            "storeID": storeID,
+            "commodityID": commodityID,
+            "rate": rate
+        };
 
-    function showAddItem() {
-        $("#textarea").show();
-        $("#operationArea").show();
-        $("#commentButton").hide();
+        $.ajax({
+            url: '../commodity/addRate',
+            type: 'POST',
+            contentType: "application/json; charset=utf-8",
+            async: true,
+            data: JSON.stringify(postBody),
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+            }
+        });
     }
 
 

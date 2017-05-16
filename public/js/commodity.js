@@ -2,7 +2,6 @@
  * Created by ss on 2017/2/7.
  */
 
-
 function renderLoadPage(data) {
     renderNavStoreList(data.storeNameList);
     renderCommodityInfo(data.basicCommodityInfo);
@@ -114,4 +113,29 @@ function renderPage(pageNumber) {
             renderPagination(data.commentNumber, data.pageID);
         }
     });
+}
+
+function hideAddItem() {
+    $("textarea").val("");
+    $("#textarea").hide();
+    $("#operationArea").hide();
+    $("#commentButton").show();
+}
+
+function showAddItem() {
+    $("#textarea").show();
+    $("#operationArea").show();
+    $("#commentButton").hide();
+}
+
+function showOops() {
+    $("#curtain").fadeIn(300);
+    $("#oops").fadeIn(300);
+    $("body").css("overflow", "hidden");
+}
+
+function hideOops() {
+    $("#curtain").hide();
+    $("#oops").hide();
+    $("body").css("overflow", "scroll");
 }

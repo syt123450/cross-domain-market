@@ -191,3 +191,47 @@ function renderInitiatedEvent() {
         });
     });
 }
+
+function renderIndexUser() {
+
+    var userID = getCookieValue("userID");
+
+    if (userID != null) {
+
+        var userName = getCookieValue("userName");
+
+        $("#loginArea a").text(userName);
+        $("#loginArea a").removeAttr("href");
+
+        $("#loginArea").hover(
+            function () {
+                $("nav>ul>li>ul:eq(1)").show();
+            },
+            function () {
+                $("nav>ul>li>ul:eq(1)").hide();
+            }
+        );
+
+        $("#logOut").click(function() {
+
+            $.ajax({
+                url: 'login/logout',
+                type: 'GET',
+                contentType: "application/json; charset=utf-8",
+                async: true,
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    renderIndexUser();
+                    $("#loginArea").unbind("mouseenter").unbind("mouseleave");
+                }
+            });
+        });
+
+    } else {
+        $("#loginArea ul").hide();
+        $("#loginArea a").text("Log In");
+        $("#loginArea a").attr("href", "html/login.html");
+        $("#recentView").hide();
+    }
+}

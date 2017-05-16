@@ -34,10 +34,10 @@
             </ul>
         </li>
         <li class="nowPage"><a>Contact</a></li>
-        <li>
+        <li id="loginArea">
             <a href="login.html">Log In</a>
             <ul>
-                <li>Log Out</li>
+                <li id="logOut">Log Out</li>
             </ul>
         </li>
         <li><a><img id="shoppingCart" src="../img/common/pageIcon/shopping_cart.png"></a></li>
@@ -160,6 +160,9 @@
 <script>
 
     $(function() {
+
+        renderUser();
+
         $.ajax({
             url: '../initialize/contact',
             type: 'GET',
