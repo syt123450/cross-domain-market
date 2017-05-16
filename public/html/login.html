@@ -79,6 +79,8 @@
 
     $(function () {
 
+        renderUser();
+
         $.ajax({
             url: '../initialize/login',
             type: 'GET',
@@ -92,28 +94,83 @@
         });
 
         $("#signInButton").click(function() {
-
-            var userInfo = $("#signInContent input:eq(0)").val();
-            var userPassword = $("#signInContent input:eq(1)").val();
-
-            var postBody = {
-                "userInfo": userInfo,
-                "userPassword": userPassword
-            };
-
-            $.ajax({
-                url: '../login/checkLogin',
-                type: 'POST',
-                contentType: "application/json; charset=utf-8",
-                async: true,
-                data: JSON.stringify(postBody),
-                dataType: 'json',
-                success: function (data) {
-                    console.log(data);
-                }
-            });
+            signIn();
         });
+
+        $("#registerButton").click(function() {
+            createUser();
+        });
+
     });
+
+    function signIn() {
+        var userInfo = $("#signInContent input:eq(0)").val();
+        var userPassword = $("#signInContent input:eq(1)").val();
+
+        var postBody = {
+            "userInfo": userInfo,
+            "userPassword": userPassword
+        };
+
+        $.ajax({
+            url: '../login/checkLogin',
+            type: 'POST',
+            contentType: "application/json; charset=utf-8",
+            async: true,
+            data: JSON.stringify(postBody),
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                location.href = "../index.html";
+            }
+        });
+    }
+
+    function checkUsageOfName() {
+        var userName = $("#registerContent input:eq(0)").val();
+
+        var postBody = {
+            "userName": userName
+        };
+
+        $.ajax({
+            url: '../login/checkName',
+            type: 'POST',
+            contentType: "application/json; charset=utf-8",
+            async: true,
+            data: JSON.stringify(postBody),
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+            }
+        });
+    }
+
+    function createUser() {
+        var userName = $("#registerContent input:eq(0)").val();
+        var userEmail = $("#registerContent input:eq(1)").val();
+        var userPassword = $("#registerContent input:eq(2)").val();
+
+        var postBody = {
+            "userName": userName,
+            "userEmail": userEmail,
+            "userPassword": userPassword
+        };
+
+        $.ajax({
+            url: '../login/create',
+            type: 'POST',
+            contentType: "application/json; charset=utf-8",
+            async: true,
+            data: JSON.stringify(postBody),
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                location.href = "../index.html";
+            }
+        });
+    }
+
 
 </script>
 

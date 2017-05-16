@@ -9,8 +9,6 @@
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
-//userID 其实是后端从cookie中取出来的
-
 $app->POST('/commodity/addComment', function (Request $request, Response $response) {
 
     $this->logger->info('Add comment for commodity.');

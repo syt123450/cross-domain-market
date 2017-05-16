@@ -50,3 +50,11 @@ $app->POST('/login/create', function (Request $request, Response $response) {
 
     return $response;
 });
+
+$app->GET('/login/logout', function(Request $request, Response $response) {
+
+    $this->logger->info("delete the cookie of user.");
+
+    //do some to response to delet the cookie
+
+});
