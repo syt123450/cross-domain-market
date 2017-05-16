@@ -196,7 +196,7 @@
         );
 
         $(".rateStar").click(function () {
-            var starNumber = $("#rateContent .rateStar").index(this);
+            var starNumber = $("#rateContent .rateStar").index(this) + 1;
             $(this).parent().attr("data-rate", starNumber);
         });
     });
