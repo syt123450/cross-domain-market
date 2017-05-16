@@ -211,7 +211,7 @@ function renderIndexUser() {
 
         var userName = getCookieValue("userName");
 
-        $("#loginArea a").text(userName);
+        $("#loginArea a").text("Welcome, " + userName);
         $("#loginArea a").removeAttr("href");
 
         $("#loginArea").hover(
@@ -230,9 +230,7 @@ function renderIndexUser() {
                 type: 'GET',
                 contentType: "application/json; charset=utf-8",
                 async: true,
-                dataType: 'json',
-                success: function (data) {
-                    console.log(data);
+                success: function () {
                     renderIndexUser();
                     $("#loginArea").unbind("mouseenter").unbind("mouseleave");
                 }
