@@ -561,7 +561,7 @@ require_once('curlConn.php');
     }
 
 /**
- * Validate if the new user name is available for
+ * Validate if the new user name is available for front end
  * @param $userName
  * @return array
  *  [
@@ -617,6 +617,20 @@ require_once('curlConn.php');
             "createMessage" => $filter
         );
 
+        return $ret;
+    }
+
+/**
+ * Check by userName if a user existed
+ * @param $userName
+ * @return bool     true if user existed; false otherwise
+ */
+    function isUserExisted($userName){
+        $ret = false;
+        $resultByNameAry = getData("db272.User", ['userName' => $userName], []);
+        if (count($resultByNameAry) !=0){
+            $ret = true;
+        }
         return $ret;
     }
 
