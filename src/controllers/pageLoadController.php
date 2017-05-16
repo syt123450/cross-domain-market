@@ -16,7 +16,13 @@ $app->GET('/initialize/index', function (Request $request, Response $response) {
     $this->logger->info('GET indexPage information.');
     $userID = $request->getCookieParams()["userID"];
 
-    $indexData = getIndexPageLoadData($userID);
+    if (isNull($userID)){
+        $indexData = getIndexPageLoadDataWithoutUserID();
+    }
+    else {
+        $indexData = getIndexPageLoadData($userID);
+    }
+
     $responseJson = json_encode($indexData);
 
     $response->getBody()->write($responseJson);

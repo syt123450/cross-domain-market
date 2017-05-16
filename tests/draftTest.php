@@ -29,5 +29,5 @@ else {
 }
 
 echo ("<br/><br/>");
-$ary = getCommodityPageLoadData(1,1);
+$ary = createUsr("studentUser","cmpe272pw","zhu.chenhua@sjsu.edu");
 var_dump($ary);
