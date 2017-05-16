@@ -30,10 +30,10 @@
 
 
 	function getAllProductData(){
-		$query = "SELECT productID, productName, description, priceOrig, priceNew, quantity, rate, rated, viewed, smallPicUrl, largePicUrl FROM Product";
+		$query = "SELECT productID, productName, description, priceOrig, priceNew, quantity, smallPicUrl, largePicUrl FROM Product";
 
 		try {
-			$con = new PDO ("mysql:host=localhost;dbname=cmpe272", "cmpe272", "cmpe272pw");
+			$con = new PDO ("mysql:host=localhost;dbname=nebula", "nebula", "nebulapw");
 			$con->setAttribute( PDO:: ATTR_ERRMODE, PDO:: ERRMODE_EXCEPTION );
 
 			$stmt = $con->prepare($query);
@@ -48,10 +48,10 @@
 	}
 	
 	function getProductData($productID){
-		$query = "SELECT productID, productName, description, priceOrig, priceNew, quantity, rate, rated, viewed, smallPicUrl, largePicUrl FROM Product WHERE productID = ?";
+		$query = "SELECT productID, productName, description, priceOrig, priceNew, quantity, smallPicUrl, largePicUrl FROM Product WHERE productID = ?";
 
 		try {
-			$con = new PDO ("mysql:host=localhost;dbname=cmpe272", "cmpe272", "cmpe272pw");
+            $con = new PDO ("mysql:host=localhost;dbname=nebula", "nebula", "nebulapw");
 			$con->setAttribute( PDO:: ATTR_ERRMODE, PDO:: ERRMODE_EXCEPTION );
 
 			$stmt = $con->prepare($query);
@@ -66,10 +66,10 @@
 	}
 	
 	function getProductsData($productID, $endID){
-		$query = "SELECT productID, productName, description, priceOrig, priceNew, quantity, rate, rated, viewed, smallPicUrl, largePicUrl FROM Product WHERE productID >= ? AND productID <= ?";
+		$query = "SELECT productID, productName, description, priceOrig, priceNew, quantity, smallPicUrl, largePicUrl FROM Product WHERE productID >= ? AND productID <= ?";
 
 		try {
-			$con = new PDO ("mysql:host=localhost;dbname=cmpe272", "cmpe272", "cmpe272pw");
+            $con = new PDO ("mysql:host=localhost;dbname=nebula", "nebula", "nebulapw");
 			$con->setAttribute( PDO:: ATTR_ERRMODE, PDO:: ERRMODE_EXCEPTION );
 
 			$stmt = $con->prepare($query);
