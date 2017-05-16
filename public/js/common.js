@@ -16,7 +16,7 @@ function bindNav() {
 
 function renderNavStoreList(storeNameList) {
     var storeListArea = $("nav>ul>li>ul:eq(0)");
-    for(var i = 0; i < storeNameList.length; i++) {
+    for (var i = 0; i < storeNameList.length; i++) {
         var nameLi = document.createElement("li");
         // $(nameLi).attr("data-storeID", storeNameList[i].storeID);
         var nameA = document.createElement("a");
@@ -44,37 +44,35 @@ String.prototype.format = function () {
     });
 };
 
-function setCookie(name,value)
-{
+function setCookie(name, value) {
     var Days = 30;
     var exp = new Date();
-    exp.setTime(exp.getTime() + Days*24*60*60*1000);
-    document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
+    exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
+    document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
 }
 
-function getCookieValue(cookieName)
-{
+function getCookieValue(cookieName) {
     var cookieValue = document.cookie;
-    var cookieStartAt = cookieValue.indexOf(""+cookieName+"=");
-    if(cookieStartAt==-1)
-    {
-        cookieStartAt = cookieValue.indexOf(cookieName+"=");
+    var cookieStartAt = cookieValue.indexOf("" + cookieName + "=");
+    if (cookieStartAt == -1) {
+        cookieStartAt = cookieValue.indexOf(cookieName + "=");
     }
-    if(cookieStartAt==-1)
-    {
+    if (cookieStartAt == -1) {
         cookieValue = null;
     }
-    else
-    {
-        cookieStartAt = cookieValue.indexOf("=",cookieStartAt)+1;
-        cookieEndAt = cookieValue.indexOf(";",cookieStartAt);
-        if(cookieEndAt==-1)
-        {
+    else {
+        cookieStartAt = cookieValue.indexOf("=", cookieStartAt) + 1;
+        cookieEndAt = cookieValue.indexOf(";", cookieStartAt);
+        if (cookieEndAt == -1) {
             cookieEndAt = cookieValue.length;
         }
-        cookieValue = unescape(cookieValue.substring(cookieStartAt,cookieEndAt));
+        cookieValue = unescape(cookieValue.substring(cookieStartAt, cookieEndAt));
     }
     return cookieValue;
+}
+
+function deleteCookie(name) {
+    document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 }
 
 function renderUser() {
@@ -87,7 +85,7 @@ function renderUser() {
 
         var userName = getCookieValue("userName");
 
-        $("#loginArea a").text(userName);
+        $("#loginArea a").text("Welcome, " + userName);
         $("#loginArea a").removeAttr("href");
 
         $("#loginArea").hover(
@@ -99,16 +97,14 @@ function renderUser() {
             }
         );
 
-        $("#logOut").click(function() {
+        $("#logOut").click(function () {
 
             $.ajax({
                 url: '../login/logout',
                 type: 'GET',
                 contentType: "application/json; charset=utf-8",
                 async: true,
-                dataType: 'json',
-                success: function (data) {
-                    console.log(data);
+                success: function () {
                     renderUser();
                     $("#loginArea").unbind("mouseenter").unbind("mouseleave");
                 }
