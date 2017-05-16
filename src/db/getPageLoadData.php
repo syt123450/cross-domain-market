@@ -76,7 +76,7 @@ function getStorePageLoadData($storeID) {
     // Get product list by CURL
     // Find CURL URL from DB
     $productData = curlData($targetStore["ProductList"]);
-    $productList = getProductList($productData);
+    $productList = getProductList($targetStore["Domain"], $productData);
 
     //total number of the product
     $storeProductNumber = count($productData);

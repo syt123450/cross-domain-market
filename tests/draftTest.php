@@ -29,5 +29,5 @@ else {
 }
 
 echo ("<br/><br/>");
-$ary = createUsr("studentUser","cmpe272pw","zhu.chenhua@sjsu.edu");
+$ary = getIndexPageLoadDataWithoutUserID();
 var_dump($ary);
