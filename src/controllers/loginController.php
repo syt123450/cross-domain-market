@@ -59,6 +59,18 @@ $app->POST('/login/create', function (Request $request, Response $response) {
     $this->logger->info("The userPassword is: " . $userPassword);
     $this->logger->info("The userEmail is: " . $userEmail);
     $storeData = createUsr($userName, $userPassword, $userEmail);
+
+    $msg = $storeData["createMessage"];
+    $userID = $msg["userID"];
+    $response = FigResponseCookies::set($response, SetCookie::create('userID')
+        ->withValue($userID)
+        ->withPath('/')
+    );
+    $response = FigResponseCookies::set($response, SetCookie::create('userName')
+        ->withValue($userName)
+        ->withPath('/')
+    );
+
     $responseJson = json_encode($storeData);
     $response->getBody()->write($responseJson);
 
@@ -67,7 +79,12 @@ $app->POST('/login/create', function (Request $request, Response $response) {
 
 $app->GET('/login/logout', function(Request $request, Response $response) {
 
-    $this->logger->info("delete the cookie of user.");
+    $this->logger->info("Deleting the cookie of user...");
+
+    FigResponseCookies::remove($response, 'userID');
+    FigResponseCookies::remove($response, 'userName');
+
+    $this->logger->info("Deletion Complete.");
 
     //do some to response to delet the cookie
 

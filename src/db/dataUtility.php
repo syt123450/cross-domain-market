@@ -613,7 +613,7 @@ require_once('curlConn.php');
 
         $ret = array(
             "createResult" => true,
-            "createMessage" => ""
+            "createMessage" => $filter
         );
 
         return $ret;

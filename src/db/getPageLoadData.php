@@ -40,6 +40,25 @@ function getIndexPageLoadData($userID) {
     return $indexLoadData;
 }
 
+function getIndexPageLoadDataWithoutUserID() {
+    // Get all store related data
+    $stores = getAllData("db272.Store");
+    $storeNameList = getStoreNameList($stores);
+    $storeData = getStoreData($stores);
+
+    // Get all Top 5 data
+    $top5Products = getData("db272.TopProduct", [], ['sort' => ['viewed' => -1], 'limit' => 5]);
+    $top5Data = getTopData($top5Products);
+
+    $indexLoadData = array(
+        "storeNameList" => $storeNameList,
+        "top5Data" => $top5Data,
+        "storeData" => $storeData
+    );
+
+    return $indexLoadData;
+}
+
 function getStorePageLoadData($storeID) {
     //use the storeID to get data
 
