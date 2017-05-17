@@ -211,7 +211,7 @@ function renderIndexUser() {
 
         var userName = getCookieValue("userName");
 
-        $("#loginArea a").text("Welcome, " + userName);
+        $("#loginArea a").text(userName);
         $("#loginArea a").removeAttr("href");
 
         $("#loginArea").hover(
