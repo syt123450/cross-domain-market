@@ -62,6 +62,9 @@ $app->POST('/login/checkThirdParty', function (Request $request, Response $respo
 
     try {
         $userAry = $userData['checkMessage'];
+        if (isEmpty($userAry)){
+            $userAry = $userData['createMessage'];
+        }
     } catch (Exception $what){
         $userAry = $userData['createMessage'];
     }
