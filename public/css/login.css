@@ -58,7 +58,7 @@ main > header > div.inactiveTitle {
     cursor: pointer;
 }
 
-main > section > input[type="text"] {
+main > section > input[type="text"], main > section > input[type="password"] {
     border: 1px solid #2fa599;
     margin-top: 20px;
     margin-left: 5%;
