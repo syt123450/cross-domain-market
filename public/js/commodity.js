@@ -7,7 +7,7 @@ function renderLoadPage(data) {
     renderCommodityInfo(data.basicCommodityInfo);
     renderDescription(data.descriptionData);
     renderComment(data.commentData);
-    renderPagination(data.commentNumber/5, 1);
+    renderPagination(data.commentNumber / 5, 1);
     renderRate(data.averageRate);
 }
 
@@ -16,6 +16,12 @@ function renderRate(averageRate) {
     console.log(starNumber);
     var infoStars = $("#commodityAverageRate img");
     var addStars = $("#rateContent>img");
+
+    for (var j = 0; j < 5; j++) {
+        $(infoStars[j]).attr("src", "../img/products/star_1.png");
+        $(addStars[j]).attr("src", "../img/products/star_1.png");
+    }
+
     for (var i = 4; i >= starNumber; i--) {
 
         console.log(addStars);
@@ -109,7 +115,7 @@ function renderPage(pageNumber) {
         success: function (data) {
             console.log(data);
             renderComment(data.commentData);
-            renderPagination(data.commentNumber/5, data.pageID);
+            renderPagination(data.commentNumber / 5, data.pageID);
         }
     });
 }
@@ -216,7 +222,7 @@ function submitComment() {
             console.log(data);
             hideAddItem();
             renderComment(data.commentData);
-            renderPagination(data.commentNumber/5, 1);
+            renderPagination(data.commentNumber / 5, 1);
         }
     });
 }
@@ -226,9 +232,9 @@ function submitRate() {
     var userID = getCookieValue("userID");
     var storeID = getUrlParameter("storeID");
     var commodityID = getUrlParameter("commodityID");
-    var like = $("#likeArea>div").attr("data-rate");
-    var price = $("#priceArea>div").attr("data-rate");
-    var quality = $("#qualityArea>div").attr("data-rate");
+    var like = $("#likeArea>div").attr("data-rate") == null ? 0 : $("#likeArea>div").attr("data-rate");
+    var price = $("#priceArea>div").attr("data-rate") == null ? 0 : $("#priceArea>div").attr("data-rate");
+    var quality = $("#qualityArea>div").attr("data-rate") == null ? 0 : $("#qualityArea>div").attr("data-rate");
 
     var postBody = {
         "userID": userID,
@@ -238,6 +244,8 @@ function submitRate() {
         "price": price,
         "quality": quality
     };
+
+    console.log(postBody);
 
     $.ajax({
         url: '../commodity/addRate',
