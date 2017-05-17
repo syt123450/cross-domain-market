@@ -236,28 +236,26 @@
 
     function facebookUserLogIn() {
 
-
         FB.api('/me', function(responseMessage) {
 
-            console.log(responseMessage.name);
+            var postBody = {
+                "userID": responseMessage.id,
+                "userName": responseMessage.name
+            };
 
             $.ajax({
                 url: '../login/checkThirdParty',
                 type: 'POST',
                 contentType: "application/json; charset=utf-8",
                 async: true,
-                data: JSON.stringify({"uniqueID": responseMessage.name}),
+                data: JSON.stringify(postBody),
                 dataType: 'json',
                 success: function (data) {
                     console.log(data);
                     location.href = "../index.html";
                 }
             });
-
-
         });
-
-
     }
 
 

@@ -54,27 +54,35 @@ $app->POST('/login/checkLogin', function (Request $request, Response $response) 
 $app->POST('/login/checkThirdParty', function (Request $request, Response $response) {
 
     $this->logger->info('User Third Party Login.');
-    $uniqueID = ($request->getParsedBody())["uniqueID"];
 
-    $this->logger->info("The uniqueID is: " . $uniqueID);
+    $userID = ($request->getParsedBody())["userID"];
+    $userName = ($request->getParsedBody())["userName"];
 
-    $userData = handleThirdPartyLogin($uniqueID);
+    $this->logger->info('UserID' . $userID);
+    $this->logger->info('UserName' . $userName);
 
-    try {
-        $userAry = $userData['checkMessage'];
-        if (isEmpty($userAry)){
-            $userAry = $userData['createMessage'];
-        }
-    } catch (Exception $what){
-        $userAry = $userData['createMessage'];
-    }
+    $userData = handleThirdPartyLogin($userID, $userName);
+
+//    try {
+//        $userAry = $userData['checkMessage'];
+//        if (isEmpty($userAry)){
+//            $userAry = $userData['createMessage'];
+//        }
+//    } catch (Exception $what){
+//        $userAry = $userData['createMessage'];
+//    }
+
+//    $response = FigResponseCookies::set($response, SetCookie::create('userID')
+//        ->withValue($userAry['userID'])
+//        ->withPath('/')
+//    );
 
     $response = FigResponseCookies::set($response, SetCookie::create('userID')
-        ->withValue($userAry['userID'])
+        ->withValue($userID)
         ->withPath('/')
     );
     $response = FigResponseCookies::set($response, SetCookie::create('userName')
-        ->withValue($uniqueID)
+        ->withValue($userName)
         ->withPath('/')
     );
 

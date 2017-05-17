@@ -81,11 +81,16 @@ function renderUser() {
 
     if (userID != null) {
 
-        console.log(222);
-
         var userName = getCookieValue("userName");
 
-        $("#loginArea a").text("Welcome, " + userName);
+        var userNameArray = userName.split("+");
+        var formatName = "";
+        for (var i = 0; i < userNameArray.length - 1; i++) {
+            formatName = formatName + userNameArray[i] + " ";
+        }
+        formatName = formatName + userNameArray[userNameArray.length - 1];
+
+        $("#loginArea a").text(formatName);
         $("#loginArea a").removeAttr("href");
 
         $("#loginArea").hover(
@@ -112,7 +117,6 @@ function renderUser() {
         });
 
     } else {
-        console.log("111");
         $("#loginArea ul").hide();
         $("#loginArea a").text("Log In");
         $("#loginArea a").attr("href", "login.html");

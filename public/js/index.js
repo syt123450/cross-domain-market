@@ -211,7 +211,14 @@ function renderIndexUser() {
 
         var userName = getCookieValue("userName");
 
-        $("#loginArea a").text(userName);
+        var userNameArray = userName.split("+");
+        var formatName = "";
+        for (var i = 0; i < userNameArray.length - 1; i++) {
+            formatName = formatName + userNameArray[i] + " ";
+        }
+        formatName = formatName + userNameArray[userNameArray.length - 1];
+
+        $("#loginArea a").text(formatName);
         $("#loginArea a").removeAttr("href");
 
         $("#loginArea").hover(

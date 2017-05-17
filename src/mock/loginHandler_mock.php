@@ -48,7 +48,7 @@ function createUsr($usrName, $usrPassword, $usrEmail) {
     return $createResult;
 }
 
-function handleThirdPartyLogin($uniqueID){
+function handleThirdPartyLogin($userID, $userName){
 
     $someResult = array(
         "createResult" => true,
