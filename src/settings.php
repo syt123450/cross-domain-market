@@ -18,7 +18,7 @@ return [
 
         // Mock settings
         'mock' => [
-            'mock' => false
+            'mock' => true
         ],
 
         // Mongo DB settings
