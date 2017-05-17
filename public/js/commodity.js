@@ -11,7 +11,6 @@ function renderLoadPage(data) {
     renderRate(data.averageRate);
 }
 
-
 function renderRate(averageRate) {
     var starNumber = Math.round(averageRate);
     console.log(starNumber);
@@ -218,6 +217,37 @@ function submitComment() {
             hideAddItem();
             renderComment(data.commentData);
             renderPagination(data.commentNumber, 1);
+        }
+    });
+}
+
+function submitRate() {
+
+    var userID = getCookieValue("userID");
+    var storeID = getUrlParameter("storeID");
+    var commodityID = getUrlParameter("commodityID");
+    var like = $("#likeArea>div").attr("data-rate");
+    var price = $("#priceArea>div").attr("data-rate");
+    var quality = $("#qualityArea>div").attr("data-rate");
+
+    var postBody = {
+        "userID": userID,
+        "storeID": storeID,
+        "commodityID": commodityID,
+        "like": like,
+        "price": price,
+        "quality": quality
+    };
+
+    $.ajax({
+        url: '../commodity/addRate',
+        type: 'POST',
+        contentType: "application/json; charset=utf-8",
+        async: true,
+        data: JSON.stringify(postBody),
+        dataType: 'json',
+        success: function (data) {
+            renderRate(data.averageRate);
         }
     });
 }

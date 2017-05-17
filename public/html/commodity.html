@@ -252,36 +252,8 @@
         });
     });
 
-    function submitRate() {
 
-        var userID = getCookieValue("userID");
-        var storeID = getUrlParameter("storeID");
-        var commodityID = getUrlParameter("commodityID");
-        var like = $("#likeArea>div").attr("data-rate");
-        var price = $("#priceArea>div").attr("data-rate");
-        var quality = $("#qualityArea>div").attr("data-rate");
 
-        var postBody = {
-            "userID": userID,
-            "storeID": storeID,
-            "commodityID": commodityID,
-            "like": like,
-            "price": price,
-            "quality": quality
-        };
-
-        $.ajax({
-            url: '../commodity/addRate',
-            type: 'POST',
-            contentType: "application/json; charset=utf-8",
-            async: true,
-            data: JSON.stringify(postBody),
-            dataType: 'json',
-            success: function (data) {
-                console.log(data);
-            }
-        });
-    }
 
 
 </script>

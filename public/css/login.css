@@ -88,6 +88,17 @@ main > section > div {
     display: none;
 }
 
+#signInContent {
+    position: relative;
+}
+
+#facebook {
+    position: absolute;
+    right: 40px;
+    bottom: 0;
+    height: 40px;
+}
+
 @media (max-width: 400px) {
     main {
         width: 350px;
