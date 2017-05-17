@@ -24,9 +24,17 @@ function getTop5Data($top5KeyWord) {
         // Rated times from high to low
         $top5Products = getData("db272.TopProduct", [], ['sort' => ['rated' => -1], 'limit' => 5]);
     }
-    else if ($top5KeyWord == "mostCommented"){
+    else if ($top5KeyWord == "bestPriced"){
         // Rates value from high to low
-        $top5Products = getData("db272.TopProduct", [], ['sort' => ['rate' => -1], 'limit' => 5]);
+        $top5Products = getData("db272.TopProduct", [], ['sort' => ['rate_price' => -1], 'limit' => 5]);
+    }
+    else if ($top5KeyWord == "mostLiked"){
+        // Rates value from high to low
+        $top5Products = getData("db272.TopProduct", [], ['sort' => ['rate_like' => -1], 'limit' => 5]);
+    }
+    else if ($top5KeyWord == "bestQuality"){
+        // Rates value from high to low
+        $top5Products = getData("db272.TopProduct", [], ['sort' => ['rate_quality' => -1], 'limit' => 5]);
     }
     else if ($top5KeyWord == "highestPrice"){
         // Price from high to low
@@ -54,9 +62,17 @@ function getTop5DataOfStore($top5KeyWord, $storeID) {
         // Rated times from high to low
         $top5Products = getData("db272.TopProduct", ['storeID' => (int)$storeID], ['sort' => ['rated' => -1], 'limit' => 3]);
     }
-    else if ($top5KeyWord == "mostCommented"){
+    else if ($top5KeyWord == "bestPriced"){
         // Rates value from high to low
-        $top5Products = getData("db272.TopProduct", ['storeID' => (int)$storeID], ['sort' => ['rate' => -1], 'limit' => 3]);
+        $top5Products = getData("db272.TopProduct", ['storeID' => (int)$storeID], ['sort' => ['rate_price' => -1], 'limit' => 3]);
+    }
+    else if ($top5KeyWord == "mostLiked"){
+        // Rates value from high to low
+        $top5Products = getData("db272.TopProduct", ['storeID' => (int)$storeID], ['sort' => ['rate_like' => -1], 'limit' => 3]);
+    }
+    else if ($top5KeyWord == "bestQuality"){
+        // Rates value from high to low
+        $top5Products = getData("db272.TopProduct", ['storeID' => (int)$storeID], ['sort' => ['rate_quality' => -1], 'limit' => 3]);
     }
     else if ($top5KeyWord == "highestPrice"){
         // Price from high to low
