@@ -21,7 +21,7 @@
             console.log(response);
 
             if (response.status === 'connected') {
-                facebookUserLogIn(response.name);
+                facebookUserLogIn();
             }
         }
 
@@ -41,9 +41,9 @@
 
             FB.AppEvents.logPageView();
 
-            FB.getLoginStatus(function(response) {
-                statusChangeCallback(response);
-            });
+//            FB.getLoginStatus(function(response) {
+//                statusChangeCallback(response);
+//            });
 
         };
 
@@ -234,20 +234,30 @@
         });
     }
 
-    function facebookUserLogIn(userName) {
+    function facebookUserLogIn() {
 
-        $.ajax({
-            url: '../login/checkThirdParty',
-            type: 'POST',
-            contentType: "application/json; charset=utf-8",
-            async: true,
-            data: JSON.stringify({"uniqueID": userName}),
-            dataType: 'json',
-            success: function (data) {
-                console.log(data);
-                location.href = "../index.html";
-            }
+
+        FB.api('/me', function(responseMessage) {
+
+            console.log(responseMessage.name);
+
+            $.ajax({
+                url: '../login/checkThirdParty',
+                type: 'POST',
+                contentType: "application/json; charset=utf-8",
+                async: true,
+                data: JSON.stringify({"uniqueID": responseMessage.name}),
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    location.href = "../index.html";
+                }
+            });
+
+
         });
+
+
     }
 
 
