@@ -94,9 +94,8 @@ main > section > div {
 
 #facebook {
     position: absolute;
-    right: 40px;
+    right: 20px;
     bottom: 0;
-    height: 40px;
 }
 
 @media (max-width: 400px) {

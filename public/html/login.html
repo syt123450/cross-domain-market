@@ -15,6 +15,48 @@
     <script src="../js/common.js"></script>
     <script src="../js/login.js"></script>
 
+    <script>
+        function statusChangeCallback(response) {
+            console.log('statusChangeCallback');
+            console.log(response);
+
+            if (response.status === 'connected') {
+                facebookUserLogIn(response.name);
+            }
+        }
+
+        function checkLoginState() {
+            FB.getLoginStatus(function(response) {
+                statusChangeCallback(response);
+            });
+        }
+
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId      : '313203595776410',
+                cookie     : true,
+                xfbml      : true,
+                version    : 'v2.8'
+            });
+
+            FB.AppEvents.logPageView();
+
+            FB.getLoginStatus(function(response) {
+                statusChangeCallback(response);
+            });
+
+        };
+
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+    </script>
+
 </head>
 <body>
 
@@ -61,7 +103,9 @@
         <input type="text" placeholder="User name/Email">
         <input type="text" placeholder="Password">
         <div id="signInButton">Sign In</div>
-        <img id="facebook" src="../img/common/facebook.png">
+        <footer id="facebook">
+            <fb:login-button autologoutlink="true" scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
+        </footer>
     </section>
     <section id="registerContent">
         <input type="text" placeholder="User Name">
@@ -182,6 +226,22 @@
             contentType: "application/json; charset=utf-8",
             async: true,
             data: JSON.stringify(postBody),
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                location.href = "../index.html";
+            }
+        });
+    }
+
+    function facebookUserLogIn(userName) {
+
+        $.ajax({
+            url: '../login/checkThirdParty',
+            type: 'POST',
+            contentType: "application/json; charset=utf-8",
+            async: true,
+            data: JSON.stringify({"uniqueID": userName}),
             dataType: 'json',
             success: function (data) {
                 console.log(data);
