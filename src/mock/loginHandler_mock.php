@@ -15,7 +15,7 @@ function checkUsr($usrInfo, $usrPassword) {
         "checkMessage" => array(
             "userID" => 2,
 	        "userName" => "tester",
-	        "email" => "zchholmes@gmail.com"
+	        "email" => "someone@gmail.com"
             )
     );
 
@@ -40,8 +40,23 @@ function createUsr($usrName, $usrPassword, $usrEmail) {
 
     $createResult = array(
         "createResult" => true,
-        "createMessage" => ""
+        "createMessage" => array(
+            "userID" => 2
+        )
     );
 
     return $createResult;
+}
+
+function handleThirdPartyLogin($uniqueID){
+
+    $someResult = array(
+        "createResult" => true,
+        "createMessage" => array(
+            "userID" => 2
+        )
+    );
+
+
+    return $someResult;
 }
