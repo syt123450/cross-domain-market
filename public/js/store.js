@@ -19,7 +19,7 @@ function renderLoadPage(data) {
     renderAD(data.storeADList);
     renderProductList(data.productList);
     renderTop5(data.top5Data);
-    renderPagination(data.productNumber, 1);
+    renderPagination(data.productNumber/15, 1);
 }
 
 function renderAD(storeADList) {
@@ -146,7 +146,7 @@ function renderPage(pageNumber) {
         success: function (productListData) {
             console.log(productListData);
             renderProductList(productListData.productList);
-            renderPagination(productListData.productNumber, productListData.pageID);
+            renderPagination(productListData.productNumber/15, productListData.pageID);
             bindClickButton();
             bindLink();
         }

@@ -1,9 +1,8 @@
 /**
  * Created by ss on 2017/5/2.
  */
-function renderPagination(totalItem, pageNumber) {
+function renderPagination(totalPage, pageNumber) {
 
-    var totalPage = Math.ceil(totalItem / 15);
     $("#pagination").attr("data-page", pageNumber);
 
     switch (totalPage) {

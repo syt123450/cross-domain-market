@@ -7,7 +7,7 @@ function renderLoadPage(data) {
     renderCommodityInfo(data.basicCommodityInfo);
     renderDescription(data.descriptionData);
     renderComment(data.commentData);
-    renderPagination(data.commentNumber, 1);
+    renderPagination(data.commentNumber/5, 1);
     renderRate(data.averageRate);
 }
 
@@ -109,7 +109,7 @@ function renderPage(pageNumber) {
         success: function (data) {
             console.log(data);
             renderComment(data.commentData);
-            renderPagination(data.commentNumber, data.pageID);
+            renderPagination(data.commentNumber/5, data.pageID);
         }
     });
 }
@@ -216,7 +216,7 @@ function submitComment() {
             console.log(data);
             hideAddItem();
             renderComment(data.commentData);
-            renderPagination(data.commentNumber, 1);
+            renderPagination(data.commentNumber/5, 1);
         }
     });
 }
