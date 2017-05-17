@@ -474,21 +474,31 @@ require_once('curlConn.php');
         );
     }
 
-    function addNewRate($userID, $storeID, $commodityID, $rate){
+    function addNewRate($userID, $storeID, $commodityID, $like, $price, $quality){
         // Find rate and rated
-        $rates = getData("db272.TopProduct", ['storeID' => (int)$storeID, 'productID' => (int)$commodityID], ['projection' => ['rate' => 1, 'rated' => 1, '_id' => 0]]);
+        $rates = getData("db272.TopProduct", ['storeID' => (int)$storeID, 'productID' => (int)$commodityID], ['projection' => ['rated' => 1, 'rate_avg' => 1, 'rate_like' => 1, 'rate_quality' => 1, 'rate_price' => 1, '_id' => 0]]);
         $rates = json_decode(json_encode($rates[0]), true);
-        $curRate = $rates["rate"];
+
         $curRated = $rates["rated"];
+        $likeRate = $rates["rate_like"];
+        $qualityRate = $rates["rate_quality"];
+        $priceRate = $rates["rate_price"];
+        $avgRate = $rates["rate_avg"];
 
         // Calculate new rate and rated
         $newRated = $curRated +1;
-        $newRate = ($curRate * $curRated + $rate) / $newRated;
+        $newLikeRate = ($likeRate * $curRated + $like) / $newRated;
+        $newQualityRate = ($qualityRate * $curRated + $quality) / $newRated;
+        $newPriceRate = ($priceRate * $curRated + $price) / $newRated;
+        $newAvgRate = ($newLikeRate + $newQualityRate + $newPriceRate) / 3;
 
         // Update database
         $sets = [
-            "rate" => $newRate,
-            "rated" => $newRated
+            "rated" => $newRated,
+            "rate_avg" => $newAvgRate ,
+            "rate_like" => $newLikeRate,
+            "rate_quality" => $newQualityRate,
+            "rate_price" => $newPriceRate
         ];
 
         $filter = [ 'storeID' => (int)$storeID, 'productID' => (int)$commodityID ];
@@ -498,7 +508,7 @@ require_once('curlConn.php');
         return array(
             "addResult" => true,
             "addMessage" => "",
-            "averageRate" => $newRate
+            "averageRate" => $newAvgRate
         );
     }
 
