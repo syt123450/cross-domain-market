@@ -31,11 +31,11 @@ function addComment($userID, $storeID, $commodityID, $commentContent) {
     return $addResult;
 }
 
-function addRate($userID, $storeID, $commodityID, $rate) {
+function addRate($userID, $storeID, $commodityID, $like, $price, $quality) {
 
     //use the commodityID, userID, rate to add rate
 
-    $addResult = addNewRate($userID, $storeID, $commodityID, $rate);
+    $addResult = addNewRate($userID, $storeID, $commodityID, $like, $price, $quality);
 
     return $addResult;
 }
