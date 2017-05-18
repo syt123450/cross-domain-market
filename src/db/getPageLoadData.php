@@ -23,8 +23,9 @@ function getIndexPageLoadData($userID) {
     $storeData = getStoreData($stores);
 
     // Get all Top 5 data
-    $top5Products = getData("db272.TopProduct", [], ['sort' => ['viewed' => -1], 'limit' => 5]);
-    $top5Data = getTopData($top5Products);
+//    $top5Products = getData("db272.TopProduct", [], ['sort' => ['viewed' => -1], 'limit' => 5]);
+//    $top5Data = getTopData($top5Products);
+    $top5Data = getTop5Data("");
 
     // Get all recent view data
     $recentViewProducts = getRecentViewProducts($userID);
@@ -47,8 +48,9 @@ function getIndexPageLoadDataWithoutUserID() {
     $storeData = getStoreData($stores);
 
     // Get all Top 5 data
-    $top5Products = getData("db272.TopProduct", [], ['sort' => ['viewed' => -1], 'limit' => 5]);
-    $top5Data = getTopData($top5Products);
+//    $top5Products = getData("db272.TopProduct", [], ['sort' => ['viewed' => -1], 'limit' => 5]);
+//    $top5Data = getTopData($top5Products);
+    $top5Data = getTop5Data("");
 
     $indexLoadData = array(
         "storeNameList" => $storeNameList,

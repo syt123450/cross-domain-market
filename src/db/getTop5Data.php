@@ -20,11 +20,11 @@
 function getTop5Data($top5KeyWord) {
 
     // Based on keyword to search for proper result
-    if ($top5KeyWord == "highestRated"){
+    if (strcmp($top5KeyWord, "highestRated") == 0){
         // Rated times from high to low
         $top5Products = getData("db272.TopProduct", [], ['sort' => ['rated' => -1], 'limit' => 5]);
     }
-    else if ($top5KeyWord == "bestPriced"){
+    else if (strcmp($top5KeyWord, "bestPriced") == 0){
         // Rates value from high to low
         $top5Products = getData("db272.TopProduct", [], ['sort' => ['rate_price' => -1], 'limit' => 5]);
     }

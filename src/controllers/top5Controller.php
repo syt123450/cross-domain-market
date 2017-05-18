@@ -14,7 +14,7 @@ $app->POST('/top5/home', function (Request $request, Response $response) {
     $this->logger->info('GET top5 commodity information for homepage.');
     $top5KeyWord = ($request->getParsedBody())["keyWord"];
     $this->logger->info("The keyWord of top5 is: " . $top5KeyWord);
-    $top5Data = getTopData($top5KeyWord);
+    $top5Data = getTop5Data($top5KeyWord);
     $responseJson = json_encode($top5Data);
     $response->getBody()->write($responseJson);
 
