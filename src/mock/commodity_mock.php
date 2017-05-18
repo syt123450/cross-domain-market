@@ -77,7 +77,7 @@ function addRate($userID, $storeID, $commodityID, $like, $price, $quality) {
 
     //use the commodityID, userID, rate to add rate
 
-    $averageRate = 5;
+    $averageRate = 2;
 
     $addResult = array(
         "addResult" => true,

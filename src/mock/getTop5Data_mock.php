@@ -19,12 +19,13 @@
  * 5.mostCommented
  */
 
-function getTop5Data($top5KeyWord) {
+function getTopData($top5KeyWord) {
 
     //use the top5KeyWord to get top5 data
 
     $top5Data = array(
         array(
+            "storeID" => "storeID1",
             "commodityID" => "ID5",
             "commodityPicUrl" => "img/home/top5/5.jpg",
             "commodityPrice" => "$24.95",
@@ -33,6 +34,7 @@ function getTop5Data($top5KeyWord) {
 
         ),
         array(
+            "storeID" => "storeID1",
             "commodityID" => "ID4",
             "commodityPicUrl" => "img/home/top5/4.jpg",
             "commodityPrice" => "$22.46",
@@ -41,6 +43,7 @@ function getTop5Data($top5KeyWord) {
 
         ),
         array(
+            "storeID" => "storeID1",
             "commodityID" => "ID3",
             "commodityPicUrl" => "img/home/top5/3.jpg",
             "commodityPrice" => "$18.35",
@@ -48,6 +51,7 @@ function getTop5Data($top5KeyWord) {
             "commodityStore" => "By SHOP LI-NING"
         ),
         array(
+            "storeID" => "storeID1",
             "commodityID" => "ID2",
             "commodityPicUrl" => "img/home/top5/2.jpg",
             "commodityPrice" => "$25.69",
@@ -55,6 +59,7 @@ function getTop5Data($top5KeyWord) {
             "commodityStore" => "By SHOP 361"
         ),
         array(
+            "storeID" => "storeID1",
             "commodityID" => "ID1",
             "commodityPicUrl" => "img/home/top5/1.jpg",
             "commodityPrice" => "$12.33",
