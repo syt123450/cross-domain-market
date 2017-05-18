@@ -296,7 +296,7 @@ require_once('curlConn.php');
         return $ret;
     }
 
-    function getBasicProductData($productData, $storeUrl, $rate, $commentNum){
+    function getBasicProductData($productData, $storeUrl, $rate_avg, $commentNum){
         $ret = array();
         $pList = json_decode($productData);
         $product = json_decode(json_encode($pList[0]), true);
@@ -307,7 +307,7 @@ require_once('curlConn.php');
         $ret["commodityPic"] = $storeUrl . $product["largePicUrl"];
         $ret["stock"] = $product["quantity"];
         $ret["commentNumber"] = $commentNum;
-        $ret["averageRate"] = $rate;
+        $ret["averageRate"] = $rate_avg;
 
         return $ret;
     }
@@ -419,7 +419,7 @@ require_once('curlConn.php');
         $collectionName = "db272.TopProduct";
 
         // Find user by userID
-        $userData = getData("db272.User", ['userID' => $userID], []);
+        $userData = getData("db272.User", ['userID' => (int)$userID], []);
         $userData = json_decode(json_encode($userData[0]), true);
 
         // Find comments

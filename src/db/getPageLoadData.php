@@ -137,7 +137,10 @@ function getCommodityPageLoadData($storeID, $commodityID) {
         // Empty, then init
         $viewed = 0;
         $rated = 0;
-        $rate =0;
+        $rate_avg =0;
+        $rate_like =0;
+        $rate_price =0;
+        $rate_quality =0;
         $comments = array();
     }
     else {
@@ -145,7 +148,10 @@ function getCommodityPageLoadData($storeID, $commodityID) {
         $product_db = json_decode(json_encode($product_db[0]), true);
         $viewed = $product_db["viewed"];
         $rated = $product_db["rated"];
-        $rate = $product_db["rate"];
+        $rate_avg = $product_db["rate_avg"];
+        $rate_like = $product_db["rate_like"];
+        $rate_price = $product_db["rate_price"];
+        $rate_quality = $product_db["rate_quality"];
         $comments = $product_db["comment"];
     }
 
@@ -168,7 +174,10 @@ function getCommodityPageLoadData($storeID, $commodityID) {
         "smallPicUrl" => $targetStore["Domain"] . $product["smallPicUrl"],
         "viewed" => (int)($viewed +1),
         "rated" => (int)$rated,
-        "rate" => (float)$rate,
+        "rate_avg" => (float)$rate_avg,
+        "rate_like" => (float)$rate_like,
+        "rate_price" => (float)$rate_price,
+        "rate_quality" => (float)$rate_quality,
         "comment" => $comments
     ];
     upsertData($collectionName, $filter, $sets);
@@ -176,7 +185,7 @@ function getCommodityPageLoadData($storeID, $commodityID) {
 
     /* Prepare Data for return  */
     // Generate basic commodity information
-    $basicCommodityInfo = getBasicProductData($productData, $targetStore["Domain"], $rate, count($comments));
+    $basicCommodityInfo = getBasicProductData($productData, $targetStore["Domain"], $rate_avg, count($comments));
 
     // Generate description data
     $descriptionData = getDescriptionData($productData);
@@ -197,7 +206,7 @@ function getCommodityPageLoadData($storeID, $commodityID) {
         "descriptionData" => $descriptionData,
         "commentNumber" => $commentNum,
         "commentData" => $commentData,
-        "averageRate" => $rate
+        "averageRate" => $rate_avg
     );
 
     return $commodityLoadData;
