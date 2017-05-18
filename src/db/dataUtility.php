@@ -644,6 +644,24 @@ require_once('curlConn.php');
         return $ret;
     }
 
+    function transferCheckResult($checkResult){
+        $loginResult = array();
+
+        $loginResult["loginResult"] = $checkResult["checkResult"];
+        $loginResult["loginMessage"] = $checkResult["checkMessage"];
+
+        return $loginResult;
+    }
+
+    function transferCreateResult($createResult){
+        $loginResult = array();
+
+        $loginResult["loginResult"] = $createResult["createResult"];
+        $loginResult["loginMessage"] = $createResult["createMessage"];
+
+        return $loginResult;
+    }
+
 
 //$ary = addNewComment(1, 1, 6, "7New Comment",5);
 //var_dump($ary);

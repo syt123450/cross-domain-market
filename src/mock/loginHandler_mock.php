@@ -48,15 +48,15 @@ function createUsr($usrName, $usrPassword, $usrEmail) {
     return $createResult;
 }
 
-function handleThirdPartyLogin($userID, $userName){
+function handleThirdPartyLogin($uniqueID){
 
-    $someResult = array(
-        "createResult" => true,
-        "createMessage" => array(
+    $loginResult = array(
+        "loginResult" => true,
+        "loginMessage" => array(
             "userID" => 2
         )
     );
 
 
-    return $someResult;
+    return $loginResult;
 }

@@ -61,26 +61,24 @@ $app->POST('/login/checkThirdParty', function (Request $request, Response $respo
     $this->logger->info('UserID' . $userID);
     $this->logger->info('UserName' . $userName);
 
-    $userData = handleThirdPartyLogin($userID, $userName);
+    $userData = handleThirdPartyLogin($userName);
 
-//    try {
-//        $userAry = $userData['checkMessage'];
-//        if (isEmpty($userAry)){
-//            $userAry = $userData['createMessage'];
-//        }
-//    } catch (Exception $what){
-//        $userAry = $userData['createMessage'];
-//    }
+    $this->logger->info('>>>>>1<<<<<');
+    $userAry = $userData['loginMessage'];
+    $this->logger->info('>>>>>2<<<<<');
+    $this->logger->info($userAry['userID']);
 
+
+    $response = FigResponseCookies::set($response, SetCookie::create('userID')
+        ->withValue($userAry['userID'])
+        ->withPath('/')
+    );
 //    $response = FigResponseCookies::set($response, SetCookie::create('userID')
-//        ->withValue($userAry['userID'])
+//        ->withValue($userID)
 //        ->withPath('/')
 //    );
 
-    $response = FigResponseCookies::set($response, SetCookie::create('userID')
-        ->withValue($userID)
-        ->withPath('/')
-    );
+
     $response = FigResponseCookies::set($response, SetCookie::create('userName')
         ->withValue($userName)
         ->withPath('/')

@@ -41,11 +41,11 @@ function handleThirdPartyLogin($uniqueID){
     if (isUserExisted($uniqueID)){
         // Existed, then login
         $checkResult = validateUser($uniqueID, $uniqueID);
-        return $checkResult;
+        return transferCheckResult($checkResult);
     }
     else {
         // Not existed, create as new user
         $createResult = createUsr($uniqueID, $uniqueID, $uniqueID);
-        return $createResult;
+        return transferCreateResult($createResult);
     }
 }
