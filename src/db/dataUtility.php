@@ -107,12 +107,12 @@ require_once('curlConn.php');
             foreach ($top5Products as $product){
                 $product = json_decode(json_encode($product), true);
                 $temp = array();
+                $temp["storeID"] = $product["storeID"];
                 $temp["commodityID"] = $product["productID"];
                 $temp["commodityPicUrl"] = $product["smallPicUrl"];
                 $temp["commodityPrice"] = $product["priceNew"];
                 $temp["commodityName"] = $product["productName"];
                 $temp["commodityStore"] = $product["storeName"];
-                $temp["commodityStoreID"] = $product["storeID"];
                 $ret[] = $temp;
             }
         }

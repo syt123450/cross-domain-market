@@ -19,7 +19,7 @@
  * 5.mostCommented
  */
 
-function getTopData($top5KeyWord) {
+function getTop5Data($top5KeyWord) {
 
     //use the top5KeyWord to get top5 data
 
