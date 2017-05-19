@@ -243,6 +243,26 @@ require_once('curlConn.php');
         return $ret;
     }
 
+    function getDisplayProductList($productList, $pageID, $storeProductNumber){
+        $numPerPage = 6;
+        /* Decide if the last page */
+        $lastID = $numPerPage * $pageID;
+        // Out of range
+        if ($lastID - $storeProductNumber >=$numPerPage){
+            $productList = array();
+        }
+        else {
+            $startIdx = $lastID -$numPerPage;
+            if ($lastID - $storeProductNumber >0){
+                $productList = array_slice($productList, $startIdx);
+            }
+            else {
+                $productList = array_slice($productList, $startIdx, $numPerPage);
+            }
+        }
+        return $productList;
+    }
+
 /**
  * Based on page number to return proper product list data
  * @param $productData

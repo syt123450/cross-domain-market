@@ -22,37 +22,18 @@ function getProductData($storeID, $pageID) {
 
     // Get all store data
     $stores = getAllData("db272.Store");
-    $storeNameList = getStoreNameList($stores);
 
     // Find the target store data by ID
     $targetStore =  findTargetStore($stores, $storeID);
 
     // Find product information
     $productData = curlData($targetStore["ProductList"]);
-    $productList = getProductList($productData);
+    $productList = getProductList($targetStore["Domain"], $productData);
 
     //total number of the product
     $storeProductNumber = count($productList);
 
-    //based on number of product per page and pageID to decide returns
-    $numPerPage = 10;
-
-    /* Decide if the last page */
-    $lastID = $numPerPage * $pageID;
-    // Out of range
-    if ($lastID - $storeProductNumber >=$numPerPage){
-        $productList = array();
-    }
-    else {
-        $startIdx = $lastID -$numPerPage;
-        if ($lastID - $storeProductNumber >0){
-            $productList = array_slice($productList, $startIdx);
-        }
-        else {
-            $productList = array_slice($productList, $startIdx, $numPerPage);
-        }
-
-    }
+    $productList = getDisplayProductList($productList, $pageID, $storeProductNumber);
 
     $productListData = array (
         "productNumber" => $storeProductNumber,

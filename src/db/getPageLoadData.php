@@ -81,7 +81,10 @@ function getStorePageLoadData($storeID) {
     $productList = getProductList($targetStore["Domain"], $productData);
 
     //total number of the product
-    $storeProductNumber = count($productData);
+    $storeProductNumber = count($productList);
+
+    // Default to return as the pageID=1
+    $productList = getDisplayProductList($productList, 1, $storeProductNumber);
 
     $top5Products = getData("db272.TopProduct", ['storeID' => (int)$storeID], ['sort' => ['viewed' => -1], 'limit' => 3]);
     $top5DataNoStore = getTopDataNoStore($top5Products);
