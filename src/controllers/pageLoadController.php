@@ -52,7 +52,12 @@ $app->POST('/initialize/commodity', function (Request $request, Response $respon
     $commodityID = ($request->getParsedBody())["commodityID"];
     $this->logger->info($commodityID);
     $this->logger->info($storeID);
-    $commodityData = getCommodityPageLoadData($storeID, $commodityID);
+
+    $cookie = FigRequestCookies::get($request, 'userID');
+    $userID = $cookie->getValue();
+    $this->logger->info('USERID:' . $userID);
+
+    $commodityData = getCommodityPageLoadData($storeID, $commodityID, $userID);
     $responseJson = json_encode($commodityData);
     $response->getBody()->write($responseJson);
 

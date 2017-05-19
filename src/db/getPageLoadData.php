@@ -190,13 +190,7 @@ function getCommodityPageLoadData($storeID, $commodityID, $userID=-1) {
 
         // Catch the recent view history for the user
         $recentViewedProducts = getRecentViewProducts($userID);
-
-        if ($recentViewedProducts !== null && !empty($recentViewedProducts)){
-
-        }
-        else {
-            $recentViewedProducts = array();
-        }
+        $recentViewedProducts =removeExistedRecentView($recentViewedProducts, (int)$targetStore["StoreID"], (int)$product["productID"]);
 
         // Add new recent view history
         $newRecentView = array(
@@ -208,6 +202,7 @@ function getCommodityPageLoadData($storeID, $commodityID, $userID=-1) {
             "viewed" => (int)($viewed +1),
             "smallPicUrl" => $targetStore["Domain"] . $product["smallPicUrl"]
         );
+
         // Add most recent at the beginning
         $recentViewedProducts  = array_reverse($recentViewedProducts);
         $recentViewedProducts[] = $newRecentView;
@@ -222,6 +217,7 @@ function getCommodityPageLoadData($storeID, $commodityID, $userID=-1) {
             "recentViewed" => $recentViewedProducts
         ];
         upsertData("db272.User", $filter, $sets);
+
     }
     else {
         // Do nothing, since we can't identify the user for update
