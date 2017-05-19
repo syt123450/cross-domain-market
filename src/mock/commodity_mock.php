@@ -10,7 +10,7 @@ function getComment($storeID, $commodityID, $pageID) {
 
     //use the storeID commodityID and pageID to get commentData
 
-    $totalCommentNumber = 100;
+    $totalCommentNumber = 4;
 
     $commentData = array(
         array(
