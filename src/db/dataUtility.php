@@ -439,7 +439,7 @@ require_once('curlConn.php');
                     $endIdx = $lastID -1;
                 }
 
-                for ($i =$startIdx; $i <$endIdx; $i++){
+                for ($i =$startIdx; $i <=$endIdx; $i++){
                     $comment = json_decode(json_encode($comments[$i]), true);
                     $temp = array();
                     $temp["commentInfo"] = "By " . $comment["userName"] . " on " . $comment["timeStamp"];
