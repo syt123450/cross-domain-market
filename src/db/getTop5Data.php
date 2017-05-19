@@ -10,21 +10,26 @@
  * @return array
  *
  * top5 data has 5 type of keyWord:
- * 1.mostViewed
- * 2.highestRated
- * 3.highestPrice
- * 4.lowestPrice
- * 5.mostCommented
+ * "mostViewed" - Default
+ * "highestRated"
+ * "bestPriced"
+ * "mostLiked"
+ * "bestQuality"
+ * "highestPrice"
+ * "lowestPrice"
+ *
+ * "recentViewed"
+ *
  */
 
 function getTop5Data($top5KeyWord) {
 
     // Based on keyword to search for proper result
-    if (strcmp($top5KeyWord, "highestRated") == 0){
+    if ($top5KeyWord == "highestRated"){
         // Rated times from high to low
         $top5Products = getData("db272.TopProduct", [], ['sort' => ['rated' => -1], 'limit' => 5]);
     }
-    else if (strcmp($top5KeyWord, "bestPriced") == 0){
+    else if ($top5KeyWord == "bestPriced"){
         // Rates value from high to low
         $top5Products = getData("db272.TopProduct", [], ['sort' => ['rate_price' => -1], 'limit' => 5]);
     }

@@ -123,8 +123,7 @@ function getContactPageLoadData() {
     return $contactLoadData;
 }
 
-function getCommodityPageLoadData($storeID, $commodityID) {
-
+function getCommodityPageLoadData($storeID, $commodityID, $userID=-1) {
     // Get Store data
     $stores = getAllData("db272.Store");
     $storeNameList = getStoreNameList($stores);
@@ -167,7 +166,6 @@ function getCommodityPageLoadData($storeID, $commodityID) {
     $product = json_decode(json_encode($pList[0]), true);
 
     // Update viewed history on TopProduct
-    $collectionName = "db272.TopProduct";
     $filter = [ 'storeID' => (int)$storeID, 'productID' => (int)$commodityID ];
     $sets = [
         "storeID" => (int)$targetStore["StoreID"],
@@ -185,7 +183,49 @@ function getCommodityPageLoadData($storeID, $commodityID) {
         "rate_quality" => (float)$rate_quality,
         "comment" => $comments
     ];
-    upsertData($collectionName, $filter, $sets);
+    upsertData("db272.TopProduct", $filter, $sets);
+
+    // Update viewed history on User
+    if ($userID >0){
+
+        // Catch the recent view history for the user
+        $recentViewedProducts = getRecentViewProducts($userID);
+
+        if ($recentViewedProducts !== null && !empty($recentViewedProducts)){
+
+        }
+        else {
+            $recentViewedProducts = array();
+        }
+
+        // Add new recent view history
+        $newRecentView = array(
+            "storeID" => (int)$targetStore["StoreID"],
+            "storeName" => $targetStore["StoreName"],
+            "productID" => (int)$product["productID"],
+            "productName" => $product["productName"],
+            "priceNew" => (float)$product["priceNew"],
+            "viewed" => (int)($viewed +1),
+            "smallPicUrl" => $targetStore["Domain"] . $product["smallPicUrl"]
+        );
+        // Add most recent at the beginning
+        $recentViewedProducts  = array_reverse($recentViewedProducts);
+        $recentViewedProducts[] = $newRecentView;
+        $recentViewedProducts  = array_reverse($recentViewedProducts);
+        // Keep the last 10 records
+        if (count($recentViewedProducts) >10){
+            $recentViewedProducts = array_slice($recentViewedProducts, 0, 10);
+        }
+
+        $filter = [ 'userID' => (int)$userID ];
+        $sets = [
+            "recentViewed" => $recentViewedProducts
+        ];
+        upsertData("db272.User", $filter, $sets);
+    }
+    else {
+        // Do nothing, since we can't identify the user for update
+    }
 
 
     /* Prepare Data for return  */

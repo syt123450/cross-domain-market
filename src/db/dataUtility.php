@@ -154,10 +154,10 @@ require_once('curlConn.php');
  * @param $user     UserID
  * @return array|mixed
  */
-    function getRecentViewProducts($user){
+    function getRecentViewProducts($userID){
         require_once ('mongoConn.php');
         // Catch general data first
-        $recentViewedProducts = getData("db272.User", ['userID' => (int)$user], ['projection' => ['recentViewed' => 1, '_id' => 0]]);
+        $recentViewedProducts = getData("db272.User", ['userID' => (int)$userID], ['projection' => ['recentViewed' => 1, '_id' => 0]]);
 
         // Catch the 1st object from returned array, i.e. the only one find from the database by the userID
         $recentViewedProducts = $recentViewedProducts[0];

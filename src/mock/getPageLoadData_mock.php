@@ -497,7 +497,7 @@ function getContactPageLoadData()
     return $contactLoadData;
 }
 
-function getCommodityPageLoadData($storeID, $commodityID)
+function getCommodityPageLoadData($storeID, $commodityID, $userID=-1)
 {
     //use $storeID and $commodityID to get data
 
