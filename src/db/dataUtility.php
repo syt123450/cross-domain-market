@@ -268,8 +268,15 @@ require_once('curlConn.php');
         return $ret;
     }
 
+/**
+ * Prepare proper number of products to display
+ * @param $productList
+ * @param $pageID
+ * @param $storeProductNumber
+ * @return array
+ */
     function getDisplayProductList($productList, $pageID, $storeProductNumber){
-        $numPerPage = 6;
+        $numPerPage = 15;
         /* Decide if the last page */
         $lastID = $numPerPage * $pageID;
         // Out of range
