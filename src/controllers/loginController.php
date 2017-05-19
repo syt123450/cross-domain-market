@@ -132,6 +132,11 @@ $app->GET('/login/logout', function(Request $request, Response $response) {
         ->withExpires('Tue, 15-Jan-2013 21:47:38 GMT')
         ->withPath('/')
     );
+//    $response = FigResponseCookies::set($response, SetCookie::create('fbsr_313203595776410')
+//        ->withValue("")
+//        ->withExpires('Tue, 15-Jan-2013 21:47:38 GMT')
+//        ->withPath('/')
+//    );
 
     $this->logger->info("Deletion Complete.");
 

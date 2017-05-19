@@ -213,6 +213,31 @@ require_once('curlConn.php');
         return $ret;
     }
 
+
+/**
+ * remove existed recent view item
+ * @param $recentViewedProducts
+ * @param $storeID
+ * @param $productID
+ * @return mixed
+ */
+    function removeExistedRecentView($recentViewedProducts, $storeID, $productID){
+        if ($recentViewedProducts !== null){
+            foreach ($recentViewedProducts as $key => $product){
+                $product = json_decode(json_encode($product), true);
+
+                if ((int)$product["productID"] == $productID && (int)$product["storeID"] == $storeID){
+                    unset($recentViewedProducts[$key]);
+                }
+            }
+        }
+        else {
+            $recentViewedProducts =array();
+        }
+
+        return $recentViewedProducts;
+    }
+
 /**
  * Process product list for front-end use (Raw data from CURL)
  * @param $productData
@@ -243,8 +268,15 @@ require_once('curlConn.php');
         return $ret;
     }
 
+/**
+ * Prepare proper number of products to display
+ * @param $productList
+ * @param $pageID
+ * @param $storeProductNumber
+ * @return array
+ */
     function getDisplayProductList($productList, $pageID, $storeProductNumber){
-        $numPerPage = 6;
+        $numPerPage = 15;
         /* Decide if the last page */
         $lastID = $numPerPage * $pageID;
         // Out of range
