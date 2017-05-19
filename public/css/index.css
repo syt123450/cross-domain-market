@@ -74,6 +74,9 @@ main > section > section > div:last-child {
 .itemBar > section > div > p {
     height: 15px;
     line-height: 15px;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    overflow:hidden;
 }
 
 .itemBar > section > div > p:nth-child(even) {
@@ -107,6 +110,9 @@ main > section > section > div:last-child {
     line-height: 40px;
     text-align: center;
     font-weight: bold;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    overflow:hidden;
 }
 
 main > section > section > div:hover {
