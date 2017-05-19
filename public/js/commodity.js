@@ -71,7 +71,7 @@ function renderCommodityInfo(basicCommodityInfo) {
     $(productName).text(basicCommodityInfo.commodityName);
     var productPriceArea = document.createElement("div");
     var productPrice = document.createElement("p");
-    $(productPrice).text(basicCommodityInfo.commodityPrice);
+    $(productPrice).text("$" + basicCommodityInfo.commodityPrice);
     var productNumber = document.createElement("p");
     var stockInfo = "Only " + basicCommodityInfo.stock + " left in stock";
     $(productNumber).text(stockInfo);

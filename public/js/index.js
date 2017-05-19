@@ -100,7 +100,7 @@ function renderTop5(top5Data) {
         $(commodityPic).attr("src", top5Data[i].commodityPicUrl);
         var commodityPricePlace = document.createElement("div");
         var commodityPrice = document.createElement("p");
-        $(commodityPrice).text(top5Data[i].commodityPrice);
+        $(commodityPrice).text("$" + top5Data[i].commodityPrice);
         var addButton = document.createElement("img");
         $(addButton).attr("src", "img/common/pageIcon/add_to_cart1.png");
         var commodityName = document.createElement("p");
@@ -150,7 +150,7 @@ function renderRecentView(recentViewData) {
             $(commodityPic).attr("src", recentViewData[i].commodityPicUrl);
             var commodityPricePlace = document.createElement("div");
             var commodityPrice = document.createElement("p");
-            $(commodityPrice).text(recentViewData[i].commodityPrice);
+            $(commodityPrice).text("$" + recentViewData[i].commodityPrice);
             var addButton = document.createElement("img");
             $(addButton).attr("src", "img/common/pageIcon/add_to_cart1.png");
             var commodityName = document.createElement("p");

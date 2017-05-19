@@ -52,7 +52,7 @@ function renderProductItem(productArea, productData) {
     $(productPic).attr("src", productData.commodityPicUrl);
     var productPricePlace = document.createElement("div");
     var productPrice = document.createElement("p");
-    $(productPrice).text(productData.commodityPrice);
+    $(productPrice).text("$" + productData.commodityPrice);
     var addButton = document.createElement("img");
     $(addButton).attr("src", "../img/common/pageIcon/add_to_cart1.png");
     var productName = document.createElement("p");
