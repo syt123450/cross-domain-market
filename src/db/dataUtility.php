@@ -201,6 +201,7 @@ require_once('curlConn.php');
             foreach ($recentViewedProducts as $product){
                 $product = json_decode(json_encode($product), true);
                 $temp = array();
+                $temp["storeID"] = $product["storeID"];
                 $temp["commodityID"] = $product["productID"];
                 $temp["commodityPicUrl"] = $product["smallPicUrl"];
                 $temp["commodityPrice"] = $product["priceNew"];
