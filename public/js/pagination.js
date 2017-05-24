@@ -6,8 +6,11 @@ function renderPagination(totalPage, pageNumber) {
     $("#pagination").attr("data-page", pageNumber);
 
     switch (totalPage) {
+        case 0:
+            render0Pagination();
+            break;
         case 1:
-            render1Pagination(pageNumber);
+            render1Pagination();
             break;
         case 2:
             render2Pagination(pageNumber);
@@ -26,9 +29,15 @@ function renderPagination(totalPage, pageNumber) {
     }
 }
 
-function render1Pagination(pageNumber) {
+function render0Pagination() {
+    var pagination = document.getElementById("pagination");
+    $(pagination).hide();
+}
+
+function render1Pagination() {
 
     var pagination = document.getElementById("pagination");
+    $(pagination).show();
     pagination.innerHTML = "";
 
     var lastButtonA = document.createElement("a");
@@ -54,6 +63,7 @@ function render1Pagination(pageNumber) {
 
 function render2Pagination(pageNumber) {
     var pagination = document.getElementById("pagination");
+    $(pagination).show();
     pagination.innerHTML = "";
 
     var lastButtonA = document.createElement("a");
@@ -96,6 +106,7 @@ function render2Pagination(pageNumber) {
 
 function render3Pagination(pageNumber) {
     var pagination = document.getElementById("pagination");
+    $(pagination).show();
     pagination.innerHTML = "";
 
     var lastButtonA = document.createElement("a");
@@ -154,6 +165,7 @@ function render3Pagination(pageNumber) {
 
 function render4Pagination(pageNumber) {
     var pagination = document.getElementById("pagination");
+    $(pagination).show();
     pagination.innerHTML = "";
 
     var lastButtonA = document.createElement("a");
@@ -234,7 +246,7 @@ function render4Pagination(pageNumber) {
             grid2A.innerHTML = "...";
             grid2A.setAttribute("class", "unactive-button");
             grid3A.innerHTML = "3";
-            grid3A.setAttribute("onclick", "now-button");
+            grid3A.setAttribute("onclick", "renderPage(3)");
             grid4A.innerHTML = "4";
             grid4A.setAttribute("class", "now-button");
             nextButtonA.setAttribute("class", "unactive-button");
@@ -250,6 +262,7 @@ function render4Pagination(pageNumber) {
 
 function render5Pagination(pageNumber) {
     var pagination = document.getElementById("pagination");
+    $(pagination).show();
     pagination.innerHTML = "";
 
     var lastButtonA = document.createElement("a");
@@ -372,6 +385,7 @@ function render5Pagination(pageNumber) {
 function renderMoreThan6Pagination(pageNumber, totalPage) {
 
     var pagination = document.getElementById("pagination");
+    $(pagination).show();
     pagination.innerHTML = "";
 
     var lastButtonA = document.createElement("a");
